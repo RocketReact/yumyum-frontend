@@ -1,4 +1,5 @@
 import Container from '../Container/Container';
+import SearchBox from '../SearchBox/SearchBox';
 import css from './Hero.module.css';
 
 const Hero = () => {
@@ -10,13 +11,7 @@ const Hero = () => {
             <div className={css.tittleWrapper}>
               <h1 className={css.title}>Plan, Cook, and Share Your Flavors</h1>
             </div>
-
-            <form className={css.heroForm}>
-              <input className={css.heroInput} type="text" />
-              <button className={css.heroBtn} type="submit">
-                Search
-              </button>
-            </form>
+            <SearchBox />
           </div>
         </Container>
       </div>
