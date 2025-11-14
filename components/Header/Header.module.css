@@ -99,6 +99,9 @@
 }
 
 @media only screen and (min-width: 768px) {
+  .headerContentContainer {
+    padding: 0;
+  }
   .burger {
     display: none;
   }
@@ -106,8 +109,27 @@
     display: flex;
     flex-direction: row;
     position: static;
+    padding:0;
+    z-index: 0;
+    background: transparent;
+    width: auto;
+    height: auto;
   }
-
-  .navMenu li {
+  .navMenu ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+  }
+  .navMenu ul :nth-child(2) {
+    margin-bottom: 0;
+  }
+  .overlay {
+    display: none;
+  }
+  .navMenu a {
+    padding: 12px;
   }
 }
+
