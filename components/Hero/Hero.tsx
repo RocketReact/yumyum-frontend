@@ -3,6 +3,7 @@ import SearchBox from '../SearchBox/SearchBox';
 import css from './Hero.module.css';
 
 const Hero = () => {
+  const handleSearch = () => {};
   return (
     <section className={css.heroSection}>
       <div className={css.overlay}>
@@ -11,7 +12,7 @@ const Hero = () => {
             <div className={css.tittleWrapper}>
               <h1 className={css.title}>Plan, Cook, and Share Your Flavors</h1>
             </div>
-            <SearchBox />
+            <SearchBox onSearch={handleSearch} />
           </div>
         </Container>
       </div>
