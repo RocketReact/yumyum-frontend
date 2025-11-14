@@ -1,5 +1,6 @@
 import { User, RegisterData } from '@/types/user';
 import { api } from './api';
+import { Recipe } from '@/types/recipe';
 
 interface CheckSessionRequest {
   success: boolean;
@@ -22,4 +23,12 @@ export interface AuthResponse {
 export const register = async (credentials: RegisterData) => {
   const { data } = await api.post<AuthResponse>('/auth/register', credentials);
   return data;
+};
+
+export const getAllRecipes = async (
+  page: number,
+  perPage: number,
+): Promise<Recipe[]> => {
+  const { data } = await api.get(`/recipes?page=${page}&perPage=${perPage}`);
+  return data.recipes ?? data;
 };
