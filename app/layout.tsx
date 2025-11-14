@@ -41,10 +41,8 @@ export default function RootLayout({
         <TanStackProvider>
           <AuthProvider>
             <Header />
-            <div className={css.container}>
-              <main className={css.main}> {children}</main>
-              {/* <Footer /> */}
-            </div>
+            <main className={css.main}> {children}</main>
+            {/* <Footer /> */}
           </AuthProvider>
         </TanStackProvider>
       </body>
