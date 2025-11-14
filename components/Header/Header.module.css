@@ -97,7 +97,27 @@
     0 0 0 6px #4e46b41f,
     0 0 0 2px var(--white);
 }
-
+.avatarNameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--light-brown);
+  border-radius: 50%;
+}
+.line {
+  display: inline-block;
+  width: 1px; /* толщина */
+  height: 39px;
+  background-color: var(--white);
+}
 @media only screen and (min-width: 768px) {
   .headerContentContainer {
     padding: 0;
@@ -109,7 +129,7 @@
     display: flex;
     flex-direction: row;
     position: static;
-    padding:0;
+    padding: 0;
     z-index: 0;
     background: transparent;
     width: auto;
@@ -131,5 +151,10 @@
   .navMenu a {
     padding: 12px;
   }
+  .register {
+    order: 3; /* Add Recipe before avatar */
+  }
+  .avatarNameContainer {
+    order: 4; /* avatar after Add Recipe */
+  }
 }
-

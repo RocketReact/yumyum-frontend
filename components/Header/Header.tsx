@@ -9,13 +9,16 @@ import { useState } from 'react';
 import { useAuthStore } from '@/lib/store/authStore';
 
 export default function Header() {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathURL = usePathname();
   if (!pathURL || pathURL.startsWith('/auth')) return null;
-
+  const firstLetterUserName = user?.name ? [...user.name][0] : '';
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
+
+  const handleLogout = () => {};
+
   return (
     <header className={css.header}>
       <Container>
@@ -76,9 +79,25 @@ export default function Header() {
                   <Link href="/auth/login">Log in</Link>
                 )}
               </li>
-              <li className={css.register}>
-                <Link href="/auth/register">Register</Link>
-              </li>
+              {isAuthenticated && (
+                <>
+                  <li className={css.userInfo}>
+                    <span className={css.avatar}>{firstLetterUserName}</span>
+                    <span className={css.userName}>{user?.name}</span>
+                  </li>
+                  <li className={css.logoutItem}>
+                    <button
+                      className={css.logoutButton}
+                      onClick={handleLogout}
+                      aria-label="Log out"
+                    >
+                      <svg stroke="var(--white)" width={24} height={24}>
+                        <use href="/sprite.svg#icon-Genericlog-out" />
+                      </svg>
+                    </button>
+                  </li>
+                </>
+              )}
             </ul>
           </nav>
         </div>
