@@ -1,19 +1,18 @@
-export async function toastSuccess(message: string) {
-  const iziToast = (await import('izitoast')).default;
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
-  iziToast.success({
+export const toastSuccess = (message: string) => {
+  return iziToast.success({
     title: 'Success',
     message,
     position: 'topRight',
   });
-}
+};
 
-export async function toastError(message: string) {
-  const iziToast = (await import('izitoast')).default;
-
-  iziToast.error({
+export const toastError = (message: string) => {
+  return iziToast.error({
     title: 'Error',
     message,
     position: 'topRight',
   });
-}
+};

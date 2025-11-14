@@ -2,12 +2,11 @@
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { login, register } from '@/lib/api/clientApi';
+import { register } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/authStore';
 import { toastSuccess, toastError } from '@/lib/utils/toast';
 import styles from './page.module.css';
-import 'izitoast/dist/css/iziToast.min.css';
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -51,20 +50,15 @@ const RegisterPage = () => {
     try {
       const { confirmPassword, ...credentials } = values;
 
-      await register(credentials);
+      const res = await register(credentials);
 
-      const user = await login({
-        email: credentials.email,
-        password: credentials.password,
-      });
+      setUser(res.user);
 
-      setUser(user);
+      toastSuccess('You have successfully registered!');
 
       router.push('/');
-
-      await toastSuccess('You have successfully registered!');
     } catch (err: any) {
-      await toastError(err?.response?.data?.message || 'Registration failed');
+      toastError(err?.response?.data?.message || 'Registration failed');
     }
   };
 

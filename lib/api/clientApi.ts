@@ -1,4 +1,4 @@
-import { User, RegisterData, LoginData } from '@/types/user';
+import { User, RegisterData } from '@/types/user';
 import { api } from './api';
 
 interface CheckSessionRequest {
@@ -15,16 +15,11 @@ export const getProfile = async (): Promise<User> => {
   return data;
 };
 
-export interface Credentials {
-  email: string;
-  password: string;
+export interface AuthResponse {
+  user: User;
+  token: string;
 }
-
-export const register = async (credentials: Credentials) => {
-  const { data } = await api.post<RegisterData>('/auth/register', credentials);
-  return data;
-};
-export const login = async (credentials: Credentials) => {
-  const { data } = await api.post<User>('/auth/login', credentials);
+export const register = async (credentials: RegisterData) => {
+  const { data } = await api.post<AuthResponse>('/auth/register', credentials);
   return data;
 };
