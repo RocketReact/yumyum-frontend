@@ -5,7 +5,8 @@ import * as Yup from 'yup';
 import { register } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/authStore';
-import { toastSuccess, toastError } from '@/lib/utils/toast';
+import 'izitoast/dist/css/iziToast.min.css';
+
 import styles from './page.module.css';
 
 const RegisterPage = () => {
@@ -51,17 +52,27 @@ const RegisterPage = () => {
       const { confirmPassword, ...credentials } = values;
 
       const res = await register(credentials);
-
       setUser(res.user);
 
-      toastSuccess('You have successfully registered!');
+      import('izitoast').then((iziToast) => {
+        iziToast.default.success({
+          title: 'Success',
+          message: 'You have successfully registered!',
+          position: 'topRight',
+        });
+      });
 
       router.push('/');
     } catch (err: any) {
-      toastError(err?.response?.data?.message || 'Registration failed');
+      import('izitoast').then((iziToast) => {
+        iziToast.default.error({
+          title: 'Error',
+          message: err?.response?.data?.message || 'Registration failed',
+          position: 'topRight',
+        });
+      });
     }
   };
-
   return (
     <main className={styles.page}>
       <div className={styles.formWrapper}>
