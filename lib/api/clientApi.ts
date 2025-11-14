@@ -13,3 +13,7 @@ export const getProfile = async (): Promise<User> => {
   const { data } = await api.get<User>('/users/current');
   return data;
 };
+export const logout = async (): Promise<void> => {
+  const { data } = await api.post<void>('/auth/logout');
+  return data;
+};

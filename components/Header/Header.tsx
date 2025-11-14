@@ -3,21 +3,30 @@
 import Image from 'next/image';
 import css from './Header.module.css';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Container from '../Container/Container';
 import { useState } from 'react';
 import { useAuthStore } from '@/lib/store/authStore';
+import { logout } from '@/lib/api/clientApi';
 
 export default function Header() {
-  const { isAuthenticated, user } = useAuthStore();
+  const { isAuthenticated, clearIsAuthenticated, user } = useAuthStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathURL = usePathname();
   if (!pathURL || pathURL.startsWith('/auth')) return null;
   const firstLetterUserName = user?.name ? [...user.name][0] : '';
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
-
-  const handleLogout = () => {};
+  const router = useRouter();
+  const handleLogout = async () => {
+    try {
+      await logout();
+      clearIsAuthenticated();
+      router.push('/');
+    } catch (error) {
+      console.log('Logout failed: ', error);
+    }
+  };
 
   return (
     <header className={css.header}>
