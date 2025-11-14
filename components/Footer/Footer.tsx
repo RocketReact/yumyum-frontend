@@ -6,6 +6,7 @@ import css from './Footer.module.css';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/authStore';
+import Container from '../Container/Container';
 
 export default function Footer() {
   const pathURL = usePathname();
@@ -29,26 +30,34 @@ export default function Footer() {
 
   return (
     <footer className={css.footer}>
-      <nav className={css.footerNav}>
-        <Link href="/">
-          <Image src="/logo.svg" width={165} height={46} alt="Logo" priority />
-        </Link>
-
-        <div id="copyright" className={css.footerCopyright}>
-          <span>&copy;</span> {currentYear} CookingCompanion. All rights
-          reserved.
-        </div>
-
-        <div className={css.footerLinksContainer}>
-          <Link href="/recipes" className={css.footerLink}>
-            Recipes
+      <Container>
+        <nav className={css.footerNav}>
+          <Link href="/">
+            <Image
+              src="/logo.svg"
+              width={165}
+              height={46}
+              alt="Logo"
+              priority
+            />
           </Link>
 
-          <a href="#" className={css.footerLink} onClick={handleAccountClick}>
-            Account
-          </a>
-        </div>
-      </nav>
+          <div id="copyright" className={css.footerCopyright}>
+            <span>&copy;</span> {currentYear} CookingCompanion. All rights
+            reserved.
+          </div>
+
+          <div className={css.footerLinksContainer}>
+            <Link href="/recipes" className={css.footerLink}>
+              Recipes
+            </Link>
+
+            <a href="#" className={css.footerLink} onClick={handleAccountClick}>
+              Account
+            </a>
+          </div>
+        </nav>
+      </Container>
     </footer>
   );
 }

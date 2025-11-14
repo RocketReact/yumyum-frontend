@@ -43,7 +43,7 @@ export default function RootLayout({
           <AuthProvider>
             <Header />
             <main className={css.main}> {children}</main>
-            {/* <Footer /> */}
+            <Footer />
           </AuthProvider>
         </TanStackProvider>
       </body>
