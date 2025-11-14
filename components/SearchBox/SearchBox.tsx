@@ -1,10 +1,6 @@
 import css from './SearchBox.module.css';
 
-interface SearchBoxProps {
-  onSearch: (query: string) => void;
-}
-
-const SearchBox = ({ onSearch }: SearchBoxProps) => {
+const SearchBox = () => {
   return (
     <form className={css.heroForm}>
       <input
