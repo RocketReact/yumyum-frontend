@@ -98,7 +98,6 @@
     0 0 0 2px var(--white);
 }
 
-
 @media only screen and (min-width: 768px) {
   .burger {
     display: none;
@@ -106,7 +105,9 @@
   .navMenu {
     display: flex;
     flex-direction: row;
+    position: static;
   }
+
   .navMenu li {
   }
 }

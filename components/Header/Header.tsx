@@ -29,26 +29,35 @@ export default function Header() {
           </Link>
           <button
             className={css.burger}
-            area-label="Open menu"
+            aria-label="Open menu"
             type="button"
             aria-controls="main-navigation"
             aria-expanded={isMenuOpen}
             onClick={toggleMenu}
           >
-            <div className={css.burger}>
-              <svg stroke="var(--white)" width={32} height={32}>
-                {isMenuOpen ? (
-                  <svg className={css.closeIcon}>
-                    <use href="/sprite.svg#icon-Genericclose" />
-                  </svg>
-                ) : (
-                  <use href="/sprite.svg#icon-Genericburger-regular" />
-                )}
-              </svg>
-            </div>
+            <svg
+              stroke="var(--white)"
+              width={32}
+              height={32}
+              className={isMenuOpen ? css.closeIcon : ''}
+            >
+              <use
+                href={
+                  isMenuOpen
+                    ? '/sprite.svg#icon-Genericclose'
+                    : '/sprite.svg#icon-Genericburger-regular'
+                }
+              />
+            </svg>
           </button>
 
-          {isMenuOpen && <div className={css.overlay} onClick={closeMenu} />}
+          {isMenuOpen && (
+            <div
+              aria-hidden="true"
+              className={css.overlay}
+              onClick={closeMenu}
+            />
+          )}
           <nav
             id="main-navigation"
             className={`${css.navMenu} ${isMenuOpen ? css.navMenuOpen : ''}`}
