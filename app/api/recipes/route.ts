@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     const search = request.nextUrl.searchParams.get('search') ?? '';
     const ingredient = request.nextUrl.searchParams.get('ingredient') ?? '';
 
-    const res = await api.get('/recipes', {
+    const res = await api('/recipes', {
       params: {
         page,
         perPage,
