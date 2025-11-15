@@ -13,7 +13,7 @@
 }
 
 .heroWrapper {
-  padding: 128px 32px 98px 32px;
+  padding: 128px 16px 98px 16px;
 }
 
 .tittleWrapper {
@@ -21,10 +21,8 @@
 }
 
 .title {
+  font: var(--display-lg-semibold);
   width: 329px;
-  font-family: var(--font-family);
-  font-weight: 600;
-  font-size: 40px;
   color: var(--white);
   margin-bottom: 24px;
 }
@@ -36,12 +34,12 @@
   }
 
   .heroWrapper {
-    padding: 128px 65px 128px 32px;
+    padding: 128px 33px 128px 0px;
   }
 
   .title {
+    font: var(--display-xl-semibold);
     width: 493px;
-    font-size: 48px;
   }
 }
 /* Styles for Desktop devices */
@@ -51,9 +49,10 @@
   }
 
   .heroWrapper {
-    padding: 128px 671px 128px 108px;
+    padding: 128px 563px 128px 0px;
   }
 
   .title {
+    font: var(--body-h1);
   }
 }
