@@ -117,6 +117,10 @@
   height: 39px;
   background-color: var(--white);
 }
+.textHoverFocus:hover, .textHoverFocus:focus {
+  opacity: 50%;
+  transition: opacity 0.3s ease-in-out;
+}
 @media only screen and (min-width: 768px) {
   .btnRegisterReceipes {
     width: 101px;

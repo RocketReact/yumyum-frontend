@@ -78,10 +78,10 @@ export default function Header() {
             aria-label="Main navigation"
           >
             <ul>
-              <li>
+              <li className={css.textHoverFocus}>
                 <Link href="/recipes">Recipes</Link>
               </li>
-              <li>
+              <li className={css.textHoverFocus}>
                 {isAuthenticated ? (
                   <Link href="/profile">My Profile</Link>
                 ) : (
