@@ -41,6 +41,10 @@
     width: 65px;
     height: 24px;
     cursor: pointer;
+    transition:
+      opacity var(--primary-transition),
+      border-bottom var(--primary-transition),
+      border-radius var(--primary-transition);
   }
 
   .footerLink:hover,

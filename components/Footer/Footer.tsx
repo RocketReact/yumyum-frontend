@@ -19,8 +19,6 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const handleAccountClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
     if (isAuthenticated) {
       router.push('/profile');
     } else {
