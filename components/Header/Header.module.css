@@ -44,8 +44,8 @@
   align-items: flex-start;
   flex-direction: column;
   gap: 20px;
-  top: 0;
-  right: -100%;
+  right: 0;
+  top: -100%;
   width: 100%;
   height: 100vh;
   background-color: var(--darck-brown);
@@ -80,7 +80,7 @@
   text-decoration: none;
 }
 .navMenuOpen {
-  right: 0;
+  top: 0;
 }
 .btnRegisterReceipes  {
   background-color: var(--light-brown);
