@@ -3,16 +3,15 @@
 import Image from 'next/image';
 import css from './Header.module.css';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Container from '../Container/Container';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuthStore } from '@/lib/store/authStore';
 import { logout } from '@/lib/api/clientApi';
 
 export default function Header() {
   const { isAuthenticated, clearIsAuthenticated, user } = useAuthStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathURL = usePathname();
   const firstLetterUserName = user?.name ? [...user.name][0] : '';
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
@@ -26,6 +25,17 @@ export default function Header() {
       console.log('Logout failed: ', error);
     }
   };
+  //no scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.documentElement.style.overflow = '';
+    }
+    return () => {
+      document.documentElement.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
   return (
     <header className={css.header}>
