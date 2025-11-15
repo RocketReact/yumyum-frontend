@@ -21,9 +21,39 @@
 }
 
 .title {
+  width: 329px;
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 40px;
   color: var(--white);
   margin-bottom: 24px;
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .heroSection {
+    background-image: url('../../public/hero/hero-tablet.jpg');
+  }
+
+  .heroWrapper {
+    padding: 128px 65px 128px 32px;
+  }
+
+  .title {
+    width: 493px;
+    font-size: 48px;
+  }
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .heroSection {
+    background-image: url('../../public/hero/hero-desktop.jpg');
+  }
+
+  .heroWrapper {
+    padding: 128px 671px 128px 108px;
+  }
+
+  .title {
+  }
 }

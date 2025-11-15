@@ -1,4 +1,7 @@
 .heroForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .heroInput {
@@ -8,8 +11,14 @@
   width: 100%;
   height: 46px;
   max-height: 48px;
-  margin-bottom: 24px;
   background-color: var(--white);
+}
+
+.heroInput:hover,
+.heroInput:focus {
+}
+
+.heroInput:active {
 }
 
 .heroInput::placeholder {
@@ -28,4 +37,41 @@
   height: 46px;
   color: var(--white);
   background: var(--light-brown);
+  transition:
+    background 250ms,
+    box-shadow 250ms;
+}
+
+.heroBtn:hover,
+.heroBtn:focus {
+  background: var(--brown);
+}
+
+.heroBtn:active {
+  box-shadow:
+    0 0 0 6px rgba(78, 70, 180, 0.12),
+    0 0 0 2px var(--white);
+  background: var(--light-brown);
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .heroForm {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .heroBtn {
+    width: 176px;
+  }
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .heroForm {
+    gap: 12px;
+  }
+
+  .heroBtn {
+    width: 190px;
+  }
 }
