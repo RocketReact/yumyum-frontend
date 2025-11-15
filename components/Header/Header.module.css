@@ -167,6 +167,7 @@
   .navMenu {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     position: static;
     padding: 0;
     z-index: 0;
