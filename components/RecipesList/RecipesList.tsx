@@ -8,7 +8,8 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllRecipes } from '@/lib/api/clientApi';
 import Loader from '../Loader/Loader';
 import { useEffect, useState } from 'react';
-import css from './RecipesList.module.css'
+import Filters from '../Filters/Filters';
+import css from './RecipesList.module.css';
 
 export interface Props {
   recipes: Recipe[];
@@ -66,6 +67,8 @@ export function RecipesList() {
 
   return (
     <div className={css.container}>
+      <Filters />
+
       <ul>
         {recipes.map((recipe) => (
           <li key={recipe._id}>
