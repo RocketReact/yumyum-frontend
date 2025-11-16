@@ -15,7 +15,7 @@
   position: relative;
   display: block;
 }
-.burger:hover {
+.burger:hover, .logoutButton:hover {
   cursor: pointer;
 }
 .closeIcon use {
@@ -75,16 +75,14 @@
   align-items: center;
   gap: 8px;
   width: 100%;
+
 }
-.navMenu ul :nth-child(2) {
-  margin-bottom: 12px;
-}
+
 
 .navMenu li {
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 44px;
   font: var(--body-md-semibold);
   letter-spacing: 0;
 }
@@ -116,7 +114,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 8px;
 }
 .avatar {
   display: flex;
@@ -133,9 +131,23 @@
   height: 39px;
   background-color: var(--white);
 }
+.recipeProfileLinks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.recipeProfileLinks >* {
+  padding: 16px;
+}
+.myProfileLink {
+  margin-bottom: 5px;
+}
 
 .text:hover,
-.text:focus {
+.text:focus,
+.logoutButton:hover,
+.logoutButton:focus {
   opacity: 50%;
   transition: opacity 0.3s ease-in-out;
 }
@@ -163,7 +175,6 @@
 .userInfoContainer {
   max-width: 393px;
   width: 100%;
-  height: auto;
   padding: 0 16px;
   display: flex;
   flex-direction: column;
@@ -174,7 +185,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 32px;
+  gap: 16px;
 }
 .recipesProfileContainer {
   display: flex;

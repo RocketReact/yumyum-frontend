@@ -12,7 +12,7 @@ import { logout } from '@/lib/api/clientApi';
 export default function Header() {
   const { isAuthenticated, clearIsAuthenticated, user } = useAuthStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const firstLetterUserName = user?.name ? [...user.name][0] : '';
+  const firstLetterUserName = user?.name?.[0]?.toUpperCase() ?? '';
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
   const router = useRouter();
@@ -113,17 +113,21 @@ export default function Header() {
 
             <ul>
               <li
-                className={`${css.text} ${css.recipesLink}  ${pathname === '/' ? css.activeUnderLine : ''}`}
+                className={`${css.recipeProfileLinks} ${css.recipesLink}  ${pathname === '/' ? css.activeUnderLine : ''}`}
               >
-                <Link href="/" onClick={closeMenu}>
+                <Link className={css.text} href="/" onClick={closeMenu}>
                   Recipes
+                </Link>
+                <Link
+                  className={`${css.myProfileLink} ${css.text}`}
+                  href="/profile"
+                  onClick={closeMenu}
+                >
+                  My Profile
                 </Link>
               </li>
               {/* {isAuthenticated ? ( */}
               <li className={css.userInfoContainer}>
-                <Link href="/profile" onClick={closeMenu}>
-                  My Profile
-                </Link>
                 <div className={css.userInfo}>
                   <div className={css.avatarNameContainer}>
                     <span className={css.avatar}>{firstLetterUserName}</span>
@@ -138,7 +142,12 @@ export default function Header() {
                     onClick={handleLogout}
                     aria-label="Log out"
                   >
-                    <svg stroke="var(--white)" width={24} height={24}>
+                    <svg
+                      fill="transparent"
+                      stroke="var(--white)"
+                      width={24}
+                      height={24}
+                    >
                       <use href="/sprite.svg#icon-Genericlog-out" />
                     </svg>
                   </button>
