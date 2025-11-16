@@ -1,6 +1,6 @@
 'use client';
 
-import css from './Filters.module.css';
+import css from './FiltersForm.module.css';
 import type { Option } from '@/types/filter';
 import { useFiltersStore } from '@/lib/store/useFiltersStore';
 

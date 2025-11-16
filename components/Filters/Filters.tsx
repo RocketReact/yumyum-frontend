@@ -1,30 +1,71 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Container from '../Container/Container';
 import css from './Filters.module.css';
 import type { Option } from '@/types/filter';
 import { FiltersForm } from '../FiltersForm/FiltersForm';
 import { FiltersModal } from '../FiltersModal/FiltersModal';
 
-type FiltersProps = {
-  totalRecipes: number;
-  categories: Option[];
-  ingredients: Option[];
-};
+//! Temp comments to return props when needed
+// type FiltersProps = {
+//   totalRecipes: number;
+//   categories: Option[];
+//   ingredients: Option[];
+// };
 
-export default function Filters({
-  totalRecipes,
-  categories,
-  ingredients,
-}: FiltersProps) {
+// {
+//   totalRecipes,
+//   categories,
+//   ingredients,
+// }: FiltersProps
+
+export default function Filters() {
+  const totalRecipes = 'xx'; //! Replace with dynamic data fetch later
+
+  const [categoriesOptions, setCategoriesOptions] = useState<Option[]>([]);
+  const [ingredientsOptions, setIngredientsOptions] = useState<Option[]>([]);
+
+  useEffect(() => {
+    async function loadFilters() {
+      try {
+        // fetch categories
+        const catRes = await fetch('/api/categories');
+        const categoriesJson = await catRes.json();
+
+        // fetch ingredients
+        const ingRes = await fetch('/api/ingredients');
+        const ingredientsJson = await ingRes.json();
+
+        // map to option[]
+        setCategoriesOptions(
+          categoriesJson.map((item: any) => ({
+            value: item.name,
+            label: item.name,
+          })),
+        );
+
+        setIngredientsOptions(
+          ingredientsJson.map((item: any) => ({
+            value: item.name,
+            label: item.name,
+          })),
+        );
+      } catch (e) {
+        console.error('Failed to load filter data:', e);
+      }
+    }
+
+    loadFilters();
+  }, []);
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <section className={css.filtersSection}>
       <Container>
         <div className={css.filtersWrapper}>
-          <p className={css.amountRecipes}>{totalRecipes} recipes</p>
+          <p className={css.totalRecipes}>{totalRecipes} recipes</p>
 
           {/* mobile toggle */}
           <button
@@ -37,11 +78,13 @@ export default function Filters({
               <use href="/Sprite.svg#icon-Mailfilter" />
             </svg>
           </button>
-        </div>
-
-        {/* desktop inline form */}
-        <div className={css.desktopFiltersPanel}>
-          <FiltersForm categories={categories} ingredients={ingredients} />
+          {/* desktop inline form */}
+          <div className={css.desktopFiltersPanel}>
+            <FiltersForm
+              categories={categoriesOptions}
+              ingredients={ingredientsOptions}
+            />
+          </div>
         </div>
       </Container>
 
@@ -49,8 +92,8 @@ export default function Filters({
       <FiltersModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        categories={categories}
-        ingredients={ingredients}
+        categories={categoriesOptions}
+        ingredients={ingredientsOptions}
       />
     </section>
   );

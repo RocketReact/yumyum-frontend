@@ -35,8 +35,8 @@ export function FiltersModal({
             aria-label="Close filters"
           >
             <span className={css.closeButtonText}>Filters</span>
-            <svg width="24" height="24">
-              <use href="/Sprite.svg#icon-Controlsclose" />
+            <svg className={css.closeIcon} width="24" height="24">
+              <use href="/Sprite.svg#icon-Notificationserror" />
             </svg>
           </button>
         </div>
