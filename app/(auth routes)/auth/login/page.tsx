@@ -40,9 +40,9 @@ const LoginPage = () => {
 
   const handleSubmit = async (values: LoginFormValues) => {
     try {
-      const res = await login(values);
+      const user = await login(values);
 
-      setUser(res.user);
+      setUser(user);
 
       import('izitoast').then((iziToast) => {
         iziToast.default.success({

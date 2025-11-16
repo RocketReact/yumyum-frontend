@@ -25,11 +25,8 @@ export const register = async (credentials: RegisterData) => {
   return data;
 };
 
-export interface LoginResponse {
-  user: User;
-}
 export const login = async (credentials: LoginData) => {
-  const { data } = await api.post<LoginResponse>('/auth/login', credentials);
+  const { data } = await api.post<User>('/auth/login', credentials);
   return data;
 };
 
