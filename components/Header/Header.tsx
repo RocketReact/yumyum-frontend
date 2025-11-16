@@ -22,6 +22,7 @@ export default function Header() {
       await logout();
       clearIsAuthenticated();
       router.push('/');
+      closeMenu();
     } catch (error) {
       console.log('Logout failed: ', error);
     }
@@ -88,7 +89,11 @@ export default function Header() {
             aria-label="Main navigation"
           >
             <div className={css.logoCloseBtnContainer}>
-              <Link className={`${css.logoInMenuOpen}`} href="/">
+              <Link
+                className={`${css.logoInMenuOpen}`}
+                href="/"
+                onClick={closeMenu}
+              >
                 <Image
                   src="/logo.svg"
                   width={165}
@@ -102,15 +107,21 @@ export default function Header() {
               <li
                 className={`${css.text} ${css.recipesLink}  ${pathname === '/' ? css.activeUnderLine : ''}`}
               >
-                <Link href="/">Recipes</Link>
+                <Link href="/" onClick={closeMenu}>
+                  Recipes
+                </Link>
               </li>
               <li
                 className={`${css.text}  ${pathname === '/profile' || pathname === '/auth/login' ? css.activeUnderLine : ''}`}
               >
                 {isAuthenticated ? (
-                  <Link href="/profile">My Profile</Link>
+                  <Link href="/profile" onClick={closeMenu}>
+                    My Profile
+                  </Link>
                 ) : (
-                  <Link href="/auth/login">Log in</Link>
+                  <Link href="/auth/login" onClick={closeMenu}>
+                    Log in
+                  </Link>
                 )}
               </li>
               {isAuthenticated ? (
@@ -134,7 +145,10 @@ export default function Header() {
                   <li>
                     <button
                       className={`${css.btnRegisterReceipes} ${css.changeOrderOnTablet}`}
-                      onClick={() => router.push('/add-recipe')}
+                      onClick={() => {
+                        router.push('/add-recipe');
+                        closeMenu();
+                      }}
                       aria-label="Add Recipe"
                     >
                       Add Recipe
@@ -145,7 +159,10 @@ export default function Header() {
                 <li>
                   <button
                     className={css.btnRegisterReceipes}
-                    onClick={() => router.push('/auth/register')}
+                    onClick={() => {
+                      router.push('/auth/register');
+                      closeMenu();
+                    }}
                     aria-label="Register"
                   >
                     Register
