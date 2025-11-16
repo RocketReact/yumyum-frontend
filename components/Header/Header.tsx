@@ -89,9 +89,9 @@ export default function Header() {
           >
             <ul>
               <li
-                className={`${css.text}  ${pathname === '/recipes' ? css.activeUnderLine : ''}`}
+                className={`${css.text}  ${pathname === '/' ? css.activeUnderLine : ''}`}
               >
-                <Link href="/recipes">Recipes</Link>
+                <Link href="/">Recipes</Link>
               </li>
               <li
                 className={`${css.text}  ${pathname === '/profile' || pathname === '/auth/login' ? css.activeUnderLine : ''}`}
