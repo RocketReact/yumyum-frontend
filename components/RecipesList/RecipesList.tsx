@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllRecipes } from '@/lib/api/clientApi';
 import Loader from '../Loader/Loader';
 import { useEffect, useState } from 'react';
+import css from './RecipesList.module.css'
 
 export interface Props {
   recipes: Recipe[];
@@ -64,7 +65,7 @@ export function RecipesList() {
   }
 
   return (
-    <div>
+    <div className={css.container}>
       <ul>
         {recipes.map((recipe) => (
           <li key={recipe._id}>
@@ -77,7 +78,7 @@ export function RecipesList() {
         <Loader />
       ) : (
         hasMore && (
-          <div>
+          <div className={css.wrapperBtn}>
             <LoadMoreBtn onClick={loadMore} />
           </div>
         )
