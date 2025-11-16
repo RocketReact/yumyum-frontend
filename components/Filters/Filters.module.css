@@ -1,160 +1,17 @@
-.filtersWrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 33px;
+.filtersSection {
   margin-top: 16px;
   margin-bottom: 16px;
 }
 
-
-/** Filters Toggle  */
-.filtersToggle {
+.filtersWrapper {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 67px;
-  font: var(--body-sm-semibold);
+  align-items: center;
+  width: 100%;
+
+  border: 0.5px dashed blue;
 }
 
-/* Desktop */
-@media (min-width: 1440px) {
-  .filtersToggle {
-    display: none;
-  }
-}
-
-/*!  Filters Toggle */
-
-.amountRecipes {
+.totalRecipes {
   font: var(--body-lg-semibold);
-}
-
-/** Inputs Wrapper  */
-.inputsWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-
-}
-
-@media (min-width: 1440px) {
-  .inputsWrapper {
-    flex-direction: row;
-
-  }
-}
-
-/*! Inputs Wrapper */
-
-.filtersPanel {
-  display: none;
-  gap: 24px;
-  align-items: center;
-
-}
-
-/* Desktop */
-@media (min-width: 1440px) {
-  .filtersPanel {
-    display: flex;
-    flex-flow: row-reverse;
-  }
-}
-
-.filtersPanelOpen {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--white);
-  border-radius: 8px;
-  width: 100%;
-  z-index: 100;
-}
-
-.filtersField {
-  font: var(--body-md-regular);
-  color: var(--gray);
-  border: 1px solid var(--light-gray);
-  border-radius: 4px;
-  padding: 0 8 0 8;
-  width: 100%;
-}
-
-@media (min-width: 1440px) {
-  .filtersField {
-    width: 179px;
-  }
-}
-
-.resetButton {
-  font: var(--body-sm-semibold);
-  height: 19px;
-  border-bottom: 1px solid black;
-
-}
-
-/** Modal Backdrop */
-.modalBackdrop {
-  position: fixed;
-  inset: 0;
-  background-color: var(--white);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-@media (min-width: 1440px) {
-  .modalBackdrop {
-    display: none;
-  }
-}
-
-/*! Modal Backdrop */
-
-
-.modal {
-  width: 100%;
-  max-width: 320px;
-  margin: 0 16px;
-  padding: 20px 16px 16px;
-  border-radius: 18px;
-  background-color: var(--white);
-  display: flex;
-  flex-direction: column;
-  gap: 29px;
-
-}
-
-.modalHeader {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-
-}
-
-.closeButtonText {
-  font: var(--body-sm-semibold);
-
-}
-
-.closeButton {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  justify-content: space-between;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 1;
-
-}
-
-.inputResetWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: flex-start;
 }
