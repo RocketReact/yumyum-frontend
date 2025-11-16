@@ -1,12 +1,17 @@
 import Image from 'next/image';
-import styles from './page.module.css';
+import css from './page.module.css';
 import { RecipeForm } from '@/components/AddRecipeForm/AddRecipeForm';
 import Container from '@/components/Container/Container';
 
 export default function AddRecipe() {
   return (
     <Container>
-      <RecipeForm />
+      <div className={css.addRecipeMain}>
+        <h1 className={css.addRecipeTitle}>Add Recipe</h1>
+        <div className={css.addRecipeForm}>
+          <RecipeForm />
+        </div>
+      </div>
     </Container>
   );
 }
