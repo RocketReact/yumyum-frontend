@@ -60,19 +60,8 @@ export default function Header() {
             aria-expanded={isMenuOpen}
             onClick={toggleMenu}
           >
-            <svg
-              stroke="var(--white)"
-              width={32}
-              height={32}
-              className={isMenuOpen ? css.closeIcon : ''}
-            >
-              <use
-                href={
-                  isMenuOpen
-                    ? '/sprite.svg#icon-Genericclose'
-                    : '/sprite.svg#icon-Genericburger-regular'
-                }
-              />
+            <svg stroke="var(--white)" width={32} height={32}>
+              <use href={'/sprite.svg#icon-Genericburger-regular'} />
             </svg>
           </button>
 
@@ -88,21 +77,39 @@ export default function Header() {
             className={`${css.navMenu} ${isMenuOpen ? css.navMenuOpen : ''}`}
             aria-label="Main navigation"
           >
-            <div className={css.logoCloseBtnContainer}>
-              <Link
-                className={`${css.logoInMenuOpen}`}
-                href="/"
-                onClick={closeMenu}
-              >
-                <Image
-                  src="/logo.svg"
-                  width={165}
-                  height={46}
-                  alt="Logo"
-                  loading="eager"
-                />
-              </Link>
-            </div>
+            <Container>
+              <div className={css.logoCloseBtnContainer}>
+                <Link
+                  className={`${css.logoInMenuOpen}`}
+                  href="/"
+                  onClick={closeMenu}
+                >
+                  <Image
+                    src="/logo.svg"
+                    width={165}
+                    height={46}
+                    alt="Logo"
+                    loading="eager"
+                  />
+                </Link>
+                <button
+                  aria-label="Close menu"
+                  type="button"
+                  aria-controls="main-navigation"
+                  aria-expanded={isMenuOpen}
+                  onClick={toggleMenu}
+                >
+                  <svg
+                    stroke="var(--white)"
+                    width={32}
+                    height={32}
+                    className={css.closeIcon}
+                  >
+                    <use href={'/sprite.svg#icon-Genericclose'} />
+                  </svg>
+                </button>
+              </div>
+            </Container>
             <ul className={`${isMenuOpen}? ${css.ulContainer} : ''`}>
               <li
                 className={`${css.text} ${css.recipesLink}  ${pathname === '/' ? css.activeUnderLine : ''}`}

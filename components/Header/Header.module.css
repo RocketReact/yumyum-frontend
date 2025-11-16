@@ -13,7 +13,6 @@
 }
 .burger {
   position: relative;
-  z-index: 1001;
   display: block;
 }
 .burger:hover {
@@ -61,7 +60,9 @@
 }
 
 .logoCloseBtnContainer {
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navMenu ul {
@@ -135,14 +136,16 @@
   transition: opacity 0.3s ease-in-out;
 }
 .logoInMenuOpen {
-  padding: 14px 16px;
+  padding: 14px 0;
 }
 .ulContainer {
   padding: 0 16px;
 }
 
 @media only screen and (min-width: 768px) {
-
+  .closeIcon {
+    display: none;
+  }
   .navMenu .logoInMenuOpen {
     display: none;
   }
