@@ -97,6 +97,17 @@
     text-align: center;
 }
 
+.button:hover {
+    background: var(--light-gray);
+    border-color: var(--light-gray);
+}
+
+.button:active {
+    box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px var(--white);
+    background: var(--light-gray);
+    border-color: var(--light-gray);
+}
+
 @media screen and (min-width: 768px) {
     .button {
         width: 267px;
@@ -127,4 +138,20 @@
 
 .favoriteButton.active .favoriteIcon {
     fill: var(--light-brown);
+}
+
+.favoriteButton:hover {
+    background: var(--light-gray);
+    border-color: var(--light-gray);
+
+}
+
+.favoriteButton:hover .favoriteIcon {
+    fill: var(--light-gray);
+}
+
+.favoriteButton:active {
+    box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px var(--white);
+    background: var(--light-gray);
+    border-color: var(--light-gray);
 }
