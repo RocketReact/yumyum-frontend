@@ -9,6 +9,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 import styles from './page.module.css';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -226,7 +227,7 @@ const RegisterPage = () => {
         </Formik>
 
         <p className={styles.loginLink}>
-          Already have an account? <a href="/auth/login">Log in</a>
+          Already have an account? <Link href="/auth/login">Log in</Link>
         </p>
       </div>
     </main>
