@@ -1,0 +1,51 @@
+.cardWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 288px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    gap: 16px;
+}
+
+.title {
+    font: var(--display-sm-bold);
+    color: var(--black);
+    margin-right: auto;
+}
+
+.img {
+    border-radius: 8px;
+}
+
+.titleWrapper {
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+.timeWrapper {
+    display: flex;
+    align-items: center;
+}
+
+
+.recipeTime {
+    font: var(--display-sm-semibold);
+    font-size: 12px;
+}
+
+.descriptionWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.description {
+    font: var(--body-md-regular);
+    color: var(--black);
+    line-height: 1.55;
+}
+
+.buttonWrapper {
+    display: flex;
+}

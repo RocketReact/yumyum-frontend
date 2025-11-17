@@ -10,7 +10,7 @@ export interface Recipe {
   area?: string;
   instructions: string;
   description?: string;
-  thumb?: string;
+  thumb: string;
   time: number;
   cals?: number;
   owner: string;

@@ -51,3 +51,8 @@ export const getAllRecipes = async (params: {
   });
   return data;
 };
+
+export const getFavoritesRecipes = async () => {
+  const { data } = await api.get('/recipes/favorites');
+  return data;
+};
