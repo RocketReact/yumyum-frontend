@@ -10,8 +10,7 @@ import { useAuthStore } from '@/lib/store/authStore';
 import { logout } from '@/lib/api/clientApi';
 
 export default function Header() {
-  const { isAuthenticated, clearIsAuthenticated, user, setUser } =
-    useAuthStore();
+  const { isAuthenticated, clearIsAuthenticated, user } = useAuthStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const firstLetterUserName = user?.name?.[0]?.toUpperCase() ?? '';
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
