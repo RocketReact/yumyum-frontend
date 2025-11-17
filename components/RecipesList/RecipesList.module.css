@@ -18,11 +18,10 @@
     flex-direction: column;
     gap: 16px;
     width: 361px;
-    height: 455px;
+    height: 483px;
     border-radius: 16px;
     padding: 12px;
     background: var(--light-beige);
-
   }
 }
 
