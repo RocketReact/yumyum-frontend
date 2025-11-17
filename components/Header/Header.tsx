@@ -155,16 +155,16 @@ export default function Header() {
                     </button>
                   </div>
 
-                  <button
+                  <Link
                     className={`${css.btnRegisterRecipes} ${css.changeOrderOnTablet}`}
                     onClick={() => {
-                      router.push('/add-recipe');
                       closeMenu();
                     }}
                     aria-label="Add Recipe"
+                    href="/add-recipe"
                   >
                     Add Recipe
-                  </button>
+                  </Link>
                 </li>
               ) : (
                 <li>
@@ -176,16 +176,16 @@ export default function Header() {
                     >
                       Log in
                     </Link>
-                    <button
+                    <Link
                       className={css.btnRegisterRecipes}
                       onClick={() => {
-                        router.push('/auth/register');
                         closeMenu();
                       }}
                       aria-label="Register"
+                      href="/auth/register"
                     >
                       Register
-                    </button>
+                    </Link>
                   </div>
                 </li>
               )}
