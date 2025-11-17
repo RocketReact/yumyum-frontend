@@ -1,30 +1,51 @@
-.cardWrapper {
+/* .cardWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 288px;
-    padding-top: 12px;
-    padding-bottom: 12px;
     gap: 16px;
-    background: var(--light-beige);
+    border-radius: 16px;
+    padding: 12px;
+    width: 361px;
+    height: 483px;
     margin-left: auto;
     margin-right: auto;
-}
+    background: var(--light-beige);
+} */
 
 .title {
     font: var(--display-sm-bold);
     color: var(--black);
-    min-width: 211px;
-
+    /* min-width: 211px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .img {
     border-radius: 8px;
+    width: 337px;
+    height: 230px;
+}
+
+@media screen and (min-width: 768px) {
+    .img {
+        width: 315px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .img {
+        width: 264px;
+        height: 178px;
+    }
 }
 
 .titleWrapper {
     display: flex;
-
+    justify-content: space-between;
+    height: 58px;
 }
 
 .timeWrapper {
@@ -37,7 +58,6 @@
     max-height: 28px;
 }
 
-
 .recipeTime {
     font: var(--display-sm-semibold);
     font-size: 12px;
@@ -47,14 +67,18 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding-left: 12px;
-    padding-right: 12px;
+    height: 83px;
 }
 
 .description {
     font: var(--body-md-regular);
     color: var(--black);
     line-height: 1.55;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .buttonWrapper {
@@ -65,22 +89,42 @@
 .button {
     border: 1px solid var(--black);
     border-radius: 8px;
-    padding: 8px 60px;
-    margin-right: auto;
-
+    padding: 8px;
+    width: 289px;
     height: 40px;
     font: var(--body-md-semibold);
-    font-weight: 600;
-    font-size: 16px;
     color: var(--black);
-
+    text-align: center;
 }
 
-.favoriteIcon {
+@media screen and (min-width: 768px) {
+    .button {
+        width: 267px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .button {
+        width: 216px;
+    }
+}
+
+.favoriteButton {
     border: 1px solid var(--black);
     border-radius: 8px;
     padding: 8px;
     width: 40px;
     height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.favoriteButton.active {
+    background-color: var(--light-brown);
+    border-color: var(--light-brown);
+}
+
+.favoriteButton.active .favoriteIcon {
+    fill: var(--light-brown);
 }

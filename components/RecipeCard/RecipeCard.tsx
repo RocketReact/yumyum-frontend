@@ -1,20 +1,26 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import css from './RecipeCard.module.css';
 import Link from 'next/link';
 import { Recipe } from '@/types/recipe';
+import FavoriteIcon from '../FavoriteIcon/FavoriteIcon';
 
 interface RecipeCardProps {
   recipe: Recipe;
 }
 
 export default function RecipeCard({ recipe }: RecipeCardProps) {
+  const [isFavorite, setIsFavorite] = useState(false);
+
   return (
-    <div className={css.cardWrapper}>
+    <>
       <Image
         src={recipe?.thumb ? recipe.thumb : '/img-default/default-img-tablet'}
         alt={recipe.title}
-        width={264}
-        height={178}
+        width={300}
+        height={300}
         className={css.img}
       />
 
@@ -34,7 +40,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
 
       <div className={css.descriptionWrapper}>
         <p className={css.description}>{recipe.description}</p>
-        <p className={css.description}>~{recipe.cals} cals</p>
+        <p className={css.descriptionCals}>~{recipe.cals} cals</p>
       </div>
 
       <div className={css.buttonWrapper}>
@@ -42,14 +48,13 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
           Learn more
         </Link>
 
-        <Image
-          src={'/icons/favorite.svg'}
-          alt="Favorite"
-          width={16}
-          height={16}
-          className={css.favoriteIcon}
-        />
+        <button
+          className={`${css.favoriteButton} ${isFavorite ? css.active : ''}`}
+          onClick={() => setIsFavorite(!isFavorite)}
+        >
+          <FavoriteIcon filled={isFavorite} className={css.favoriteIcon} />
+        </button>
       </div>
-    </div>
+    </>
   );
 }
