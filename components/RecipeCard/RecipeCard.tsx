@@ -43,7 +43,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
         </Link>
 
         <Image
-          src={'/icons/favorites.svg'}
+          src={'/icons/favorite.svg'}
           alt="Favorite"
           width={16}
           height={16}
