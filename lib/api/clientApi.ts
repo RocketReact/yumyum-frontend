@@ -48,6 +48,11 @@ export const getAllRecipes = async (params: {
   return data;
 };
 
+export const getRecipeById = async (id: string): Promise<Recipe> => {
+  const { data } = await api.get(`/recipes/id/${id}`);
+  return data;
+};
+
 export const getFavoriteRecipes = async (params: {
   page?: string | null;
   perPage?: string;

@@ -1,54 +1,28 @@
-'use client';
-import { Recipe } from '@/types/recipe';
+import React from 'react';
 import Container from '../Container/Container';
+import { Recipe } from '@/types/recipe';
 import css from './RecipeDetails.module.css';
-import { getFavoriteRecipes } from '@/lib/api/clientApi';
-import { useEffect, useState } from 'react';
 
 const RecipeDetails = ({ recipe }: { recipe: Recipe }) => {
-  const [favorite, setFavorite] = useState(false);
-  const [loading, setLoading] = useState(false);
+  //   const handleFavorite = async () => {
+  //     setLoading(true);
 
-  const handleFavorite = async () => {
-    setLoading(true);
-
-    try {
-      if (favorite) {
-        // await removeFavoriteRecipe(recipe._id);
-        console.log('Removing from favorites:', recipe._id);
-        setFavorite(false);
-      } else {
-        // await addFavoriteRecipe(recipe._id);
-        console.log('Adding to favorites:', recipe._id);
-        setFavorite(true);
-      }
-    } catch (error) {
-      console.error('Error toggling favorite:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    async function checkFavorite() {
-      try {
-        const favorites = await getFavoriteRecipes({
-          page: '1',
-          perPage: '100',
-        });
-
-        const isFavorite = favorites.recipes.some(
-          (item) => item._id === recipe._id,
-        );
-
-        setFavorite(isFavorite);
-      } catch (error) {
-        console.error('Error checking favorite:', error);
-      }
-    }
-
-    checkFavorite();
-  }, [recipe._id]);
+  //     try {
+  //       if (favorite) {
+  //         // await removeFavoriteRecipe(recipe._id);
+  //         console.log('Removing from favorites:', recipe._id);
+  //         setFavorite(false);
+  //       } else {
+  //         // await addFavoriteRecipe(recipe._id);
+  //         console.log('Adding to favorites:', recipe._id);
+  //         setFavorite(true);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error toggling favorite:', error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
   return (
     <section>
@@ -78,7 +52,7 @@ const RecipeDetails = ({ recipe }: { recipe: Recipe }) => {
                 </span>
               </li>
             </ul>
-            <button
+            {/* <button
               className={css.generalInfoBtn}
               onClick={handleFavorite}
               type="button"
@@ -98,7 +72,7 @@ const RecipeDetails = ({ recipe }: { recipe: Recipe }) => {
                   </svg>
                 </>
               )}
-            </button>
+            </button> */}
           </div>
         </div>
         <div className={css.aboutWrapper}>
