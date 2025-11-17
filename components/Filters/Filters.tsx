@@ -1,6 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+//ToDo:
+//! Reset filter do not clear search query
+
+import { useState } from 'react';
 import css from './Filters.module.css';
 import type { Option } from '@/types/filter';
 import { FiltersForm } from '../FiltersForm/FiltersForm';
@@ -34,30 +37,36 @@ export default function Filters({ totalRecipes }: { totalRecipes: number }) {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleToggle = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
     <section className={css.filtersSection}>
-      <div>
-        <div className={css.filtersWrapper}>
-          <p className={css.totalRecipes}>{totalRecipes} recipes</p>
+      <div className={css.filtersWrapper}>
+        <p className={css.totalRecipes}>{totalRecipes} recipes</p>
 
-          {/* mobile toggle */}
-          <button
-            className={css.filtersToggle}
-            type="button"
-            onClick={() => setIsOpen(true)}
-          >
-            <span>Filters</span>
-            <svg width="24" height="24">
+        {/* mobile toggle */}
+        <button
+          className={css.filtersToggle}
+          type="button"
+          onClick={handleToggle}
+        >
+          <span>Filters</span>
+          <svg width="24" height="24">
+            {!isOpen ? (
               <use href="/Sprite.svg#icon-Mailfilter" />
-            </svg>
-          </button>
-          {/* desktop inline form */}
-          <div className={css.desktopFiltersPanel}>
-            <FiltersForm
-              categories={categoriesOptions}
-              ingredients={ingredientsOptions}
-            />
-          </div>
+            ) : (
+              <use href="/Sprite.svg#icon-Notificationserror" />
+            )}
+          </svg>
+        </button>
+        {/* desktop inline form */}
+        <div className={css.desktopFiltersPanel}>
+          <FiltersForm
+            categories={categoriesOptions}
+            ingredients={ingredientsOptions}
+          />
         </div>
       </div>
 

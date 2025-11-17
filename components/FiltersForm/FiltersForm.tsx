@@ -3,6 +3,7 @@
 import css from './FiltersForm.module.css';
 import type { Option } from '@/types/filter';
 import { useFiltersStore } from '@/lib/store/useFiltersStore';
+import { useSearchStore } from '@/lib/store/useSearchStore';
 
 type FiltersFormProps = {
   categories: Option[];
@@ -20,9 +21,11 @@ export function FiltersForm({
   const setCategory = useFiltersStore((s) => s.setCategory);
   const setIngredient = useFiltersStore((s) => s.setIngredient);
   const resetFilters = useFiltersStore((s) => s.resetFilters);
+  const clearSearchQuery = useSearchStore((s) => s.clearSearchQuery);
 
   const handleReset = () => {
     resetFilters();
+    clearSearchQuery();
     onAfterReset?.();
   };
 

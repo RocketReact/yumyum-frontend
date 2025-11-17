@@ -27,20 +27,6 @@ export function FiltersModal({
       }}
     >
       <div className={css.modal}>
-        <div className={css.modalHeader}>
-          <button
-            type="button"
-            className={css.closeButton}
-            onClick={onClose}
-            aria-label="Close filters"
-          >
-            <span className={css.closeButtonText}>Filters</span>
-            <svg className={css.closeIcon} width="24" height="24">
-              <use href="/Sprite.svg#icon-Notificationserror" />
-            </svg>
-          </button>
-        </div>
-
         <FiltersForm
           categories={categories}
           ingredients={ingredients}
@@ -50,5 +36,3 @@ export function FiltersModal({
     </div>
   );
 }
-
-// ToDo: The modal should appear droping down starting from Filters toggle
