@@ -39,14 +39,6 @@ export default function Header() {
       document.documentElement.style.overflow = '';
     };
   }, [isMenuOpen]);
-  //  useEffect(() => {
-  //    setUser({
-  //      _id: 'fsafasfas',
-  //      name: 'Adal',
-  //      email: 'max@gmail.com',
-  //      avatarUrl: 'aaaaaa',
-  //    });
-  //  }, []);
   return (
     <header className={css.header}>
       <Container>

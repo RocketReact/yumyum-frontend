@@ -195,6 +195,10 @@
   .myProfileLink {
     margin-bottom: 5px;
   }
+  .recipeProfileLinks .myProfileLink {
+    margin-right: 32px;
+    margin-left: 0;
+  }
   .loginRegisterContainer {
     max-height: 74px;
     display: flex;
@@ -204,7 +208,7 @@
     justify-content: space-between;
     text-align: center;
     text-wrap: nowrap;
-    gap: 4px;
+    gap: 0;
     font: var(--body-sm-semibold)
   }
   .btnRegisterReceipes {
@@ -220,9 +224,6 @@
   .text {
     text-wrap: nowrap;
     margin-right: 4px;
-  }
-  .recipesLink {
-    margin-right: 8px;
   }
   .text a {
     position: relative;
@@ -294,13 +295,18 @@
   }
   .recipeProfileLinks {
     flex-direction: row;
-    gap: 8px
+    gap: 0;
   }
-  .mb8 {
-    margin-right: 20px;
+  .navMenu .mb8 {
+    margin-right: 32px;
+    margin-left: 0;
   }
-  .recipesLink {
-    margin-right: 16px;
+  .recipeProfileLinks .recipesLink {
+    margin-right: 32px;
+    margin-left: 0;
+  }
+  .navMenu .login {
+    margin-left: 0;
   }
   .changeOrderOnTablet {
     order: -1;
