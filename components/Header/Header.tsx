@@ -196,14 +196,3 @@ export default function Header() {
     </header>
   );
 }
-//<li
-//  className={`${css.text}  ${pathname === '/profile' || pathname === '/auth/login' ? css.activeUnderLine : ''}`}
-//>
-//  {isAuthenticated ? (
-//    <Link href="/profile" onClick={closeMenu}>
-//      My Profile
-//    </Link>
-//  ) : (
-//
-//  )}
-//</li>
