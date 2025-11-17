@@ -11,7 +11,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
   return (
     <div className={css.cardWrapper}>
       <Image
-        src={recipe.thumb}
+        src={recipe?.thumb ? recipe.thumb : '/img-default/default-img-tablet'}
         alt={recipe.title}
         width={264}
         height={178}
