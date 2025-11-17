@@ -124,7 +124,7 @@ export default function Header() {
                 {isAuthenticated && (
                   <Link
                     className={`${css.myProfileLink} ${css.text}`}
-                    href="/profile"
+                    href="/recipes"
                     onClick={closeMenu}
                   >
                     My Profile
