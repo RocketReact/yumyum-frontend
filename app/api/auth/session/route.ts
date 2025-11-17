@@ -16,11 +16,15 @@ export async function POST() {
     }
 
     if (refreshToken) {
-      const apiRes = await api.post('auth/refresh', {
-        headers: {
-          Cookie: cookieStore.toString(),
+      const apiRes = await api.post(
+        'auth/refresh',
+        {},
+        {
+          headers: {
+            Cookie: cookieStore.toString(),
+          },
         },
-      });
+      );
 
       const setCookie = apiRes.headers['set-cookie'];
 
@@ -34,11 +38,14 @@ export async function POST() {
             path: parsed.Path,
             maxAge: Number(parsed['Max-Age']),
           };
-
           if (parsed.accessToken)
             cookieStore.set('accessToken', parsed.accessToken, options);
+
           if (parsed.refreshToken)
             cookieStore.set('refreshToken', parsed.refreshToken, options);
+
+          if (parsed.sessionId)
+            cookieStore.set('sessionId', parsed.sessionId, options);
         }
         return NextResponse.json({ success: true }, { status: 200 });
       }
