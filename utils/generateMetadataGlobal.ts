@@ -8,7 +8,7 @@ export function generateMetadataGlobal({
   path = '',
   image = OG_IMAGE,
 }: GenerateMetadataParams): Metadata {
-  const url = path ? `${SITE_DOMAIN}${path}` : SITE_DOMAIN;
+  const url = path ? `${SITE_DOMAIN}/${path}` : SITE_DOMAIN;
 
   // If no image.url — use default img
   const imageUrl = image.url || OG_IMAGE.url;
