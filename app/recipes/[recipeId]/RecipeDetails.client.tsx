@@ -1,4 +1,5 @@
 'use client';
+import Loader from '@/components/Loader/Loader';
 import RecipeDetails from '@/components/RecipeDetails/RecipeDetails';
 import { getRecipeById } from '@/lib/api/clientApi';
 import { useQuery } from '@tanstack/react-query';
@@ -13,7 +14,7 @@ const RecipeDetailsClient = ({ recipeId }: { recipeId: string }) => {
   return (
     <>
       {data && <RecipeDetails recipe={data} />}
-      {isLoading && <p>Loading, please wait...</p>}
+      {isLoading && <Loader />}
       {!data && error && <p>Something went wrong.</p>}
     </>
   );

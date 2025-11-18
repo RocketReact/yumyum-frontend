@@ -1,4 +1,3 @@
-import React from 'react';
 import Container from '../Container/Container';
 import { Recipe } from '@/types/recipe';
 import css from './RecipeDetails.module.css';

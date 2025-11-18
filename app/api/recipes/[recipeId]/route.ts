@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { isAxiosError } from 'axios';
 import { api } from '@/app/api/api';
 import { logErrorResponse } from '../../_utils/utils';
@@ -13,8 +13,6 @@ type Params = {
 export async function GET(request: Request, { params }: Params) {
   try {
     const { recipeId } = await params;
-
-    console.log('API Route - Recipe ID:', recipeId);
 
     const res = await api.get<Recipe>(`recipes/id/${recipeId}`);
 
