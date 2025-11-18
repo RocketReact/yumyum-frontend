@@ -27,7 +27,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
         <h2 className={css.title}>{recipe.title}</h2>
         <div className={css.timeWrapper}>
           <svg className={css.timeIcon} width="15" height="15">
-            <use href="/icons/clock.svg#clock"></use>
+            <use href="/sprite.svg#clock"></use>
           </svg>
           <span className={css.recipeTime}>{recipe.time}</span>
         </div>
@@ -48,7 +48,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
           onClick={() => setIsFavorite(!isFavorite)}
         >
           <svg className={css.favoriteIcon} width="14" height="17">
-            <use href={`/icons/favorite.svg#favorite`}></use>
+            <use href={`/sprite.svg#favorite`}></use>
           </svg>
         </button>
       </div>
