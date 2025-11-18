@@ -77,84 +77,86 @@ export default function Header() {
 
             {/*Desktop navigation - always visible on tablet/desktop*/}
             <nav className={css.navMenuDesktop} aria-label="Main navigation">
-              {/*   <ul> */}
-              {/*   <li className={css.recipeProfileLinks}> */}
-              {/*     <Link */}
-              {/*       className={`${css.text} ${isAuthenticated ? css.mb8 : css.recipesLink} ${pathname === '/' ? css.activeUnderLine : ''}`} */}
-              {/*       href="/" */}
-              {/*       onClick={closeMenu} */}
-              {/*     > */}
-              {/*       Recipes */}
-              {/*     </Link> */}
-              {/*     {isAuthenticated && ( */}
-              {/*       <Link */}
-              {/*         className={`${css.myProfileLink} ${css.text} ${pathname === '/profile/own' ? css.activeUnderLine : ''}`} */}
-              {/*         href="/profile/own" */}
-              {/*         onClick={closeMenu} */}
-              {/*       > */}
-              {/*         My Profile */}
-              {/*       </Link> */}
-              {/*     )} */}
-              {/*   </li> */}
-              {/*   {isAuthenticated ? ( */}
-              {/*     <li className={css.userInfoContainer}> */}
-              {/*       <div className={css.userInfo}> */}
-              {/*         <div className={css.avatarNameContainer}> */}
-              {/*           <span className={css.avatar}>{firstLetterUserName}</span> */}
-              {/*           <span className={css.userName}>{user?.name}</span> */}
-              {/*         </div> */}
-              {/*         <span className={css.line} /> */}
-              {/*         <button */}
-              {/*           className={css.logoutLink} */}
-              {/*           onClick={handleLogout} */}
-              {/*           aria-label="Log out" */}
-              {/*         > */}
-              {/*           <svg */}
-              {/*             fill="transparent" */}
-              {/*             stroke="var(--white)" */}
-              {/*             width={24} */}
-              {/*             height={24} */}
-              {/*           > */}
-              {/*             <use href="/sprite.svg#icon-Genericlog-out" /> */}
-              {/*           </svg> */}
-              {/*         </button> */}
-              {/*       </div> */}
+              <ul>
+                <li className={css.recipeProfileLinks}>
+                  <Link
+                    className={`${css.text} ${isAuthenticated ? css.mb8 : css.recipesLink} ${pathname === '/' ? css.activeUnderLine : ''}`}
+                    href="/"
+                    onClick={closeMenu}
+                  >
+                    Recipes
+                  </Link>
+                  {isAuthenticated && (
+                    <Link
+                      className={`${css.myProfileLink} ${css.text} ${pathname === '/profile/own' ? css.activeUnderLine : ''}`}
+                      href="/profile/own"
+                      onClick={closeMenu}
+                    >
+                      My Profile
+                    </Link>
+                  )}
+                </li>
+                {isAuthenticated ? (
+                  <li className={css.userInfoContainer}>
+                    <div className={css.userInfo}>
+                      <div className={css.avatarNameContainer}>
+                        <span className={css.avatar}>
+                          {firstLetterUserName}
+                        </span>
+                        <span className={css.userName}>{user?.name}</span>
+                      </div>
+                      <span className={css.line} />
+                      <button
+                        className={css.logoutLink}
+                        onClick={handleLogout}
+                        aria-label="Log out"
+                      >
+                        <svg
+                          fill="transparent"
+                          stroke="var(--white)"
+                          width={24}
+                          height={24}
+                        >
+                          <use href="/sprite.svg#icon-Genericlog-out" />
+                        </svg>
+                      </button>
+                    </div>
 
-              {/*       <Link */}
-              {/*         className={`${css.linkRegisterRecipes} ${css.changeOrderOnTablet}`} */}
-              {/*         onClick={() => { */}
-              {/*           closeMenu(); */}
-              {/*         }} */}
-              {/*         aria-label="Add Recipe" */}
-              {/*         href="/add-recipe" */}
-              {/*       > */}
-              {/*         Add Recipe */}
-              {/*       </Link> */}
-              {/*     </li> */}
-              {/*   ) : ( */}
-              {/*     <li> */}
-              {/*       <div className={css.loginRegisterContainer}> */}
-              {/*         <Link */}
-              {/*           className={`${css.login} ${css.text} ${pathname === '/auth/login' ? css.activeUnderLine : ''}`} */}
-              {/*           href="/auth/login" */}
-              {/*           onClick={closeMenu} */}
-              {/*         > */}
-              {/*           Log in */}
-              {/*         </Link> */}
-              {/*         <Link */}
-              {/*           className={css.linkRegisterRecipes} */}
-              {/*           onClick={() => { */}
-              {/*             closeMenu(); */}
-              {/*           }} */}
-              {/*           aria-label="Register" */}
-              {/*           href="/auth/register" */}
-              {/*         > */}
-              {/*           Register */}
-              {/*         </Link> */}
-              {/*       </div> */}
-              {/*     </li> */}
-              {/*   )} */}
-              {/* </ul> */}
+                    <Link
+                      className={`${css.linkRegisterRecipes} ${css.changeOrderOnTablet}`}
+                      onClick={() => {
+                        closeMenu();
+                      }}
+                      aria-label="Add Recipe"
+                      href="/add-recipe"
+                    >
+                      Add Recipe
+                    </Link>
+                  </li>
+                ) : (
+                  <li>
+                    <div className={css.loginRegisterContainer}>
+                      <Link
+                        className={`${css.login} ${css.text} ${pathname === '/auth/login' ? css.activeUnderLine : ''}`}
+                        href="/auth/login"
+                        onClick={closeMenu}
+                      >
+                        Log in
+                      </Link>
+                      <Link
+                        className={css.linkRegisterRecipes}
+                        onClick={() => {
+                          closeMenu();
+                        }}
+                        aria-label="Register"
+                        href="/auth/register"
+                      >
+                        Register
+                      </Link>
+                    </div>
+                  </li>
+                )}
+              </ul>
             </nav>
           </div>
         </Container>
