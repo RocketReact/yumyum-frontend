@@ -1,0 +1,171 @@
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 48px;
+  margin-bottom: 32px;
+}
+
+.title {
+  font: var(--display-lg-semibold);
+}
+
+.imgWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 276px;
+  border-radius: 8px;
+  background-color: #2b2d30;
+  overflow: hidden;
+}
+
+.titleImg {
+  object-fit: cover;
+  width: 100%;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.generalInfoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.generalInfoWrapper {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--light-beige);
+}
+
+.generalInfoList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.generalInfoTitle {
+  margin-bottom: 15px;
+  font: var(--display-sm-semibold);
+}
+
+.generalInfoItem {
+  font: var(--body-md-semibold);
+}
+
+.generalInfoSpan {
+  font: var(--body-md-regular);
+}
+
+.btn {
+  height: 56px;
+  width: 100%;
+  background: var(--light-brown);
+  border-radius: 8px;
+}
+.otherInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.aboutTitle {
+  font: var(--display-sm-semibold);
+  margin-bottom: 8px;
+}
+
+.aboutDescription {
+  font: var(--body-md-regular);
+}
+
+.ingredientsTitle {
+  font: var(--display-sm-semibold);
+  margin-bottom: 8px;
+}
+
+.ingredientItem {
+  font: var(--body-md-regular);
+}
+
+.preparationTitle {
+  font: var(--display-sm-semibold);
+  margin-bottom: 24px;
+}
+
+.preparationDescription {
+  font: var(--body-md-regular);
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .titleWrapper {
+    flex-direction: column-reverse;
+  }
+
+  .title {
+    font: var(--display-xl-semibold);
+  }
+
+  .titleImg {
+    width: 100%;
+    height: 624px;
+  }
+
+  .imgWrapper {
+    height: 624px;
+  }
+
+  .generalInfoWrapper {
+    width: 431px;
+    padding: 24px;
+  }
+
+  .generalInfoContainer {
+    flex-direction: row;
+  }
+
+  .btn {
+    width: 249px;
+  }
+
+  .aboutTitle {
+    font: var(--display-md-semibold);
+  }
+
+  .ingredientsTitle {
+    font: var(--display-md-semibold);
+  }
+
+  .preparationTitle {
+    font: var(--display-md-semibold);
+  }
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .titleImg {
+    width: min-content;
+  }
+
+  .infoWrapper {
+    flex-direction: row-reverse;
+  }
+
+  .generalInfoWrapper {
+    width: 393px;
+  }
+
+  .generalInfoContainer {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 393px;
+  }
+}
