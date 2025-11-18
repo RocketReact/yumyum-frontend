@@ -65,7 +65,7 @@
   overflow: hidden;
   z-index: 1001;
 
-  width: var(--radix-select-triger-width);
+  width: var(--radix-select-trigger-width);
 }
 
 .viewport {
