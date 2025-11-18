@@ -24,6 +24,19 @@
 
 /*! Input-Reset Wrapper*/
 
+.filterFieldsWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+}
+
+@media (min-width: 1440px) {
+  .filterFieldsWrapper {
+    flex-direction: row;
+  }
+}
+
 .filtersField {
   width: 100%;
 

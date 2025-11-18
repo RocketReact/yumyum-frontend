@@ -32,26 +32,28 @@ export function FiltersForm({
 
   return (
     <div className={css.inputResetWrapper}>
-      {/* Category */}
-      <div className={css.filtersField}>
-        <CustomSelect
-          name="Category"
-          placeholder="Category"
-          value={category}
-          options={categories}
-          onChange={setCategory}
-        />
-      </div>
+      <div className={css.filterFieldsWrapper}>
+        {/* Category */}
+        <div className={css.filtersField}>
+          <CustomSelect
+            name="Category"
+            placeholder="Category"
+            value={category}
+            options={categories}
+            onChange={setCategory}
+          />
+        </div>
 
-      {/* Ingredient */}
-      <div className={css.filtersField}>
-        <CustomSelect
-          name="Ingredient"
-          placeholder="Ingredient"
-          value={ingredient}
-          options={ingredients}
-          onChange={setIngredient}
-        />
+        {/* Ingredient */}
+        <div className={css.filtersField}>
+          <CustomSelect
+            name="Ingredient"
+            placeholder="Ingredient"
+            value={ingredient}
+            options={ingredients}
+            onChange={setIngredient}
+          />
+        </div>
       </div>
 
       <button type="button" className={css.resetButton} onClick={handleReset}>
