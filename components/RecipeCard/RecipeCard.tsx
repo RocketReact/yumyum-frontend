@@ -39,7 +39,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
       </div>
 
       <div className={css.buttonWrapper}>
-        <Link href={'/'} className={css.button}>
+        <Link href={`/recipes/id/${recipe._id}`} className={css.button}>
           Learn more
         </Link>
 

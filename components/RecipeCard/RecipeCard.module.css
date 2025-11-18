@@ -3,6 +3,7 @@
     color: var(--black);
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 218px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -131,19 +132,20 @@
     transition: all var(--primary-transition);
 }
 
-.favoriteButton:hover,
+.favoriteButton:hover {
+    background: var(--light-brown);
+    border-color: var(--light-brown);
+}
+
 .favoriteButton:active {
     background: var(--light-brown);
     border-color: var(--light-brown);
+    box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px var(--white);
 }
 
 .favoriteButton.active {
     background-color: var(--brown);
     border-color: var(--brown);
-}
-
-.favoriteButton.active .favoriteIcon {
-    stroke: var(--white);
 }
 
 .favoriteIcon {
@@ -154,4 +156,23 @@
 
 .favoriteButton:hover .favoriteIcon {
     stroke: var(--white);
+}
+
+.favoriteButton:active .favoriteIcon {
+    stroke: var(--white);
+}
+
+.favoriteButton.active .favoriteIcon {
+    stroke: var(--white);
+}
+
+.favoriteButton.active:hover {
+    background: var(--light-brown);
+    border-color: var(--light-brown);
+}
+
+.favoriteButton.active:hover .favoriteIcon {
+    fill: transparent;
+    stroke: var(--white);
+    transition: all var(--primary-transition);
 }
