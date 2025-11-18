@@ -24,15 +24,23 @@
 
 /*! Input-Reset Wrapper*/
 
-
 .filtersField {
   width: 100%;
-  display: flex;
+
+
 
 }
 
-.resetButton {
+@media (min-width: 1440px) {
+  .filtersField {
+    width: 179px;
+    height: 33px;
+    /* border: 1px dashed red; */
 
+  }
+}
+
+.resetButton {
   font: var(--body-sm-semibold);
   border-bottom: 1px solid var(--black);
 
@@ -41,6 +49,11 @@
 @media (min-width: 1440px) {
   .resetButton {
     /* border: 1px dashed blue; */
-    width: 74px;
+    /* width: 74px; */
+    width: auto;
+
+
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 }
