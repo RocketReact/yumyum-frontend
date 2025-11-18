@@ -142,7 +142,7 @@ export const RecipeForm = () => {
       if (iziToast) {
         iziToast.success({ title: 'Success', message: 'Recipe created!' });
       }
-      router.push(`/recipes/id/${res.data._id}`);
+      router.push(`/recipes/${res.data._id}`);
     } catch (err: any) {
       console.error(err);
       if (iziToast) {
@@ -166,235 +166,247 @@ export const RecipeForm = () => {
         {({ values, setFieldValue, isSubmitting }) => (
           <Form className={css.addRecipeForm}>
             {/* --- Upload Photo Block --- */}
-            <label className={css.addRecipeFormBlockTitle}>
-              Upload Photo
-              <div className={css.customFileInputWrapper}>
-                <input
-                  type="file"
-                  accept="image/*"
-                  className={css.hiddenFileInput}
-                  onChange={(e) => {
-                    const file = e.target.files?.[0] || null;
-                    setFieldValue('thumb', file);
-                    setPreview(file ? URL.createObjectURL(file) : null);
-                  }}
-                />
-                {preview ? (
-                  <img
-                    src={preview}
-                    alt="Preview"
-                    className={css.addRecipeFormPreviewImage}
+            <div className={css.addRecipeImgBlock}>
+              <label className={css.addRecipeFormBlockTitle}>
+                Upload Photo
+                <div className={css.customFileInputWrapper}>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className={css.hiddenFileInput}
+                    onChange={(e) => {
+                      const file = e.target.files?.[0] || null;
+                      setFieldValue('thumb', file);
+                      setPreview(file ? URL.createObjectURL(file) : null);
+                    }}
                   />
-                ) : (
-                  <div className={css.imagePlaceholder}>
-                    <span className={css.imagePlaceholderIcon}></span>
-                  </div>
-                )}
-                {values.thumb && (
-                  <span className={css.fileNameDisplay}>
-                    {(values.thumb as File).name}
-                  </span>
-                )}
-              </div>
-              <ErrorMessage
-                name="thumb"
-                component="div"
-                className={css.errorMessage}
-              />
-            </label>
-
-            <p className={css.addRecipeFormBlockTitle}>General Information</p>
-
-            <label className={css.addRecipeFormBlockSubtitle}>
-              Recipe Title
-              <Field
-                name="title"
-                className={css.addRecipeFormInput}
-                placeholder="Enter the name of your recipe"
-              />
-              <ErrorMessage
-                name="title"
-                component="div"
-                className={css.errorMessage}
-              />
-            </label>
-
-            <label className={css.addRecipeFormBlockSubtitle}>
-              Recipe Description
-              <Field
-                name="description"
-                as="textarea"
-                rows={3}
-                className={css.addRecipeFormTextarea}
-                placeholder="Enter a brief description of your recipe"
-              />
-              <ErrorMessage
-                name="description"
-                component="div"
-                className={css.errorMessage}
-              />
-            </label>
-
-            <label className={css.addRecipeFormBlockSubtitle}>
-              Cooking time in minutes
-              <Field
-                name="time"
-                type="number"
-                className={css.addRecipeFormInput}
-                placeholder="10"
-              />
-              <ErrorMessage
-                name="time"
-                component="div"
-                className={css.errorMessage}
-              />
-            </label>
-
-            <label className={css.addRecipeFormBlockSubtitle}>
-              Calories
-              <Field
-                name="cals"
-                type="number"
-                className={css.addRecipeFormInput}
-                placeholder="150 cals"
-              />
-              <ErrorMessage
-                name="cals"
-                component="div"
-                className={css.errorMessage}
-              />
-            </label>
-
-            <label className={css.addRecipeFormBlockSubtitle}>
-              Category
-              <Field
-                name="category"
-                as="select"
-                className={css.addRecipeFormInput}
-              >
-                <option value="">Soup</option>
-                {categories.map((cat) => (
-                  <option key={cat._id} value={cat._id}>
-                    {cat.name}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage
-                name="category"
-                component="div"
-                className={css.errorMessage}
-              />
-            </label>
-
-            {/* --- Ingredients Block --- */}
-            <div className={css.addRecipeIngredientsGroup}>
-              <label className={css.addRecipeFormBlockTitle}>Ingredients</label>{' '}
-              <FieldArray name="ingredients">
-                {({ push, remove }) => (
-                  <div>
-                    {values.ingredients.map((ing, index) => (
-                      <div key={index} className={css.ingredientRow}>
-                        <label className={css.addRecipeFormBlockSubtitle}>
-                          Name
-                          <Field
-                            as="select"
-                            name={`ingredients[${index}].id`}
-                            className={css.addRecipeFormInput}
-                            onChange={(e: any) => {
-                              const selected = ingredientsList.find(
-                                (i) => i._id === e.target.value,
-                              );
-                              setFieldValue(
-                                `ingredients[${index}].id`,
-                                selected?._id || '',
-                              );
-                              setFieldValue(
-                                `ingredients[${index}].name`,
-                                selected?.name || '',
-                              );
-                            }}
-                          >
-                            <option value="">Broccoli</option>
-                            {ingredientsList.map((i) => (
-                              <option key={i._id} value={i._id}>
-                                {i.name}
-                              </option>
-                            ))}
-                          </Field>
-                          <ErrorMessage
-                            name={`ingredients[${index}].id`}
-                            component="div"
-                            className={css.errorMessage}
-                          />
-                        </label>
-
-                        <label className={css.addRecipeFormBlockSubtitle}>
-                          Amount
-                          <Field
-                            name={`ingredients[${index}].amount`}
-                            className={css.addRecipeFormInput}
-                            placeholder="100g"
-                          />
-                          <ErrorMessage
-                            name={`ingredients[${index}].amount`}
-                            component="div"
-                            className={css.errorMessage}
-                          />
-                        </label>
-
-                        <button
-                          type="button"
-                          onClick={() => remove(index)}
-                          className={css.removeButton}
-                        >
-                          <span className={css.removeIcon}></span>
-                        </button>
-                      </div>
-                    ))}
-                    <button
-                      type="button"
-                      onClick={() => push({ id: '', name: '', amount: '' })}
-                      className={css.addIngredientButton}
-                    >
-                      Add new Ingredient
-                    </button>
-                    <ErrorMessage name="ingredients">
-                      {(msg) => {
-                        if (typeof msg === 'string') {
-                          return <div className={css.errorMessage}>{msg}</div>;
-                        }
-                        return null;
-                      }}
-                    </ErrorMessage>
-                  </div>
-                )}
-              </FieldArray>
+                  {preview ? (
+                    <img
+                      src={preview}
+                      alt="Preview"
+                      className={css.addRecipeFormPreviewImage}
+                    />
+                  ) : (
+                    <div className={css.imagePlaceholder}></div>
+                  )}
+                  {values.thumb && (
+                    <span className={css.fileNameDisplay}>
+                      {(values.thumb as File).name}
+                    </span>
+                  )}
+                </div>
+                <ErrorMessage
+                  name="thumb"
+                  component="div"
+                  className={css.errorMessage}
+                />
+              </label>
             </div>
+            <div className={css.addRecipeInfoBlock}>
+              <div className={css.addRecipeGeneralGroup}>
+                <p className={css.addRecipeFormBlockTitle}>
+                  General Information
+                </p>
 
-            {/* --- Instructions Block --- */}
-            <label className={css.addRecipeFormBlockTitle}>
-              Instructions
-              <Field
-                name="instructions"
-                as="textarea"
-                rows={5}
-                className={css.addRecipeFormTextarea}
-                placeholder="Enter a text"
-              />
-              <ErrorMessage
-                name="instructions"
-                component="div"
-                className={css.errorMessage}
-              />
-            </label>
+                <label className={css.addRecipeFormBlockSubtitle}>
+                  Recipe Title
+                  <Field
+                    name="title"
+                    className={css.addRecipeFormInput}
+                    placeholder="Enter the name of your recipe"
+                  />
+                  <ErrorMessage
+                    name="title"
+                    component="div"
+                    className={css.errorMessage}
+                  />
+                </label>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={css.addRecipeFormButtonSubmit}
-            >
-              Publish Recipe
-            </button>
+                <label className={css.addRecipeFormBlockSubtitle}>
+                  Recipe Description
+                  <Field
+                    name="description"
+                    as="textarea"
+                    rows={3}
+                    className={css.addRecipeFormTextarea}
+                    placeholder="Enter a brief description of your recipe"
+                  />
+                  <ErrorMessage
+                    name="description"
+                    component="div"
+                    className={css.errorMessage}
+                  />
+                </label>
+
+                <label className={css.addRecipeFormBlockSubtitle}>
+                  Cooking time in minutes
+                  <Field
+                    name="time"
+                    type="number"
+                    className={css.addRecipeFormInput}
+                    placeholder="10"
+                  />
+                  <ErrorMessage
+                    name="time"
+                    component="div"
+                    className={css.errorMessage}
+                  />
+                </label>
+                <div className={css.addRecipeCalsAndCategoryWrapper}>
+                  <label className={css.addRecipeFormBlockSubtitle}>
+                    Calories
+                    <Field
+                      name="cals"
+                      type="number"
+                      className={css.addRecipeFormCalsInput}
+                      placeholder="150 cals"
+                    />
+                    <ErrorMessage
+                      name="cals"
+                      component="div"
+                      className={css.errorMessage}
+                    />
+                  </label>
+
+                  <label className={css.addRecipeFormBlockSubtitle}>
+                    Category
+                    <Field
+                      name="category"
+                      as="select"
+                      className={css.addRecipeFormCategoryInput}
+                    >
+                      <option value="">Soup</option>
+                      {categories.map((cat) => (
+                        <option key={cat._id} value={cat._id}>
+                          {cat.name}
+                        </option>
+                      ))}
+                    </Field>
+                    <ErrorMessage
+                      name="category"
+                      component="div"
+                      className={css.errorMessage}
+                    />
+                  </label>
+                </div>
+              </div>
+
+              {/* --- Ingredients Block --- */}
+              <div className={css.addRecipeIngredientsGroup}>
+                <label className={css.addRecipeFormBlockTitle}>
+                  Ingredients
+                </label>
+                <FieldArray name="ingredients">
+                  {({ push, remove }) => (
+                    <div>
+                      {values.ingredients.map((ing, index) => (
+                        <div key={index} className={css.ingredientRow}>
+                          <label className={css.addRecipeFormBlockSubtitle}>
+                            Name
+                            <Field
+                              as="select"
+                              name={`ingredients[${index}].id`}
+                              className={css.addRecipeFormInput}
+                              onChange={(e: any) => {
+                                const selected = ingredientsList.find(
+                                  (i) => i._id === e.target.value,
+                                );
+                                setFieldValue(
+                                  `ingredients[${index}].id`,
+                                  selected?._id || '',
+                                );
+                                setFieldValue(
+                                  `ingredients[${index}].name`,
+                                  selected?.name || '',
+                                );
+                              }}
+                            >
+                              <option value="">Broccoli</option>
+                              {ingredientsList.map((i) => (
+                                <option key={i._id} value={i._id}>
+                                  {i.name}
+                                </option>
+                              ))}
+                            </Field>
+                            <ErrorMessage
+                              name={`ingredients[${index}].id`}
+                              component="div"
+                              className={css.errorMessage}
+                            />
+                          </label>
+
+                          <label className={css.addRecipeFormBlockSubtitle}>
+                            Amount
+                            <Field
+                              name={`ingredients[${index}].amount`}
+                              className={css.addRecipeFormInput}
+                              placeholder="100g"
+                            />
+                            <ErrorMessage
+                              name={`ingredients[${index}].amount`}
+                              component="div"
+                              className={css.errorMessage}
+                            />
+                          </label>
+
+                          <button
+                            type="button"
+                            onClick={() => remove(index)}
+                            className={css.removeButton}
+                          >
+                            <span className={css.removeIcon}></span>
+                          </button>
+                        </div>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={() => push({ id: '', name: '', amount: '' })}
+                        className={css.addIngredientButton}
+                      >
+                        Add new Ingredient
+                      </button>
+                      <ErrorMessage name="ingredients">
+                        {(msg) => {
+                          if (typeof msg === 'string') {
+                            return (
+                              <div className={css.errorMessage}>{msg}</div>
+                            );
+                          }
+                          return null;
+                        }}
+                      </ErrorMessage>
+                    </div>
+                  )}
+                </FieldArray>
+              </div>
+
+              {/* --- Instructions Block --- */}
+              <div className={css.addRecipeInstructionsGroup}>
+                <label className={css.addRecipeFormBlockTitle}>
+                  Instructions
+                  <Field
+                    name="instructions"
+                    as="textarea"
+                    rows={5}
+                    className={css.addRecipeFormTextarea}
+                    placeholder="Enter a text"
+                  />
+                  <ErrorMessage
+                    name="instructions"
+                    component="div"
+                    className={css.errorMessage}
+                  />
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={css.addRecipeFormButtonSubmit}
+              >
+                Publish Recipe
+              </button>
+            </div>
           </Form>
         )}
       </Formik>
