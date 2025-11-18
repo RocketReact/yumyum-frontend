@@ -58,6 +58,11 @@
     max-height: 28px;
 }
 
+.timeIcon {
+    fill: var(--white);
+    stroke: var(--black);
+}
+
 .recipeTime {
     font: var(--display-sm-semibold);
     font-size: 12px;
@@ -81,32 +86,36 @@
     -webkit-box-orient: vertical;
 }
 
+.descriptionCals {
+    font: var(--body-md-regular);
+    color: var(--black);
+}
+
 .buttonWrapper {
     display: flex;
     justify-content: space-between;
 }
 
 .button {
-    border: 1px solid var(--black);
+    border: 1px solid;
+    background-color: var(--light-brown);
     border-radius: 8px;
     padding: 8px;
     width: 289px;
     height: 40px;
     font: var(--body-md-semibold);
-    color: var(--black);
+    color: var(--white);
     text-align: center;
-    transition: all --primary-transition;
+    transition: all var(--primary-transition);
 }
 
 .button:hover {
-    background: var(--light-gray);
-    border-color: var(--light-gray);
+    background: var(--brown);
 }
 
 .button:active {
     box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px var(--white);
-    background: var(--light-gray);
-    border-color: var(--light-gray);
+    background: var(--light-brown);
 }
 
 @media screen and (min-width: 768px) {
@@ -122,7 +131,7 @@
 }
 
 .favoriteButton {
-    border: 1px solid var(--black);
+    border: 1px solid transparent;
     border-radius: 8px;
     padding: 8px;
     width: 40px;
@@ -130,7 +139,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all --primary-transition;
+    transition: all var(--primary-transition);
+    background-color: var(--light-brown);
+}
+
+.favoriteIcon {
+    display: block;
+    color: var(--black);
+    transition: color var(--primary-transition);
 }
 
 .favoriteButton.active {
@@ -139,21 +155,19 @@
 }
 
 .favoriteButton.active .favoriteIcon {
-    fill: var(--light-brown);
+    color: var(--white);
 }
 
 .favoriteButton:hover {
-    background: var(--light-gray);
-    border-color: var(--light-gray);
-
+    background: var(--brown);
+    border-color: var(--brown);
 }
 
 .favoriteButton:hover .favoriteIcon {
-    fill: var(--light-gray);
+    /* color: var(--black); */
 }
 
 .favoriteButton:active {
-    box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px var(--white);
-    background: var(--light-gray);
-    border-color: var(--light-gray);
+    background: var(--brown);
+
 }

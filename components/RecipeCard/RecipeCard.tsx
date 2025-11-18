@@ -5,7 +5,6 @@ import Image from 'next/image';
 import css from './RecipeCard.module.css';
 import Link from 'next/link';
 import { Recipe } from '@/types/recipe';
-import FavoriteIcon from '../FavoriteIcon/FavoriteIcon';
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -27,13 +26,9 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
       <div className={css.titleWrapper}>
         <h2 className={css.title}>{recipe.title}</h2>
         <div className={css.timeWrapper}>
-          <Image
-            src="/icons/clock.svg"
-            alt="Time"
-            width={15}
-            height={15}
-            className={css.timeIcon}
-          />
+          <svg className={css.timeIcon} width="15" height="15">
+            <use href="/icons/clock.svg#clock"></use>
+          </svg>
           <span className={css.recipeTime}>{recipe.time}</span>
         </div>
       </div>
@@ -52,7 +47,9 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
           className={`${css.favoriteButton} ${isFavorite ? css.active : ''}`}
           onClick={() => setIsFavorite(!isFavorite)}
         >
-          <FavoriteIcon filled={isFavorite} className={css.favoriteIcon} />
+          <svg className={css.favoriteIcon} width="14" height="17">
+            <use href={`/icons/favorite.svg#favorite`}></use>
+          </svg>
         </button>
       </div>
     </>
