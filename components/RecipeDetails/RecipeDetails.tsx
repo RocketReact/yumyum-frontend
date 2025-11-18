@@ -38,7 +38,7 @@ const RecipeDetails = async ({ recipe }: { recipe: Recipe }) => {
       <Container>
         <div className={css.titleWrapper}>
           <div className={css.imgWrapper}>
-            {/* <picture>
+            <picture>
               <source
                 media="(min-width: 768px)"
                 srcSet={recipe.thumb?.replace('preview', 'preview/large')}
@@ -48,12 +48,12 @@ const RecipeDetails = async ({ recipe }: { recipe: Recipe }) => {
                 src={recipe.thumb}
                 alt={recipe.title}
               />
-            </picture> */}
-            <img
+            </picture>
+            {/* <img
               className={css.titleImg}
               src={recipe.thumb}
               alt={recipe.title}
-            />
+            /> */}
           </div>
           <h2 className={css.title}>{recipe.title}</h2>
         </div>
