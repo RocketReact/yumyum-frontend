@@ -3,7 +3,7 @@ export interface GenerateMetadataParams {
   description: string;
   path?: string;
   image?: {
-    url: string;
+    url?: string;
     width?: number;
     height?: number;
     alt?: string;

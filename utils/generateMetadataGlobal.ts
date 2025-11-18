@@ -1,32 +1,26 @@
 import { Metadata } from 'next';
 import { GenerateMetadataParams } from '@/types/metadata';
-import { SITE_DOMAIN, SITE_NAME } from '@/config/metadata';
+import { SITE_DOMAIN, SITE_NAME, OG_IMAGE } from '@/config/metadata';
 
 export function generateMetadataGlobal({
   title,
   description,
   path = '',
-  image = {
-    url: '',
-    width: 1200,
-    height: 630,
-    alt: '',
-  },
+  image = OG_IMAGE,
 }: GenerateMetadataParams): Metadata {
-  const baseUrl = SITE_DOMAIN || 'https://yumyum-frontend.vercel.app';
-  const url = path ? `${baseUrl}/${path}` : baseUrl;
+  const url = path ? `${SITE_DOMAIN}/${path}` : SITE_DOMAIN;
 
   // If no image.url — use default img
-  const imageUrl = image.url || 'hero/hero-mobile.jpg';
+  const imageUrl = image.url || OG_IMAGE.url;
 
   // generate img url
   const absoluteImageUrl = imageUrl.startsWith('http')
     ? imageUrl
-    : `${baseUrl}${imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`}`;
+    : `${SITE_DOMAIN}${imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`}`;
   return {
     title,
     description,
-    metadataBase: new URL(baseUrl),
+    metadataBase: new URL(SITE_DOMAIN),
     openGraph: {
       type: 'website',
       title,
@@ -45,17 +39,20 @@ export function generateMetadataGlobal({
   };
 }
 
-//TODO how to use in the component
+//TODO how to use in the component app/[recipeId]/page.tsx
 
-//export async function generateMetadata(): Promise<Metadata> {
-//  return generateMetadataGlobal({
-//    title: 'YumYum Recipes',
-//    description:
-//      'Browse thousands of delicious YumYum recipes — filter by category, ingredient, or keyword',
-//    path: '',
-//    image: {
-//      url: 'hero/hero-tablet.jpg',
-//      alt: 'YumYum Recipes',
-//    },
-//  });
-//}
+//    export async function generateMetadata({ params }): Promise<Metadata> {
+//    const recipe = await getRecipe(params.recipeId);
+//
+//    return generateMetadataGlobal({
+//      title: recipe.title,
+//      description: recipe.description,
+//      path: `recipes/${params.recipeId}`,
+//      image: {
+//        url: recipe.image, // ← динамическое изображение рецепта
+//        width: 1200,
+//        height: 630,
+//        alt: recipe.title,
+//      },
+//    });
+//  }
