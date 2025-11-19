@@ -1,4 +1,4 @@
-/** Modal Backdrop */
+/* 
 .modalBackdrop {
   position: fixed;
   inset: 0;
@@ -17,7 +17,7 @@
   }
 }
 
-/*! Modal Backdrop*/
+
 
 
 .modal {
@@ -44,4 +44,4 @@
 
 .closeIcon {
   color: black;
-}
+} */

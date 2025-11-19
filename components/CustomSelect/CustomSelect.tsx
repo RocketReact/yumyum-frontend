@@ -1,5 +1,4 @@
 import * as Select from '@radix-ui/react-select';
-import type { Option } from '@/types/filter';
 import type { CustomSelectProps } from '@/types/filter';
 import css from './CustomSelect.module.css';
 
