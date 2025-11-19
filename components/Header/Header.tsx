@@ -84,6 +84,7 @@ export default function Header() {
         className={`${css.navMenu} ${isMenuOpen ? css.navMenuOpen : ''}`}
         aria-label="Main navigation"
       >
+        <div className={css.navMenuInner}>
             {/*mobile logo & close btn*/}
             <div className={css.logoCloseBtnContainer}>
               <Link
@@ -194,6 +195,7 @@ export default function Header() {
                 </li>
               )}
             </ul>
+        </div>
       </nav>
 
       {/*overlay via portal*/}

@@ -65,6 +65,13 @@
   padding-top: 14px;
 }
 
+.navMenuInner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .logoCloseBtnContainer {
   margin: 0 auto;
   max-width: 393px;
@@ -280,8 +287,19 @@
     padding: 0;
     z-index: 0;
     background: transparent;
-    width: auto;
+    width: 100%;
     height: auto;
+  }
+
+  .navMenuInner {
+    margin: 0 auto;
+    max-width: 768px;
+    width: 100%;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
   }
   .navMenu ul {
     display: flex;
@@ -335,5 +353,12 @@
   }
   .changeOrderOnTablet {
     order: -1;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .navMenuInner {
+    max-width: 1440px;
+    padding: 0 108px;
   }
 }
