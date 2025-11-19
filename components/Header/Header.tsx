@@ -8,10 +8,12 @@ import Container from '../Container/Container';
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '@/lib/store/authStore';
 import { logout } from '@/lib/api/clientApi';
+import { createPortal } from 'react-dom';
 
 export default function Header() {
   const { isAuthenticated, clearIsAuthenticated, user } = useAuthStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const firstLetterUserName = user?.name?.[0]?.toUpperCase() ?? '';
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
@@ -27,15 +29,23 @@ export default function Header() {
       console.log('Logout failed: ', error);
     }
   };
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   //no scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
     } else {
       document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     }
     return () => {
       document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     };
   }, [isMenuOpen]);
 
@@ -65,13 +75,14 @@ export default function Header() {
               <use href={'/sprite.svg#icon-Genericburger-regular'} />
             </svg>
           </button>
-          {/*overlay*/}
-          {isMenuOpen && (
+          {/*overlay via portal*/}
+          {mounted && isMenuOpen && createPortal(
             <div
               aria-hidden="true"
               className={css.overlay}
               onClick={closeMenu}
-            ></div>
+            />,
+            document.body
           )}
           <nav
             id="main-navigation"
