@@ -1,5 +1,5 @@
-/* TODO */
 .header {
+  position: relative;
   max-height: 74px;
   background-color: var(--darck-brown);
   color: var(--white);
@@ -26,7 +26,7 @@
   position: fixed;
   inset: 0;
   background-color: var(--darck-brown);
-  z-index: 1;
+  z-index: 999;
   animation: fadeIn var(--primary-transition);
 }
 @keyframes fadeIn {
@@ -45,46 +45,6 @@
     transform: scaleX(1);
   }
 }
-/* Mobile menu portal container */
-.mobileMenuPortal {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  transform: translateY(-100%);
-  transition: transform var(--primary-transition);
-  animation: slideDown var(--primary-transition) forwards;
-}
-
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-/* Mobile navigation inside portal */
-.navMenuMobile {
-  position: fixed;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 20px;
-  right: 0;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: var(--darck-brown);
-  z-index: 10001;
-}
-
-/* Desktop navigation - hidden on mobile */
-.navMenuDesktop {
-  display: none;
-}
-
-/* Legacy navMenu class - keeping for compatibility */
 .navMenu {
   position: fixed;
   display: flex;
@@ -95,9 +55,20 @@
   top: -100%;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   background-color: var(--darck-brown);
-  z-index: 1000;
+  z-index: 1001;
   transition: var(--primary-transition);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: 14px;
+}
+
+.navMenuInner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .logoCloseBtnContainer {
@@ -110,8 +81,6 @@
   align-items: center;
 }
 
-/* Mobile menu styles */
-.navMenuMobile ul,
 .navMenu ul {
   display: flex;
   flex-direction: column;
@@ -119,7 +88,7 @@
   width: 100%;
 }
 
-.navMenuMobile li,
+
 .navMenu li {
   width: 100%;
   display: flex;
@@ -127,8 +96,6 @@
   font: var(--body-md-semibold);
   letter-spacing: 0;
 }
-
-.navMenuMobile a,
 .navMenu a {
   display: block;
   color: var(--white);
@@ -238,80 +205,15 @@
   flex-direction: column;
   gap: 32px;
 }
+.userName {
+  font: var(--body-sm-semibold)
+}
 
 @media only screen and (min-width: 768px) {
   .header {
     display: flex;
     align-items: center;
   }
-
-  /* Hide mobile menu portal on desktop */
-  .mobileMenuPortal {
-    display: none !important;
-  }
-
-  /* Show desktop navigation */
-  .navMenuDesktop {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: static;
-    padding: 0;
-    z-index: 0;
-    background: transparent;
-    width: auto;
-    height: auto;
-  }
-
-  .navMenuDesktop ul {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: auto;
-    gap: 0;
-  }
-
-  .navMenuDesktop ul :nth-child(2) {
-    margin-bottom: 0;
-  }
-
-  .navMenuDesktop a {
-    padding: 37px 0;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    margin: 0 12px;
-  }
-
-  .navMenuDesktop .text {
-    text-align: center;
-    height: 74px;
-    display: flex;
-    align-items: center;
-    font: var(--body-sm-semibold);
-  }
-
-  .navMenuDesktop .linkRegisterRecipes {
-    display: block;
-    height: 44px;
-    padding: 12px 0.974em;
-    text-wrap: nowrap;
-    margin: 0;
-    text-align: center;
-    line-height: normal;
-    width: 100%;
-    font: var(--body-md-semibold)
-  }
-
-  .navMenuDesktop .mb8 {
-    margin-right: 32px;
-    margin-left: 0;
-  }
-
-  .navMenuDesktop .login {
-    margin-left: 0;
-  }
-
   .myProfileLink {
     margin-bottom: 5px;
   }
@@ -331,11 +233,23 @@
     gap: 0;
     font: var(--body-sm-semibold)
   }
-
+  .navMenu .linkRegisterRecipes {
+    display: block;
+    height: 44px;
+    padding: 12px 0.974em;
+    text-wrap: nowrap;
+    margin: 0;
+    text-align: center;
+    line-height: normal;
+    width: 100%;
+    font: var(--body-md-semibold)
+  }
   .closeIcon {
     display: none;
   }
-
+  .navMenu .logoInMenuOpen {
+    display: none;
+  }
   .text {
     text-wrap: nowrap;
     margin-right: 4px;
@@ -361,17 +275,98 @@
     opacity: 1;
   }
 
+  .navMenu .text.activeUnderLine:hover,
+  .navMenu .text.activeUnderLine:focus {
+    opacity: 1;
+  }
+
+  .navLink {
+    text-wrap: nowrap;
+    margin-right: 4px;
+    position: relative;
+    font: var(--body-sm-semibold);
+    height: 74px;
+  }
+
+  .navLink::before {
+    content: '';
+    position: absolute;
+    bottom: 26px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--white);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .navLink.activeUnderLine::before {
+    animation: slideIn 0.3s ease-in-out forwards;
+  }
+
+  .navLink.activeUnderLine:hover,
+  .navLink.activeUnderLine:focus {
+    opacity: 1;
+  }
+
+
   .headerContentContainer {
     padding: 0;
   }
   .burger {
     display: none;
   }
+  .navMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: static;
+    padding: 0;
+    z-index: 0;
+    background: transparent;
+    width: 100%;
+    height: auto;
+  }
 
+  .navMenuInner {
+    margin: 0 auto;
+    max-width: 768px;
+    width: 100%;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
+  }
+  .navMenu ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    gap: 0;
+  }
+
+  .navMenu ul :nth-child(2) {
+    margin-bottom: 0;
+  }
   .overlay {
     display: none;
   }
+  .navMenu a {
+    padding: 37px 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 12px;
+  }
 
+  .navMenu .text {
+    text-align: center;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    font: var(--body-sm-semibold);
+  }
   .userInfoContainer{
     flex-direction: row;
     padding: 0;
@@ -381,13 +376,19 @@
   .recipeProfileLinks {
     flex-direction: row;
     gap: 0;
+    height: 74px;
   }
-
+  .navMenu .mb8 {
+    margin-right: 32px;
+    margin-left: 0;
+  }
   .recipeProfileLinks .recipesLink {
     margin-right: 32px;
     margin-left: 0;
   }
-
+  .navMenu .login {
+    margin-left: 0;
+  }
   .changeOrderOnTablet {
     order: -1;
   }
