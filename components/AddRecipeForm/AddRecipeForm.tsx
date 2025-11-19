@@ -158,6 +158,7 @@ export const RecipeForm = () => {
 
   return (
     <>
+      <h1 className={css.addRecipeTitle}>Add Recipe</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -202,6 +203,8 @@ export const RecipeForm = () => {
                 />
               </label>
             </div>
+
+            {/* ---  General Block --- */}
             <div className={css.addRecipeInfoBlock}>
               <div className={css.addRecipeGeneralGroup}>
                 <p className={css.addRecipeFormBlockTitle}>
@@ -354,7 +357,13 @@ export const RecipeForm = () => {
                             onClick={() => remove(index)}
                             className={css.removeButton}
                           >
-                            <span className={css.removeIcon}></span>
+                            <svg
+                              className={css.removeIcon}
+                              width="15"
+                              height="15"
+                            >
+                              <use href="/sprite.svg#icon-Genericdelete"></use>
+                            </svg>
                           </button>
                         </div>
                       ))}

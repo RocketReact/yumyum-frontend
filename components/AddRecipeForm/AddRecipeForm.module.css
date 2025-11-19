@@ -8,18 +8,15 @@
   padding-top: 16px;
 }
 
+.addRecipeTitle {
+  font: var(--display-lg-semibold);
+  color: var(--black);
+}
+
 .addRecipeFormBlockTitle {
   font: var(--display-sm-semibold);
   color: var(--black);
 }
-/* 
-.addRecipeImgBlock {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
-  gap: 4px;
-} */
 
 .addRecipeInfoBlock {
   display: flex;
@@ -28,6 +25,7 @@
   flex-direction: column;
   gap: 40px;
 }
+
 /* Thumb block styles */
 
 .imagePlaceholder,
@@ -214,6 +212,21 @@
   background-color: var(--light-brown);
 }
 
+.removeButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 8px;
+  padding: 2px 8px 2px 4px;
+  background-color: var(--white);
+  max-height: 28px;
+}
+
+.removeIcon {
+  stroke: currentColor;
+  fill: none;
+}
+
 .addRecipeInstructionsGroup {
   display: flex;
   align-items: flex-start;
@@ -221,7 +234,7 @@
   flex-direction: column;
   gap: 16px;
   width: 361px;
-  padding-bottom: 40px;
+  /* padding-bottom: 40px; */
 }
 
 .addRecipeFormButtonSubmit {
@@ -253,4 +266,7 @@
     0 0 0 6px rgba(78, 70, 180, 0.12),
     0 0 0 2px var(--white);
   background-color: var(--light-brown);
+}
+
+.errorMessage {
 }

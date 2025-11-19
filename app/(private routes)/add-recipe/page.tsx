@@ -7,7 +7,6 @@ export default function AddRecipe() {
   return (
     <Container>
       <div className={css.addRecipeMain}>
-        <h1 className={css.addRecipeTitle}>Add Recipe</h1>
         <div className={css.addRecipeForm}>
           <RecipeForm />
         </div>

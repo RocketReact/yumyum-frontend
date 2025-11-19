@@ -7,17 +7,3 @@
   padding-top: 48px;
   padding-bottom: 48px;
 }
-
-.addRecipeTitle {
-  font: var(--display-lg-semibold);
-  color: var(--black);
-}
-
-/* .addRecipeForm {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
-  gap: 24px;
-  width: 361px;
-} */
