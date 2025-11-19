@@ -75,20 +75,15 @@ export default function Header() {
               <use href={'/sprite.svg#icon-Genericburger-regular'} />
             </svg>
           </button>
-          {/*overlay via portal*/}
-          {mounted && isMenuOpen && createPortal(
-            <div
-              aria-hidden="true"
-              className={css.overlay}
-              onClick={closeMenu}
-            />,
-            document.body
-          )}
-          <nav
-            id="main-navigation"
-            className={`${css.navMenu} ${isMenuOpen ? css.navMenuOpen : ''}`}
-            aria-label="Main navigation"
-          >
+        </div>
+      </Container>
+
+      {/*mobile menu*/}
+      <nav
+        id="main-navigation"
+        className={`${css.navMenu} ${isMenuOpen ? css.navMenuOpen : ''}`}
+        aria-label="Main navigation"
+      >
             {/*mobile logo & close btn*/}
             <div className={css.logoCloseBtnContainer}>
               <Link
@@ -199,9 +194,17 @@ export default function Header() {
                 </li>
               )}
             </ul>
-          </nav>
-        </div>
-      </Container>
+      </nav>
+
+      {/*overlay via portal*/}
+      {mounted && isMenuOpen && createPortal(
+        <div
+          aria-hidden="true"
+          className={css.overlay}
+          onClick={closeMenu}
+        />,
+        document.body
+      )}
     </header>
   );
 }
