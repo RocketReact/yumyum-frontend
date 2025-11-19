@@ -11,7 +11,7 @@ import { logout } from '@/lib/api/clientApi';
 import { createPortal } from 'react-dom';
 
 export default function Header() {
-  const { isAuthenticated, clearIsAuthenticated, user } = useAuthStore();
+  const { isAuthenticated, clearIsAuthenticated, user, setUser } = useAuthStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const firstLetterUserName = user?.name?.[0]?.toUpperCase() ?? '';
@@ -34,7 +34,8 @@ export default function Header() {
     setMounted(true);
   }, []);
 
-  //no scroll when mobile menu is open
+
+  //no scroll when a mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.documentElement.style.overflow = 'hidden';
@@ -128,7 +129,7 @@ export default function Header() {
                 </Link>
                 {isAuthenticated && (
                   <Link
-                    className={`${css.myProfileLink} ${css.text} ${pathname === '/profile/own' ? css.activeUnderLine : ''}`}
+                    className={`${css.myProfileLink} ${css.navLink } ${pathname === '/profile/own' ? css.activeUnderLine : ''}`}
                     href="/profile/own"
                     onClick={closeMenu}
                   >

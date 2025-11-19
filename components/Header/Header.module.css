@@ -205,6 +205,9 @@
   flex-direction: column;
   gap: 32px;
 }
+.userName {
+  font: var(--body-sm-semibold)
+}
 
 @media only screen and (min-width: 768px) {
   .header {
@@ -272,6 +275,41 @@
     opacity: 1;
   }
 
+  .navMenu .text.activeUnderLine:hover,
+  .navMenu .text.activeUnderLine:focus {
+    opacity: 1;
+  }
+
+  .navLink {
+    text-wrap: nowrap;
+    margin-right: 4px;
+    position: relative;
+    font: var(--body-sm-semibold);
+    height: 74px;
+  }
+
+  .navLink::before {
+    content: '';
+    position: absolute;
+    bottom: 26px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--white);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .navLink.activeUnderLine::before {
+    animation: slideIn 0.3s ease-in-out forwards;
+  }
+
+  .navLink.activeUnderLine:hover,
+  .navLink.activeUnderLine:focus {
+    opacity: 1;
+  }
+
+
   .headerContentContainer {
     padding: 0;
   }
@@ -338,6 +376,7 @@
   .recipeProfileLinks {
     flex-direction: row;
     gap: 0;
+    height: 74px;
   }
   .navMenu .mb8 {
     margin-right: 32px;
