@@ -1,3 +1,16 @@
+//TODO 2 part
+//button Publish - need to add error iziToast
+//add tablet, desc styles
+//fix category, ingredient select option color
+//add select inputs dropdown styles and arrow icon
+//remove arrows from the time input field, must be only textfield
+//double check validation messages according to the tech task
+//double check css
+//refactor code to minimalize it
+//try to check what a f*ck with preview img
+
+//you can add something here needed to be fixed
+
 'use client';
 
 import { useState, useEffect } from 'react';
