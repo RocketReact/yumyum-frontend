@@ -25,7 +25,10 @@
 }
 .overlay {
   position: fixed;
-  inset: 0;
+  top: 74px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: var(--darck-brown);
   z-index: 999;
   animation: fadeIn var(--primary-transition);
