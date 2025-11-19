@@ -55,17 +55,11 @@ interface RecipeFormValues {
 
 type IngredientErrors = FormikErrors<IngredientValue> | string | undefined;
 
-interface RecipeFormErrors {
-  ingredients?: IngredientErrors[];
-}
-
 interface AddIngredientButtonProps {
   push: (obj: IngredientValue) => void;
   values: RecipeFormValues;
   css: any;
-
   errors: FormikErrors<RecipeFormValues>;
-
   touched: FormikTouched<RecipeFormValues>;
   getIziToast: () => Promise<any>;
 }
@@ -88,16 +82,23 @@ const validationSchema = Yup.object({
   ingredients: Yup.array()
     .of(
       Yup.object({
-        id: Yup.string().required('Choose an ingredient'),
-        name: Yup.string().required(),
-        amount: Yup.string()
-          .required('Specify the quantity')
-          .min(1, 'Specify the quantity'),
+        id: Yup.string().nullable(),
+        name: Yup.string().nullable(),
+        amount: Yup.string().nullable(),
       }),
     )
-    .min(1, 'Add at least 1 ingredient (placeholder included).'),
+    .min(0, 'Must contain at least 0 elements (check handled in handleSubmit)')
+    .max(17, 'Maximum 16 ingredients added.'),
   instructions: Yup.string().max(1200).required('Specify the instructions'),
   thumb: Yup.mixed().nullable().optional(),
+});
+
+const ingredientValidationSchema = Yup.object({
+  id: Yup.string().required('Choose an ingredient'),
+  name: Yup.string().required(),
+  amount: Yup.string()
+    .required('Specify the quantity')
+    .min(1, 'Specify the quantity'),
 });
 
 export const RecipeForm = () => {
@@ -148,12 +149,28 @@ export const RecipeForm = () => {
 
     const finalIngredients = values.ingredients.slice(0, -1);
 
-    if (finalIngredients.length === 0) {
+    if (finalIngredients.length < 2) {
       if (iziToast) {
         iziToast.error({
           title: 'Error',
-          message: 'Please add at least one ingredient.',
-          position: 'topRight',
+          message: 'Please add at least 2 ingredients.',
+          position: 'bottomRight',
+        });
+      }
+      setSubmitting(false);
+      return;
+    }
+
+    try {
+      await Yup.array()
+        .of(ingredientValidationSchema)
+        .validate(finalIngredients, { abortEarly: false });
+    } catch (err: any) {
+      if (iziToast) {
+        iziToast.error({
+          title: 'Validation Error',
+          message: 'Some added ingredients are incomplete or invalid.',
+          position: 'bottomRight',
         });
       }
       setSubmitting(false);
@@ -176,7 +193,7 @@ export const RecipeForm = () => {
       }));
       formData.append('ingredients', JSON.stringify(ingredientsForBackend));
 
-      const res = await api.post('add-recipe', formData, {
+      const res = await api.post('/recipes/create-recipe', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -405,12 +422,8 @@ export const RecipeForm = () => {
                           push={push}
                           values={values}
                           css={css}
-                          errors={
-                            errors as unknown as FormikErrors<RecipeFormValues>
-                          }
-                          touched={
-                            touched as unknown as FormikTouched<RecipeFormValues>
-                          }
+                          errors={errors as FormikErrors<RecipeFormValues>}
+                          touched={touched as FormikTouched<RecipeFormValues>}
                           getIziToast={getIziToast}
                         />
 
@@ -451,16 +464,11 @@ export const RecipeForm = () => {
                           </div>
                         )}
 
-                        <ErrorMessage name="ingredients">
-                          {(msg) => {
-                            if (typeof msg === 'string') {
-                              return (
-                                <div className={css.errorMessage}>{msg}</div>
-                              );
-                            }
-                            return null;
-                          }}
-                        </ErrorMessage>
+                        {values.ingredients.slice(0, -1).length < 2 && (
+                          <div className={css.errorMessage}>
+                            Please add at least 2 ingredients.
+                          </div>
+                        )}
                       </div>
                     );
                   }}
@@ -468,6 +476,7 @@ export const RecipeForm = () => {
               </div>
 
               {/* --- Instructions Block --- */}
+
               <div className={css.addRecipeInstructionsGroup}>
                 <label className={css.addRecipeFormBlockTitle}>
                   Instructions
@@ -509,7 +518,7 @@ const AddIngredientButton = ({
   touched,
   getIziToast,
 }: AddIngredientButtonProps) => {
-  const { validateForm, setTouched } = useFormikContext<RecipeFormValues>();
+  const { setTouched } = useFormikContext<RecipeFormValues>();
   const lastIndex = values.ingredients.length - 1;
 
   const handleAdd = async () => {
@@ -517,7 +526,6 @@ const AddIngredientButton = ({
 
     setTouched({
       ...touched,
-
       ingredients: [
         ...(
           (touched.ingredients as FormikTouched<IngredientValue>[]) || []
@@ -526,32 +534,27 @@ const AddIngredientButton = ({
       ],
     });
 
-    const validationErrors = await validateForm();
+    const currentIng = values.ingredients[lastIndex];
 
-    const ingredientErrors = validationErrors.ingredients as
-      | IngredientErrors[]
-      | undefined;
-
-    if (ingredientErrors && ingredientErrors[lastIndex]) {
-      if (iziToast) {
-        iziToast.error({
-          title: 'Validation Error',
-          message: 'Please select an ingredient and specify the amount.',
-          position: 'topRight',
-        });
+    if (currentIng.id && currentIng.amount) {
+      if (values.ingredients.length >= 17) {
+        if (iziToast) {
+          iziToast.error({
+            title: 'Limit Reached',
+            message: 'Maximum 16 ingredients allowed.',
+            position: 'bottomRight',
+          });
+        }
+        return;
       }
-      return;
-    }
 
-    const ingToPush = values.ingredients[lastIndex];
-    if (ingToPush.id && ingToPush.amount) {
       push({ id: '', name: '', amount: '' });
     } else {
       if (iziToast) {
         iziToast.error({
           title: 'Error',
           message: 'Please select an ingredient and specify the amount.',
-          position: 'topRight',
+          position: 'bottomRight',
         });
       }
     }

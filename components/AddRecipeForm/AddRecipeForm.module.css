@@ -33,6 +33,8 @@
   border-radius: 16px;
   width: 361px;
   height: 383px;
+  object-fit: cover;
+  object-position: center;
   background-image: url('../../public/img-default/default-img-mobile.jpg');
 }
 
@@ -215,16 +217,20 @@
 .removeButton {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-direction: row;
   gap: 4px;
   border-radius: 8px;
-  padding: 2px 8px 2px 4px;
-  background-color: var(--white);
-  max-height: 28px;
+  padding: 0px 0px 4px;
+  width: 24px;
+  height: 28px;
 }
 
 .removeIcon {
   stroke: currentColor;
   fill: none;
+  width: 16px;
+  height: 16px;
 }
 
 .addRecipeInstructionsGroup {
@@ -268,9 +274,6 @@
   background-color: var(--light-brown);
 }
 
-.errorMessage {
-}
-
 .ingredientsTable {
   width: 100%;
   margin-top: 32px;
@@ -300,4 +303,9 @@
 .tableAmount {
   display: flex;
   align-items: center;
+}
+
+.errorMessage {
+  font: var(--body-sm-regular);
+  color: var(--red);
 }
