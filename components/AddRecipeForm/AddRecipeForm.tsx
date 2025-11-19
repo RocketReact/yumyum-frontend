@@ -40,6 +40,7 @@ interface RecipeFormValues {
   cals?: string;
   category: string;
   ingredients: [{ id: string; name: string; amount: string }];
+  tempIngredient: { id: string; name: string; amount: string };
   instructions: string;
   thumb?: File | null;
 }
@@ -109,6 +110,7 @@ export const RecipeForm = () => {
     cals: '',
     category: '',
     ingredients: [{ id: '', name: '', amount: '' }],
+    tempIngredient: { id: '', name: '', amount: '' },
     instructions: '',
     thumb: null,
   };
@@ -299,81 +301,132 @@ export const RecipeForm = () => {
                 <label className={css.addRecipeFormBlockTitle}>
                   Ingredients
                 </label>
+
                 <FieldArray name="ingredients">
                   {({ push, remove }) => (
                     <div>
-                      {values.ingredients.map((ing, index) => (
-                        <div key={index} className={css.ingredientRow}>
-                          <label className={css.addRecipeFormBlockSubtitle}>
-                            Name
-                            <Field
-                              as="select"
-                              name={`ingredients[${index}].id`}
-                              className={css.addRecipeFormIngredientsInput}
-                              onChange={(e: any) => {
-                                const selected = ingredientsList.find(
-                                  (i) => i._id === e.target.value,
-                                );
-                                setFieldValue(
-                                  `ingredients[${index}].id`,
-                                  selected?._id || '',
-                                );
-                                setFieldValue(
-                                  `ingredients[${index}].name`,
-                                  selected?.name || '',
-                                );
-                              }}
-                            >
-                              <option value="">Broccoli</option>
-                              {ingredientsList.map((i) => (
-                                <option key={i._id} value={i._id}>
-                                  {i.name}
-                                </option>
-                              ))}
-                            </Field>
-                            <ErrorMessage
-                              name={`ingredients[${index}].id`}
-                              component="div"
-                              className={css.errorMessage}
-                            />
-                          </label>
+                      <div className={css.ingredientRow}>
+                        <label className={css.addRecipeFormBlockSubtitle}>
+                          Name
+                          <Field
+                            as="select"
+                            name="tempIngredient.id"
+                            className={css.addRecipeFormIngredientsInput}
+                            onChange={(e: any) => {
+                              const selected = ingredientsList.find(
+                                (i) => i._id === e.target.value,
+                              );
 
-                          <label className={css.addRecipeFormBlockSubtitle}>
-                            Amount
-                            <Field
-                              name={`ingredients[${index}].amount`}
-                              className={css.addRecipeFormIngredientsInput}
-                              placeholder="100g"
-                            />
-                            <ErrorMessage
-                              name={`ingredients[${index}].amount`}
-                              component="div"
-                              className={css.errorMessage}
-                            />
-                          </label>
-
-                          <button
-                            type="button"
-                            onClick={() => remove(index)}
-                            className={css.removeButton}
+                              setFieldValue(
+                                'tempIngredient.id',
+                                selected?._id || '',
+                              );
+                              setFieldValue(
+                                'tempIngredient.name',
+                                selected?.name || '',
+                              );
+                            }}
+                            value={values.tempIngredient?.id || ''}
                           >
-                            <svg
-                              className={css.removeIcon}
-                              width="15"
-                              height="15"
-                            >
-                              <use href="/sprite.svg#icon-Genericdelete"></use>
-                            </svg>
-                          </button>
-                        </div>
-                      ))}
+                            <option value="">Select ingredient</option>{' '}
+                            {ingredientsList.map((i) => (
+                              <option key={i._id} value={i._id}>
+                                {i.name}
+                              </option>
+                            ))}
+                          </Field>
+                          <ErrorMessage
+                            name="tempIngredient.id"
+                            component="div"
+                            className={css.errorMessage}
+                          />
+                        </label>
+
+                        <label className={css.addRecipeFormBlockSubtitle}>
+                          Amount
+                          <Field
+                            name="tempIngredient.amount"
+                            className={css.addRecipeFormIngredientsInput}
+                            placeholder="100g"
+                          />
+                          <ErrorMessage
+                            name="tempIngredient.amount"
+                            component="div"
+                            className={css.errorMessage}
+                          />
+                        </label>
+                      </div>
+
                       <button
                         type="button"
-                        onClick={() => push({ id: '', name: '', amount: '' })}
+                        onClick={() => {
+                          if (
+                            values.tempIngredient?.id &&
+                            values.tempIngredient?.amount
+                          ) {
+                            push({
+                              id: values.tempIngredient.id,
+                              name: values.tempIngredient.name,
+                              amount: values.tempIngredient.amount,
+                            });
+
+                            setFieldValue('tempIngredient.id', '');
+                            setFieldValue('tempIngredient.name', '');
+                            setFieldValue('tempIngredient.amount', '');
+                          } else {
+                            // alert('Please select an ingredient and enter amount');
+                          }
+                        }}
                         className={css.addIngredientButton}
                       >
                         Add new Ingredient
                       </button>
+
+                      <ErrorMessage name="ingredients">
+                        {(msg) => {
+                          if (typeof msg === 'string') {
+                            return (
+                              <div className={css.errorMessage}>{msg}</div>
+                            );
+                          }
+                          return null;
+                        }}
+                      </ErrorMessage>
+
+                      {/* === ТАБЛИЦЯ — З’ЯВЛЯЄТЬСЯ ЛИШЕ КОЛИ Є ХОЧ 1 ІНГРЕДІЄНТ === */}
+                      {values.ingredients.length > 1 && (
+                        <div className={css.ingredientsTable}>
+                          <div className={css.tableHeader}>
+                            <span>Name:</span>
+                            <span>Amount:</span>
+                            <span></span>
+                          </div>
+
+                          {values.ingredients.map((ing, index) => (
+                            <div key={index} className={css.tableRow}>
+                              <span className={css.tableName}>{ing.name}</span>
+                              <span className={css.tableAmount}>
+                                {ing.amount}
+                              </span>
+
+                              <button
+                                type="button"
+                                onClick={() => remove(index)}
+                                className={css.removeButton}
+                              >
+                                <svg
+                                  className={css.removeIcon}
+                                  width="15"
+                                  height="15"
+                                >
+                                  <use href="/sprite.svg#icon-Genericdelete"></use>
+                                </svg>
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
                       <ErrorMessage name="ingredients">
                         {(msg) => {
                           if (typeof msg === 'string') {
