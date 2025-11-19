@@ -88,7 +88,7 @@ const validationSchema = Yup.object({
       }),
     )
     .min(0, 'Must contain at least 0 elements (check handled in handleSubmit)')
-    .max(17, 'Maximum 16 ingredients added.'),
+    .max(17, 'Maximum 16 ingredients to add.'),
   instructions: Yup.string().max(1200).required('Specify the instructions'),
   thumb: Yup.mixed().nullable().optional(),
 });
@@ -154,7 +154,7 @@ export const RecipeForm = () => {
         iziToast.error({
           title: 'Error',
           message: 'Please add at least 2 ingredients.',
-          position: 'bottomRight',
+          position: 'topRight',
         });
       }
       setSubmitting(false);
@@ -170,7 +170,7 @@ export const RecipeForm = () => {
         iziToast.error({
           title: 'Validation Error',
           message: 'Some added ingredients are incomplete or invalid.',
-          position: 'bottomRight',
+          position: 'topRight',
         });
       }
       setSubmitting(false);
@@ -191,8 +191,9 @@ export const RecipeForm = () => {
         id: ing.id,
         measure: ing.amount,
       }));
+      console.log('Ingredients JSON:', JSON.stringify(ingredientsForBackend));
       formData.append('ingredients', JSON.stringify(ingredientsForBackend));
-
+      console.log('Sending formData keys:', Array.from(formData.keys()));
       const res = await api.post('/recipes/create-recipe', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
@@ -542,7 +543,7 @@ const AddIngredientButton = ({
           iziToast.error({
             title: 'Limit Reached',
             message: 'Maximum 16 ingredients allowed.',
-            position: 'bottomRight',
+            position: 'topRight',
           });
         }
         return;
@@ -554,7 +555,7 @@ const AddIngredientButton = ({
         iziToast.error({
           title: 'Error',
           message: 'Please select an ingredient and specify the amount.',
-          position: 'bottomRight',
+          position: 'topRight',
         });
       }
     }
