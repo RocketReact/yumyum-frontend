@@ -78,7 +78,7 @@ export default function Header() {
         </div>
       </Container>
 
-      {/*mobile menu*/}
+      {/*mobile menu - only visible on mobile*/}
       <nav
         id="main-navigation"
         className={`${css.navMenu} ${isMenuOpen ? css.navMenuOpen : ''}`}
@@ -198,7 +198,7 @@ export default function Header() {
         </div>
       </nav>
 
-      {/*overlay via portal*/}
+      {/*overlay via portal - rendered before navMenu to ensure navMenu is on top*/}
       {mounted && isMenuOpen && createPortal(
         <div
           aria-hidden="true"

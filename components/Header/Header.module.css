@@ -3,7 +3,6 @@
   max-height: 74px;
   background-color: var(--darck-brown);
   color: var(--white);
-  z-index: 100;
 }
 .headerContentContainer {
   display: flex;
@@ -58,7 +57,7 @@
   height: 100vh;
   height: 100dvh;
   background-color: var(--darck-brown);
-  z-index: 1000;
+  z-index: 1001;
   transition: var(--primary-transition);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
