@@ -71,11 +71,29 @@
   font: var(--body-md-regular);
 }
 
-.btn {
+.favBtn {
+  font: var(--body-lg-semibold);
   height: 56px;
   width: 100%;
   background: var(--light-brown);
   border-radius: 8px;
+  cursor: pointer;
+  color: var(--white);
+  transition:
+    background var(--primary-transition),
+    box-shadow var(--primary-transition);
+}
+
+.favBtn:hover,
+.favBtn:focus {
+  background: var(--brown);
+}
+
+.favBtn:active {
+  box-shadow:
+    0 0 0 6px rgba(78, 70, 180, 0.12),
+    0 0 0 2px var(--white);
+  background: var(--light-brown);
 }
 .otherInfoWrapper {
   display: flex;
@@ -150,7 +168,7 @@
     flex-direction: row;
   }
 
-  .btn {
+  .favBtn {
     width: 249px;
   }
 
@@ -184,7 +202,7 @@
     flex-direction: column;
   }
 
-  .btn {
+  .favBtn {
     width: 393px;
   }
 }

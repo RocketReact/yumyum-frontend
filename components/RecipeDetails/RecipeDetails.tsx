@@ -90,8 +90,7 @@ const RecipeDetails = ({ recipe }: { recipe: Recipe }) => {
                 </li>
               </ul>
             </div>
-            {/* //! заглушка */}
-            <button className={css.btn}>Save</button>
+            <button className={css.favBtn}>Save</button>
             {/* <button
               className={css.generalInfoBtn}
               onClick={handleFavorite}
