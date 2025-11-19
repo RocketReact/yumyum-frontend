@@ -16,25 +16,27 @@ const RecipeDetails = ({ recipe, ingredients }: RecipeDetailsProps) => {
     return ingredient?.name || 'Unknown ingredient';
   };
 
-  //   const handleFavorite = async () => {
-  //     setLoading(true);
+  const favorite = false;
 
-  //     try {
-  //       if (favorite) {
-  //         // await removeFavoriteRecipe(recipe._id);
-  //         console.log('Removing from favorites:', recipe._id);
-  //         setFavorite(false);
-  //       } else {
-  //         // await addFavoriteRecipe(recipe._id);
-  //         console.log('Adding to favorites:', recipe._id);
-  //         setFavorite(true);
-  //       }
-  //     } catch (error) {
-  //       console.error('Error toggling favorite:', error);
-  //     } finally
-  //       setLoading(false);
+  // const handleFavorite = async () => {
+  //   setLoading(true);
+
+  //   try {
+  //     if (favorite) {
+  //       // await removeFavoriteRecipe(recipe._id);
+  //       console.log('Removing from favorites:', recipe._id);
+  //       setFavorite(false);
+  //     } else {
+  //       // await addFavoriteRecipe(recipe._id);
+  //       console.log('Adding to favorites:', recipe._id);
+  //       setFavorite(true);
   //     }
-  //   };
+  //   } catch (error) {
+  //     console.error('Error toggling favorite:', error);
+  //   } finally
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <section>
@@ -78,28 +80,27 @@ const RecipeDetails = ({ recipe, ingredients }: RecipeDetailsProps) => {
                 </li>
               </ul>
             </div>
-            <button className={css.favBtn}>Save</button>
-            {/* <button
-              className={css.generalInfoBtn}
-              onClick={handleFavorite}
+            <button
               type="button"
+              className={css.favBtn}
+              // onClick={handleFavorite}
             >
               {favorite ? (
                 <>
-                  <span>Unsave</span>
-                  <svg className={css.generalInfoBtnIcon}>
-                    <use href="#icon-unsave" />
+                  <span className={css.favBtnTitle}>Save</span>
+                  <svg className={css.favBtnIconSave} width="24" height="24">
+                    <use href="/Sprite.svg#icon-Genericbookmark-alternative" />
                   </svg>
                 </>
               ) : (
                 <>
-                  <span>Save</span>
-                  <svg className={css.generalInfoBtnIcon}>
-                    <use href="#icon-save" />
+                  <span className={css.favBtnTitle}>Unsave</span>
+                  <svg className={css.favBtnIconUnsave} width="24" height="24">
+                    <use href="/Sprite.svg#icon-Genericbookmark-alternative" />
                   </svg>
                 </>
               )}
-            </button> */}
+            </button>
           </div>
           <div className={css.otherInfoWrapper}>
             <div className={css.aboutWrapper}>
