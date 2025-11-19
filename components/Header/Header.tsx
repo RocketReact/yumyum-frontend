@@ -27,7 +27,7 @@ export default function Header() {
       console.log('Logout failed: ', error);
     }
   };
-  // when a mobile menu is open
+  //no scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.documentElement.style.overflow = 'hidden';
