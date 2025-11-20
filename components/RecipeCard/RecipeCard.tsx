@@ -5,13 +5,31 @@ import Image from 'next/image';
 import css from './RecipeCard.module.css';
 import Link from 'next/link';
 import { Recipe } from '@/types/recipe';
+import AuthModaling from '../AuthModaling/AuthModaling';
 
 interface RecipeCardProps {
   recipe: Recipe;
+  isAuthenticated: boolean;
+  addFavoriteRecipe: (recipeId: string) => void;
 }
 
-export default function RecipeCard({ recipe }: RecipeCardProps) {
+export default function RecipeCard({
+  recipe,
+  isAuthenticated,
+  addFavoriteRecipe,
+}: RecipeCardProps) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  const handleFavoriteClick = () => {
+    if (!isAuthenticated) {
+      setShowAuthModal(true);
+      return;
+    }
+
+    addFavoriteRecipe(recipe._id);
+    setIsFavorite(!isFavorite);
+  };
 
   return (
     <>
@@ -49,7 +67,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
           className={`${css.favoriteButton} ${isFavorite ? css.active : ''}`}
           onClick={(e) => {
             e.currentTarget.blur();
-            setIsFavorite(!isFavorite);
+            handleFavoriteClick();
           }}
           type="button"
         >
@@ -58,6 +76,8 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
           </svg>
         </button>
       </div>
+
+      {showAuthModal && <AuthModaling />}
     </>
   );
 }
