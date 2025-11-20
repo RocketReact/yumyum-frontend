@@ -6,7 +6,10 @@ import { getIngredientsProps } from '@/types/filter';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useEffect, useState } from 'react';
 import 'izitoast/dist/css/iziToast.min.css';
-import { addToFavorite, removeFromFavorite } from '@/lib/api/clientApi';
+import {
+  addFavoriteRecipe,
+  removeFavoriteRecipe,
+} from '@/lib/services/favorites';
 
 interface RecipeDetailsProps {
   recipe: Recipe;
@@ -15,7 +18,6 @@ interface RecipeDetailsProps {
 
 const RecipeDetails = ({ recipe, ingredients }: RecipeDetailsProps) => {
   const [favorite, setFavorite] = useState(false);
-  const { addSavedRecipe, removeSavedRecipe } = useAuthStore.getState();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const savedRecipes = useAuthStore((state) => state.user?.savedRecipes);
 
@@ -42,9 +44,7 @@ const RecipeDetails = ({ recipe, ingredients }: RecipeDetailsProps) => {
 
     try {
       if (!favorite) {
-        await addToFavorite({ recipeId: recipe._id });
-
-        addSavedRecipe(recipe._id);
+        addFavoriteRecipe(recipe._id);
 
         setFavorite(false);
 
@@ -56,10 +56,7 @@ const RecipeDetails = ({ recipe, ingredients }: RecipeDetailsProps) => {
           });
         });
       } else {
-        await removeFromFavorite({ recipeId: recipe._id });
-
-        removeSavedRecipe(recipe._id);
-
+        removeFavoriteRecipe(recipe._id);
         setFavorite(true);
 
         import('izitoast').then((iziToast) => {
