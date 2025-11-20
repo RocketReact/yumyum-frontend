@@ -87,7 +87,19 @@
     height: 383px;
     object-fit: cover;
     object-position: center;
-    background-image: url('../../public/img-default/default-img-mobile.jpg');
+    overflow: hidden;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .defaultPlaceholderImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .customFileInputWrapper {
@@ -95,6 +107,8 @@
     display: inline-block;
     cursor: pointer;
     padding-top: 8px;
+    width: 361px;
+    height: 383px;
   }
 
   .hiddenFileInput {

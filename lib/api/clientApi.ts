@@ -108,3 +108,12 @@ export const removeFromFavorite = async ({
   const res = await api.delete(`/recipes/favorites/${recipeId}`);
   return res.data;
 };
+
+export const createRecipe = async (formData: FormData) => {
+  const response = await api.post('/recipes/create-recipe', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response;
+};

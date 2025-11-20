@@ -1,16 +1,3 @@
-//TODO 2 part
-//button Publish - need to add error iziToast
-//add tablet, desc styles
-//fix category, ingredient select option color
-//add select inputs dropdown styles and arrow icon
-//remove arrows from the time input field, must be only textfield
-//double check validation messages according to the tech task
-//double check css
-//refactor code to minimalize it
-//try to check what a f*ck with preview img
-
-//you can add something here needed to be fixed
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -30,6 +17,14 @@ import { api } from '@/lib/api/api';
 import { useRouter } from 'next/navigation';
 import css from './AddRecipeForm.module.css';
 import 'izitoast/dist/css/iziToast.min.css';
+import {
+  Category,
+  Ingredient,
+  IngredientValue,
+  initialValues,
+  RecipeFormValues,
+} from '@/types/recipe';
+import { createRecipe } from '@/lib/api/clientApi';
 
 const getIziToast = async () => {
   if (typeof window !== 'undefined') {
@@ -38,33 +33,6 @@ const getIziToast = async () => {
   }
   return null;
 };
-
-interface Category {
-  _id: string;
-  name: string;
-}
-
-interface Ingredient {
-  _id: string;
-  name: string;
-}
-
-interface IngredientValue {
-  id: string;
-  name: string;
-  amount: string;
-}
-
-interface RecipeFormValues {
-  title: string;
-  description: string;
-  time: string;
-  cals?: string;
-  category: string;
-  ingredients: IngredientValue[];
-  instructions: string;
-  thumb?: File | null;
-}
 
 // type IngredientErrors = FormikErrors<IngredientValue> | string | undefined;
 
@@ -97,7 +65,10 @@ const validationSchema = Yup.object({
       Yup.object({
         id: Yup.string().nullable(),
         name: Yup.string().nullable(),
-        amount: Yup.string().nullable(),
+        amount: Yup.string()
+          .nullable()
+          .min(2, 'Minimum 2 characters')
+          .max(50, 'Maximum 50 characters'),
       }),
     )
     .min(0, 'Must contain at least 0 elements (check handled in handleSubmit)')
@@ -142,17 +113,6 @@ export const RecipeForm = () => {
     fetchCategories();
     fetchIngredients();
   }, []);
-
-  const initialValues: RecipeFormValues = {
-    title: '',
-    description: '',
-    time: '',
-    cals: '',
-    category: '',
-    ingredients: [{ id: '', name: '', amount: '' }],
-    instructions: '',
-    thumb: null,
-  };
 
   const handleSubmit = async (
     values: RecipeFormValues,
@@ -208,9 +168,7 @@ export const RecipeForm = () => {
       formData.append('ingredients', JSON.stringify(ingredientsForBackend));
       console.log('Sending formData keys:', Array.from(formData.keys()));
 
-      const res = await api.post('/recipes/create-recipe', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const res = await createRecipe(formData);
 
       if (iziToast) {
         iziToast.success({ title: 'Success', message: 'Recipe created!' });
@@ -270,7 +228,25 @@ export const RecipeForm = () => {
                         className={css.addRecipeFormPreviewImage}
                       />
                     ) : (
-                      <div className={css.imagePlaceholder}></div>
+                      <picture className={css.imagePlaceholder}>
+                        <source
+                          media="(min-width: 1440px)"
+                          srcSet="/img-default/default-img-desktop.jpg"
+                        />
+
+                        <source
+                          media="(min-width: 768px)"
+                          srcSet="/img-default/default-img-tablet.jpg"
+                        />
+
+                        <img
+                          src="/img-default/default-img-mobile.jpg"
+                          alt="Default Recipe Placeholder"
+                          className={css.defaultPlaceholderImage}
+                          width="361"
+                          height="383"
+                        />
+                      </picture>
                     )}
                     {values.thumb && (
                       <span className={css.fileNameDisplay}>
