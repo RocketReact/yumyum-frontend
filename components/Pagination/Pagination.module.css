@@ -32,12 +32,12 @@
 
 .pagination :global(.previous) svg,
 .pagination :global(.next) svg {
-  fill: #fff;
-  color: #fff;
+  fill: var(--white);
+  color: var(--white);
 }
 .nextArrow {
-  stroke-width: #fff;
-  fill: #fff;
+  stroke-width: var(--white);
+  fill: var(--white);
   width: 24px;
   height: 24px;
   display: block;
@@ -64,16 +64,22 @@
 
 .pagination li:hover,
 .pagination li:focus {
-  background: var(--beige);
+  background: var(--brown);
+  color: var(--white);
 }
 
+.pagination li:active {
+  background: var(--light-brown);
+  color: var(--white);
+  border-color: var(--white);
+}
 .active {
   background: var(--light-brown);
 }
 
 .active a {
-  color: #fff !important;
-  font: var(--body-md-semibold);
+  color: var(--white);
+  font: var(--body-md-semibold) !important;
 }
 
 .paginationPlaceholder {
