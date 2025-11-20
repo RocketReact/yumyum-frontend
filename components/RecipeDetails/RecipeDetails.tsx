@@ -5,11 +5,8 @@ import css from './RecipeDetails.module.css';
 import { getIngredientsProps } from '@/types/filter';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useEffect, useState } from 'react';
-import {
-  addFavoriteRecipe,
-  removeFavoriteRecipe,
-} from '@/lib/services/favorites';
 import 'izitoast/dist/css/iziToast.min.css';
+import { addToFavorite, removeFromFavorite } from '@/lib/api/clientApi';
 
 interface RecipeDetailsProps {
   recipe: Recipe;
@@ -18,15 +15,17 @@ interface RecipeDetailsProps {
 
 const RecipeDetails = ({ recipe, ingredients }: RecipeDetailsProps) => {
   const [favorite, setFavorite] = useState(false);
-
+  const { addSavedRecipe, removeSavedRecipe } = useAuthStore.getState();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const savedRecipes = useAuthStore((state) => state.savedRecipes);
+  const savedRecipes = useAuthStore((state) => state.user?.savedRecipes);
 
   const ingredientsMap = new Map(ingredients.map((ing) => [ing._id, ing]));
 
   useEffect(() => {
-    const isSaved = savedRecipes.includes(recipe._id);
-    setFavorite(isSaved);
+    const isSaved = savedRecipes?.includes(recipe._id) || false;
+    if (!isSaved) {
+      setFavorite(false);
+    } else setFavorite(isSaved);
   }, [savedRecipes, recipe._id]);
 
   const getIngredientName = (id: string): string => {
@@ -42,14 +41,34 @@ const RecipeDetails = ({ recipe, ingredients }: RecipeDetailsProps) => {
     }
 
     try {
-      if (favorite) {
-        await removeFavoriteRecipe(recipe._id);
+      if (!favorite) {
+        await addToFavorite({ recipeId: recipe._id });
+
+        addSavedRecipe(recipe._id);
 
         setFavorite(false);
+
+        import('izitoast').then((iziToast) => {
+          iziToast.default.success({
+            title: 'Success',
+            message: 'Successfully saved to favorites',
+            position: 'topRight',
+          });
+        });
       } else {
-        await addFavoriteRecipe(recipe._id);
+        await removeFromFavorite({ recipeId: recipe._id });
+
+        removeSavedRecipe(recipe._id);
 
         setFavorite(true);
+
+        import('izitoast').then((iziToast) => {
+          iziToast.default.success({
+            title: 'Success',
+            message: 'Removed from favorites',
+            position: 'topRight',
+          });
+        });
       }
     } catch {
       import('izitoast').then((iziToast) => {
