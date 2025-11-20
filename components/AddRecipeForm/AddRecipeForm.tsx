@@ -336,7 +336,7 @@ export const RecipeForm = () => {
                         as="select"
                         className={`${css.addRecipeFormCategoryInput} ${isFieldInvalid('category')}`}
                       >
-                        <option value="">Select Category</option>
+                        <option value="">Soup</option>
                         {categories.map((cat) => (
                           <option key={cat._id} value={cat._id}>
                             {cat.name}
@@ -388,7 +388,7 @@ export const RecipeForm = () => {
                                   }}
                                   value={values.ingredients[lastIndex].id}
                                 >
-                                  <option value="">Select ingredient</option>{' '}
+                                  <option value="">Broccoli</option>
                                   {ingredientsList.map((i) => (
                                     <option key={i._id} value={i._id}>
                                       {i.name}
