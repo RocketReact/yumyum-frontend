@@ -92,15 +92,7 @@
   cursor: pointer;
 }
 
-/* highlighted (hover / keyboard focus) */
-.item[data-highlighted] {
+.item:hover {
   outline: none;
-  background-color: #e6e6e6;
-}
-
-/* selected item – optional different style */
-.item[data-state='checked'] {
-  font: var(--body-md-regular);
-  color: var(--black);
-
+  background-color: var(--light-gray-2);
 }

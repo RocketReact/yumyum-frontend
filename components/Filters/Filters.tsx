@@ -32,18 +32,23 @@ export default function Filters({ totalRecipes }: { totalRecipes: number }) {
     })) ?? [];
 
   const [isOpen, setIsOpen] = useState(false);
-  const filtersRef = useRef<HTMLDivElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     if (!isOpen) return;
 
     function handleClickOutside(event: MouseEvent) {
-      if (!filtersRef.current) return;
       const target = event.target as Node;
 
-      if (!filtersRef.current.contains(target)) {
-        setIsOpen(false);
-      }
+      // If inside panel -> ignore
+      if (panelRef.current?.contains(target)) return;
+
+      // If click on filters button -> ignore
+      if (buttonRef.current?.contains(target)) return;
+
+      // Click on everything else -> close filter
+      setIsOpen(false);
     }
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -58,11 +63,12 @@ export default function Filters({ totalRecipes }: { totalRecipes: number }) {
 
   return (
     <section className={css.filtersSection}>
-      <div className={css.filtersWrapper} ref={filtersRef}>
+      <div className={css.filtersWrapper}>
         <div className={css.filtersHeader}>
           <p className={css.totalRecipes}>{totalRecipes} recipes</p>
 
           <button
+            ref={buttonRef}
             className={css.filtersToggle}
             type="button"
             onClick={handleToggle}
@@ -78,19 +84,20 @@ export default function Filters({ totalRecipes }: { totalRecipes: number }) {
           </button>
         </div>
 
-        <div
-          className={`${css.filtersPanel} ${isOpen ? css.filtersPanelOpen : ''}`}
-        >
-          <FiltersForm
-            categories={categoriesOptions}
-            ingredients={ingredientsOptions}
-          />
-        </div>
+        {isOpen && (
+          <div
+            ref={panelRef}
+            className={`${css.filtersPanel}  ${isOpen ? css.filtersPanelOpen : ''}`}
+          >
+            <FiltersForm
+              categories={categoriesOptions}
+              ingredients={ingredientsOptions}
+            />
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
-//todo: dropdown content width fix
-//todo: selection item hover / active
 // todo: all color changes via transition

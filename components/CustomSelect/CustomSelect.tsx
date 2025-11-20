@@ -1,7 +1,6 @@
 import * as Popover from '@radix-ui/react-popover';
 import type { CustomSelectProps } from '@/types/filter';
 import css from './CustomSelect.module.css';
-// import { useLayoutEffect, useRef, useState } from 'react';
 
 export function CustomSelect({
   placeholder,
@@ -11,15 +10,6 @@ export function CustomSelect({
   name,
 }: CustomSelectProps) {
   const selectHasValue = Boolean(value);
-  // const triggerRef = useRef<HTMLLIElement | null>(null);
-  // const [triggerWidth, setTriggerWidth] = useState<number | null>(null);
-
-  // useLayoutEffect(() => {
-  //   if (triggerRef.current) {
-  //     const width = triggerRef.current.offsetWidth;
-  //     setTriggerWidth(width);
-  //   }
-  // }, [triggerRef.current, options, value]);
 
   return (
     <Popover.Root modal={false}>
@@ -40,13 +30,7 @@ export function CustomSelect({
         </div>
       </Popover.Trigger>
 
-      <Popover.Content
-        className={css.content}
-        // style={{
-        //   width: triggerWidth ? `${triggerWidth}px` : 'auto',
-        // }}
-        // align="start"
-      >
+      <Popover.Content className={css.content}>
         <ul className={css.viewport}>
           {options.map((option) => (
             <li
