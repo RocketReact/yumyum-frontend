@@ -2,23 +2,32 @@
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
 import Loader from '@/components/Loader/Loader';
 import RecipeDetails from '@/components/RecipeDetails/RecipeDetails';
-import { getRecipeById } from '@/lib/api/clientApi';
+import { getIngredients, getRecipeById } from '@/lib/api/clientApi';
 import { useQuery } from '@tanstack/react-query';
+import { notFound } from 'next/navigation';
 
 const RecipeDetailsClient = ({ recipeId }: { recipeId: string }) => {
-  const { data, isLoading, error } = useQuery({
+  const { data: recipe, isLoading: isRecipeLoading } = useQuery({
     queryKey: ['recipe', recipeId],
     queryFn: () => getRecipeById(recipeId),
     refetchOnMount: false,
   });
 
-  return (
-    <>
-      {data && <RecipeDetails recipe={data} />}
-      {isLoading && <Loader />}
-      {!data && error && <ErrorMessage />}
-    </>
-  );
+  const { data: ingredients, isLoading: isIngredientsLoading } = useQuery({
+    queryKey: ['ingredients'],
+    queryFn: () => getIngredients(),
+    refetchOnMount: false,
+  });
+
+  if (isRecipeLoading || isIngredientsLoading) {
+    return <Loader />;
+  }
+
+  if (!recipe || !ingredients) {
+    return notFound();
+  }
+
+  return <RecipeDetails recipe={recipe} ingredients={ingredients} />;
 };
 
 export default RecipeDetailsClient;
