@@ -404,11 +404,6 @@
     width: 704px;
   }
 
-  .errorMessage {
-    font: var(--body-sm-regular);
-    color: var(--red);
-  }
-
   /* ==================================== */
   /* Thumb & File Input */
   /* ==================================== */
@@ -536,4 +531,150 @@
 
 /* DESC STYLES */
 @media screen and (min-width: 1440px) {
+  .addRecipeForm {
+    gap: 24px;
+    max-width: 1226px;
+    flex-direction: row;
+  }
+
+  .addRecipeImgBlock {
+    order: 1;
+  }
+
+  .addRecipeGeneralGroup,
+  .addRecipeInstructionsGroup {
+    width: 809px;
+  }
+
+  .addRecipeInfoBlock {
+    gap: 72px;
+    width: 809px;
+  }
+
+  .addRecipeCalsAndCategoryWrapper {
+    max-width: 809px;
+  }
+
+  .ingredientRow {
+    width: 809px;
+  }
+
+  /* ==================================== */
+  /* Typography
+  /* ==================================== */
+
+  .addRecipeTitle {
+    font: var(--display-xl-semibold);
+  }
+
+  .addRecipeFormBlockTitle {
+    font: var(--display-md-semibold);
+  }
+
+  .addRecipeFormBlockSubtitle,
+  .addRecipeFormBlockIngSubtitle {
+    font: var(--body-lg-regular);
+  }
+
+  .addRecipeFormBlockIngSubtitle {
+    gap: 24px;
+    width: 809px;
+  }
+
+  /* ==================================== */
+  /* Thumb & File Input */
+  /* ==================================== */
+
+  .imagePlaceholder,
+  .addRecipeFormPreviewImage {
+    max-width: 391px;
+    max-height: 374px;
+  }
+
+  .customFileInputWrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding-top: 4px;
+    width: 391px;
+    height: 448px;
+  }
+
+  /* ==================================== */
+  /* Input & Textarea */
+  /* ==================================== */
+
+  .addRecipeFormInput {
+    width: 809px;
+  }
+
+  .addRecipeFormTextarea,
+  .addRecipeFormInstructionsTextarea {
+    width: 809px;
+  }
+
+  .addRecipeFormInstructionsTextarea {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  .addRecipeFormCategoryInput,
+  .addRecipeFormCalsInput {
+    width: 392px;
+  }
+  .addRecipeFormIngredientsInput {
+    width: 288px;
+  }
+
+  /* ==================================== */
+  /* Buttons */
+  /* ==================================== */
+
+  .addIngredientButtonWrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .addIngredientButton {
+    width: 258px;
+    height: 23px;
+    font: var(--body-sm-semibold);
+  }
+
+  .addRecipeFormButtonSubmit {
+    width: 809px;
+    height: 44px;
+    font: var(--body-md-semibold);
+  }
+
+  /* ==================================== */
+  /* Ingreadients Table */
+  /* ==================================== */
+
+  .ingredientsTable {
+    width: 332px;
+    gap: 4px;
+  }
+
+  /* .tableHeader {
+    padding: 4px 0px;
+    width: 100%;
+  }
+
+  .tableRow {
+    padding: 4px 0px;
+    width: 100%;
+  } */
+
+  /* Formik Fields styles  */
+  .addRecipeFormSelectCategoryWrapper {
+    width: 392px;
+  }
+
+  .addRecipeFormSelectIngredientWrapper {
+    width: 497px;
+  }
 }
