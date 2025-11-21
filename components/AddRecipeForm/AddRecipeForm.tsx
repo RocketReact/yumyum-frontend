@@ -423,6 +423,12 @@ export const RecipeForm = () => {
                                         }
                                         placeholder="100g"
                                       />
+                                      {values.ingredients.slice(0, -1).length <
+                                        2 && (
+                                        <div className={css.errorMessage}>
+                                          Please add at least 2 ingredients.
+                                        </div>
+                                      )}
                                       <ErrorMessage
                                         name={`ingredients[${lastIndex}].amount`}
                                         component="div"
@@ -477,12 +483,6 @@ export const RecipeForm = () => {
                                         </button>
                                       </div>
                                     ))}
-                                </div>
-                              )}
-
-                              {values.ingredients.slice(0, -1).length < 2 && (
-                                <div className={css.errorMessage}>
-                                  Please add at least 2 ingredients.
                                 </div>
                               )}
                             </div>

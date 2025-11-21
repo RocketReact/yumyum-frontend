@@ -595,7 +595,7 @@
     position: relative;
     display: inline-block;
     cursor: pointer;
-    padding-top: 4px;
+    margin-top: 10px;
     width: 391px;
     height: 448px;
   }
