@@ -145,11 +145,11 @@
     align-items: center;
   }
 
-  .selectWrapper {
+  /* .selectWrapper {
     position: relative;
     display: flex;
     align-items: center;
-  }
+  } */
 
   .addRecipeFormIngredientsInput {
     display: flex;
@@ -164,8 +164,7 @@
     flex-grow: 1;
   }
 
-  .arrowIcon,
-  .arrowIconCategory {
+  .arrowIcon {
     display: flex;
     position: absolute;
     right: 12px;
@@ -175,10 +174,6 @@
     stroke: currentColor;
     fill: none;
     z-index: 5;
-  }
-
-  .arrowIcon {
-    transform: translateY(-50%);
   }
 
   .addRecipeFormIngredientsInput:first-child {

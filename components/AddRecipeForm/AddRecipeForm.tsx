@@ -25,6 +25,8 @@ import {
   RecipeFormValues,
 } from '@/types/recipe';
 import { createRecipe } from '@/lib/api/clientApi';
+import { FormikSelect } from './FormikSelect/FormikSelect';
+import { SelectOption } from '@/types/formik';
 
 const getIziToast = async () => {
   if (typeof window !== 'undefined') {
@@ -90,6 +92,11 @@ export const RecipeForm = () => {
   const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([]);
   const [preview, setPreview] = useState<string | null>(null);
   const router = useRouter();
+  const categoryOptions: SelectOption[] = categories.map((cat) => ({
+    value: cat._id,
+    label: cat.name,
+    data: cat,
+  }));
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -329,31 +336,18 @@ export const RecipeForm = () => {
                       />
                     </label>
 
-                    <label className={css.addRecipeFormBlockSubtitle}>
-                      Category
-                      <div className={css.selectWrapper}>
-                        <Field
-                          name="category"
-                          as="select"
-                          className={`${css.addRecipeFormCategoryInput} ${isFieldInvalid('category')}`}
-                        >
-                          <option value="Soup">Soup</option>
-                          {categories.map((cat) => (
-                            <option key={cat._id} value={cat._id}>
-                              {cat.name}
-                            </option>
-                          ))}
-                        </Field>
-                        <svg className={css.arrowIconCategory}>
-                          <use href="/sprite.svg#icon-Controlschevron-down"></use>
-                        </svg>
-                      </div>
-                      <ErrorMessage
-                        name="category"
-                        component="div"
-                        className={css.errorMessage}
-                      />
-                    </label>
+                    <FormikSelect
+                      label="Category"
+                      name="category"
+                      options={categoryOptions}
+                      placeholder="Soup"
+                    />
+
+                    {/* <ErrorMessage
+                      name="category"
+                      component="div"
+                      className={css.errorMessage}
+                    /> */}
                   </div>
                 </div>
 
