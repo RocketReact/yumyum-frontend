@@ -376,22 +376,30 @@ export const RecipeForm = () => {
                             <div>
                               {values.ingredients.length > 0 && (
                                 <div className={css.ingredientRow}>
-                                  <FormikSelect
-                                    label="Name"
-                                    name={`ingredients[${lastIndex}].id`}
-                                    options={ingredientOptions}
-                                    placeholder="Broccoli"
-                                    width="100%"
-                                    onChange={(option: SelectOption | null) => {
-                                      const selectedName = option
-                                        ? option.label
-                                        : '';
-                                      setFieldValue(
-                                        `ingredients[${lastIndex}].name`,
-                                        selectedName,
-                                      );
-                                    }}
-                                  />
+                                  <div
+                                    className={
+                                      css.addRecipeFormBlockIngSubtitle
+                                    }
+                                  >
+                                    <FormikSelect
+                                      label="Name"
+                                      name={`ingredients[${lastIndex}].id`}
+                                      options={ingredientOptions}
+                                      placeholder="Broccoli"
+                                      width="100%"
+                                      onChange={(
+                                        option: SelectOption | null,
+                                      ) => {
+                                        const selectedName = option
+                                          ? option.label
+                                          : '';
+                                        setFieldValue(
+                                          `ingredients[${lastIndex}].name`,
+                                          selectedName,
+                                        );
+                                      }}
+                                    />
+                                  </div>
                                   <ErrorMessage
                                     name={`ingredients[${lastIndex}].id`}
                                     component="div"
