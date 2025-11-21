@@ -116,3 +116,17 @@ export default function ConfirmationModal({
     document.body,
   );
 }
+//How to use - Header example:
+// <ConfirmationModal
+//          onConfirm={() => {
+//            setIsModalOpen(false);
+//            handleLogout();
+//          }}
+//          title="Are you sure?"
+//          paragraph="We will miss you!"
+//          confirmSecondButtonText="Cancel"
+//          confirmSecondButtonVariant="Cancel"
+//          confirmButtonText="Logout"
+//          confirmButtonVariant="Logout"
+//          onConfirmSecond={() => setIsModalOpen(false)}
+//        />
