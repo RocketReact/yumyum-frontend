@@ -21,63 +21,7 @@
   min-width: 362px;
 }
 
-.btnLogout {
-  background: var(--red);
-  color: var(--white);
-  text-wrap: nowrap;
-}
-.btnRegister {
-  color: var(--white);
-  background: var(--light-brown);
-}
-.btnRegister:hover, .btnRegister:focus {
-    background: var(--brown);
-    transition: background var(--primary-transition)
-}
 
-.btnCancel, .btnLogin {
-  background: var(--light-beige);
-  border: 1px solid var(--black);
-  text-wrap: nowrap;
-}
-.btnGoToMyProfile {
-}
-.btnLogout:hover,
-.btnLogout:focus{
-  opacity: 0.7;
-  transition: opacity var(--primary-transition);
-}
-.btnCancel:hover,
-.btnCancel:focus,
-.btnLogin:hover,
-.btnLogin:focus {
-    background: var(--beige-2);
-    border: none;
-    color: var(--white);
-    transition: background var(--primary-transition);
-}
-
-.closeButton {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-.closeButton svg {
-  color: var(--black);
-  width: 24px;
-  height: 24px;
-}
-
-.closeButton:hover svg,
-.closeButton:focus svg {
-  color: var(--black-60);
-}
 .title {
   font: var(--body-md-semibold);
   font-weight: 700;
@@ -100,6 +44,69 @@
 .ulElementReverse {
   flex-direction: column-reverse;
 }
+
+
+.paragraph {
+  text-align: center;
+  font: var(--body-md-regular);
+  text-wrap: wrap;
+  margin-bottom: 20px;
+}
+.btnLogout {
+  background: var(--red);
+  color: var(--white);
+  text-wrap: nowrap;
+}
+.btnRegister, .btnGoToMyProfile {
+  color: var(--white);
+  background: var(--light-brown);
+}
+.btnRegister:hover, .btnRegister:focus, .btnGoToMyProfile:hover, .btnGoToMyProfile:focus {
+  background: var(--brown);
+  transition: background var(--primary-transition)
+}
+
+.btnCancel, .btnLogin {
+  background: var(--light-beige);
+  border: 1px solid var(--black);
+  text-wrap: nowrap;
+}
+
+.btnLogout:hover,
+.btnLogout:focus{
+  opacity: 0.7;
+  transition: opacity var(--primary-transition);
+}
+.btnCancel:hover,
+.btnCancel:focus,
+.btnLogin:hover,
+.btnLogin:focus {
+  background: var(--beige-2);
+  border: none;
+  color: var(--white);
+  transition: background var(--primary-transition);
+}
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.closeButton svg {
+  color: var(--black);
+  width: 24px;
+  height: 24px;
+}
+
+.closeButton:hover svg,
+.closeButton:focus svg {
+  color: var(--black-60);
+}
 .buttonCancel {
   border-radius: 8px;
   padding: 16px 16px;
@@ -117,14 +124,13 @@
   height: 54px;
   cursor: pointer;
 }
-
-.paragraph {
-  text-align: center;
-  font: var(--body-md-regular);
-  text-wrap: wrap;
-  margin-bottom: 20px;
+.btnGoToMyProfile {
+  font: var(--body-md-semibold);
+  text-wrap: nowrap;
+  width: 330px;
+  padding:12px 99.5px ;
+  height: 44px;
 }
-
 @media screen and (min-width: 768px) {
 
   .backdrop {
@@ -134,9 +140,7 @@
     padding: 56px 32px 32px 32px;
     width: 420px;
   }
-  .closeButton {
-    right: 32px;
-  }
+
   .ulElement {
     display: flex;
     flex-direction: row;
@@ -146,8 +150,9 @@
   .ulElementReverse {
     flex-direction: row-reverse;
   }
-
-
+  .closeButton {
+    right: 32px;
+  }
   .buttonAccept, .buttonCancel {
     padding: 12px 54px;
     height: 44px;
@@ -161,6 +166,13 @@
   }
   .btnRegister {
     padding: 8px 47.75px;
+  }
+  .btnGoToMyProfile {
+    font: var(--body-md-semibold);
+    text-wrap: nowrap;
+    width: 356px;
+    padding:12px 99.5px ;
+    height: 44px;
   }
 }
 @media screen and (min-width: 1440px) {
@@ -181,5 +193,8 @@
   }
   .btnRegister {
     padding: 8px 47.75px;
+  }
+  .btnGoToMyProfile {
+    height: 44px;
   }
 }

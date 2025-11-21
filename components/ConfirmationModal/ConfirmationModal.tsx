@@ -15,16 +15,16 @@ interface ConfirmationModalProps {
   cancelButtonText?: string; // ? Текст відмовлення (По замовчуванню "Ні")
   onConfirm: () => void; // ? Функція що виконується у разі підтвердження
   onCancel: () => void; // ? Функція що виконується у разі відмовлення, закриття модального вікна
-  confirmButtonVariant?: 'Login' | 'Logout' | 'GoToMyProfile';
-  cancelButtonVariant?: 'Cancel' | 'Register';
+  confirmButtonVariant?: 'Login' | 'Logout';
+  cancelButtonVariant?: 'Cancel' | 'Register' | 'GoToMyProfile';
   reverseOrder?: boolean;
 }
 
 export default function ConfirmationModal({
-  title = 'Are you sure?',
-  paragraph = 'We will miss you!',
-  confirmButtonText = 'Log out',
-  cancelButtonText = 'Cancel',
+  title,
+  paragraph,
+  confirmButtonText,
+  cancelButtonText,
   onConfirm,
   onCancel,
   confirmButtonVariant,
@@ -97,17 +97,19 @@ export default function ConfirmationModal({
               {cancelButtonText}
             </button>
           </li>
-          <li className={css.listElement}>
-            <button
-              className={`${css.buttonAccept} ${css[`btn${confirmButtonVariant}`]}`}
-              type="button"
-              onClick={() => {
-                onConfirm();
-              }}
-            >
-              {confirmButtonText}
-            </button>
-          </li>
+          {cancelButtonVariant === 'GoToMyProfile' ? null : (
+            <li className={css.listElement}>
+              <button
+                className={`${css.buttonAccept} ${css[`btn${confirmButtonVariant}`]}`}
+                type="button"
+                onClick={() => {
+                  onConfirm();
+                }}
+              >
+                {confirmButtonText}
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </div>,
