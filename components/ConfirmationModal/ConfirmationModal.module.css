@@ -21,15 +21,14 @@
   min-width: 362px;
 }
 
-.btnLogin {
-}
 .btnLogout {
   background: var(--red);
   color: var(--white);
+  text-wrap: nowrap;
 }
 .btnRegister {
 }
-.btnCancel {
+.btnCancel, .btnLogin {
   background: var(--light-beige);
   border: 1px solid var(--black);
 }
@@ -124,8 +123,11 @@
     right: 32px;
   }
   .ulElement {
+    display: flex;
     flex-direction: row;
-    column-gap: 24px;
+    column-gap: 27px;
+    align-items: normal;
+
   }
   .buttonAccept {
     padding: 12px 54px;
