@@ -6,7 +6,6 @@ import type { Option } from '@/types/filter';
 import { FiltersForm } from '../FiltersForm/FiltersForm';
 import { useQuery } from '@tanstack/react-query';
 import { getCategories, getIngredients } from '@/lib/api/clientApi';
-import NoResults from '../NoResults/NoResults';
 
 export default function Filters({ totalRecipes }: { totalRecipes: number }) {
   const { data: categoriesJson, isLoading: catLoading } = useQuery({
@@ -59,7 +58,6 @@ export default function Filters({ totalRecipes }: { totalRecipes: number }) {
 
   return (
     <section className={css.filtersSection}>
-      <NoResults />
       <div className={css.filtersWrapper}>
         <div className={css.filtersHeader}>
           <p className={css.totalRecipes}>{totalRecipes} recipes</p>
