@@ -13,10 +13,8 @@
     align-items: center;
     flex-flow: row-reverse;
     width: 480px;
-
   }
 }
-
 
 .filterFieldsWrapper {
   display: flex;
@@ -34,14 +32,12 @@
 .filtersField {
   width: 100%;
   border: none;
-
 }
 
 @media (min-width: 1440px) {
   .filtersField {
     width: 179px;
     height: 33px;
-
   }
 }
 
@@ -50,8 +46,9 @@
   cursor: pointer;
   color: var(--black);
   border-bottom: 1px solid transparent;
-
-
+  transition:
+    color var(--primary-transition),
+    border-bottom var(--primary-transition);
 }
 
 .resetButton:hover,
@@ -62,8 +59,6 @@
 .resetButton:active {
   border-bottom: 1px solid var(--black);
 }
-
-
 
 @media (min-width: 1440px) {
   .resetButton {
