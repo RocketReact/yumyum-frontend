@@ -21,7 +21,6 @@
   min-width: 362px;
 }
 
-
 .title {
   font: var(--body-md-semibold);
   font-weight: 700;
@@ -45,7 +44,6 @@
   flex-direction: column-reverse;
 }
 
-
 .paragraph {
   text-align: center;
   font: var(--body-md-regular);
@@ -57,23 +55,28 @@
   color: var(--white);
   text-wrap: nowrap;
 }
-.btnRegister, .btnGoToMyProfile {
+.btnRegister,
+.btnGoToMyProfile {
   color: var(--white);
   background: var(--light-brown);
 }
-.btnRegister:hover, .btnRegister:focus, .btnGoToMyProfile:hover, .btnGoToMyProfile:focus {
+.btnRegister:hover,
+.btnRegister:focus,
+.btnGoToMyProfile:hover,
+.btnGoToMyProfile:focus {
   background: var(--brown);
-  transition: background var(--primary-transition)
+  transition: background var(--primary-transition);
 }
 
-.btnCancel, .btnLogin {
+.btnCancel,
+.btnLogin {
   background: var(--light-beige);
   border: 1px solid var(--black);
   text-wrap: nowrap;
 }
 
 .btnLogout:hover,
-.btnLogout:focus{
+.btnLogout:focus {
   opacity: 0.7;
   transition: opacity var(--primary-transition);
 }
@@ -128,11 +131,10 @@
   font: var(--body-md-semibold);
   text-wrap: nowrap;
   width: 330px;
-  padding:12px 99.5px ;
+  padding: 12px 99.5px;
   height: 44px;
 }
 @media screen and (min-width: 768px) {
-
   .backdrop {
     padding: 64px 32px;
   }
@@ -153,12 +155,14 @@
   .closeButton {
     right: 32px;
   }
-  .buttonAccept, .buttonCancel {
+  .buttonAccept,
+  .buttonCancel {
     padding: 12px 54px;
     height: 44px;
     width: 164px;
   }
-  .btnLogin, .btnRegister {
+  .btnLogin,
+  .btnRegister {
     font: var(--body-md-semibold);
     height: 36px;
     width: 164px;
@@ -171,7 +175,7 @@
     font: var(--body-md-semibold);
     text-wrap: nowrap;
     width: 356px;
-    padding:12px 99.5px ;
+    padding: 12px 99.5px;
     height: 44px;
   }
 }
