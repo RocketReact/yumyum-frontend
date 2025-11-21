@@ -145,13 +145,7 @@
     align-items: center;
   }
 
-  /* .selectWrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-  } */
-
-  .addRecipeFormIngredientsInput {
+  /* .addRecipeFormIngredientsInput {
     display: flex;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -162,7 +156,7 @@
     width: 100%;
     height: auto;
     flex-grow: 1;
-  }
+  } */
 
   .arrowIcon {
     display: flex;
@@ -174,10 +168,6 @@
     stroke: currentColor;
     fill: none;
     z-index: 5;
-  }
-
-  .addRecipeFormIngredientsInput:first-child {
-    margin-bottom: 24px;
   }
 
   .addRecipeFormTextarea,
@@ -198,6 +188,7 @@
 
   .addRecipeFormInstructionsTextarea {
     margin-top: 16px;
+    margin-bottom: 8px;
   }
 
   .addRecipeFormCategoryInput,
@@ -240,6 +231,8 @@
     gap: 12px;
     border-radius: 8px;
     padding: 12px 16px;
+    margin-bottom: 8px;
+    margin-top: 16px;
     width: 361px;
     height: 44px;
     background-color: var(--light-brown);

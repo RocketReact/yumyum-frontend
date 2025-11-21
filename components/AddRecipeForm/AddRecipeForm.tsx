@@ -36,8 +36,6 @@ const getIziToast = async () => {
   return null;
 };
 
-// type IngredientErrors = FormikErrors<IngredientValue> | string | undefined;
-
 interface AddIngredientButtonProps {
   push: (obj: IngredientValue) => void;
   values: RecipeFormValues;
@@ -97,7 +95,7 @@ export const RecipeForm = () => {
     label: cat.name,
     data: cat,
   }));
-  // 💡 НОВИЙ СПИСОК ОПЦІЙ ДЛЯ ІНГРЕДІЄНТІВ
+
   const ingredientOptions: SelectOption[] = ingredientsList.map((ing) => ({
     value: ing._id,
     label: ing.name,
@@ -348,12 +346,6 @@ export const RecipeForm = () => {
                       options={categoryOptions}
                       placeholder="Soup"
                     />
-
-                    {/* <ErrorMessage
-                      name="category"
-                      component="div"
-                      className={css.errorMessage}
-                    /> */}
                   </div>
                 </div>
 
@@ -471,7 +463,7 @@ export const RecipeForm = () => {
                       name="instructions"
                       as="textarea"
                       rows={5}
-                      className={`${css.addRecipeFormTextarea} ${isFieldInvalid('description')}`}
+                      className={`${css.addRecipeFormInstructionsTextarea} ${isFieldInvalid('description')}`}
                       placeholder="Enter a text"
                     />
                     <ErrorMessage

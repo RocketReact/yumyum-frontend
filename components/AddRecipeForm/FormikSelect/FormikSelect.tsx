@@ -157,7 +157,7 @@ export const FormikSelect: React.FC<
         components={{ DropdownIndicator }}
         className={hasError ? css['is-invalid'] : ''}
       />
-      {hasError && <div className={css.errorMessage}>{meta.error}</div>} 
+      {hasError && <div className={css.errorMessage}>{meta.error}</div>}
     </label>
   );
 };
