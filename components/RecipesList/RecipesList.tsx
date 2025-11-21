@@ -100,7 +100,7 @@ export function RecipesList({
 
           <Pagination
             onChange={handlePageChange}
-            currentPage={page}
+            currentPage={currentPage}
             totalPages={totalPages}
             recipes={recipes.length > 0}
           />

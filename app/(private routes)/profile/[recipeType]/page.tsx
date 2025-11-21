@@ -1,69 +1,43 @@
-'use client';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { notFound } from 'next/navigation';
 
-import { useParams, notFound } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-import ProfileNavigation from '@/components/ProfileNavigation/ProfileNavigation';
-import { RecipesList } from '@/components/RecipesList/RecipesList';
+import ProfilePageClient from './ProfilePageClient';
+import getQueryClient from '@/lib/getQueryClient';
 import { getOwnRecipes, getFavoriteRecipes } from '@/lib/api/clientApi';
-import { Recipe, RecipeFavorite } from '@/types/recipe';
-import css from './page.module.css';
-import Container from '@/components/Container/Container';
-
-type RecipeType = 'own' | 'favorites';
 
 interface RecipesResponse {
   page: number;
   perPage: number;
   totalRecipes: number;
   totalPages: number;
-  recipes: (Recipe | RecipeFavorite)[];
+  recipes: any[];
 }
 
-export default function ProfilePage() {
-  const params = useParams();
-  const recipeType = params.recipeType as RecipeType;
-
-  const [page, setPage] = useState(1);
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ recipeType: 'own' | 'favorites' }>;
+}) {
+  const { recipeType } = await params;
 
   if (recipeType !== 'own' && recipeType !== 'favorites') {
-    notFound();
+    return notFound();
   }
 
-  const { data, isLoading } = useQuery<RecipesResponse>({
-    queryKey: ['recipes', recipeType, page],
-    queryFn: async () => {
-      //  гарантируем единый тип результата
-      const result =
-        recipeType === 'own'
-          ? await getOwnRecipes({ page: String(page) })
-          : await getFavoriteRecipes({ page: String(page) });
+  const queryClient = getQueryClient();
+  const page = 1;
 
-      return {
-        ...result,
-        recipes: result.recipes,
-      };
-    },
+  await queryClient.prefetchQuery<RecipesResponse>({
+    queryKey: ['recipes', recipeType, page],
+    queryFn: () =>
+      recipeType === 'own'
+        ? getOwnRecipes({ page: String(page) })
+        : getFavoriteRecipes({ page: String(page) }),
   });
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <Container>
-      <h2 className={css.title}>My profile</h2>
-      <ProfileNavigation />
-
-      <RecipesList
-        recipes={data?.recipes ?? []} // ← now always AnyRecipe[]
-        isLoadingExternal={isLoading}
-        disableFetch={true}
-        externalTotalPages={data?.totalPages ?? 1}
-        externalCurrentPage={page}
-        externalOnChangePage={handlePageChange}
-      />
-    </Container>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <ProfilePageClient recipeType={recipeType} />
+    </HydrationBoundary>
   );
 }
