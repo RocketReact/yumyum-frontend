@@ -62,7 +62,17 @@ export default function ConfirmationModal({
       onClick={(e) => handleBackdropClick(e)}
     >
       <div className={css.modal}>
-        {/* <button className={css.closeButton}type='button' onClick={()=> {onCancel()}}> <IoIosClose  className={css.closeButtonIcon} size={48} /></button> */}
+        <button
+          className={css.closeButton}
+          type="button"
+          onClick={() => {
+            onCancel();
+          }}
+        >
+          <svg stroke="currentColor">
+            <use href={'/sprite-new.svg#icon-close-medium'} />
+          </svg>
+        </button>
         <h2 className={css.title}>{title}</h2>
         <p className={css.paragraph}>{paragraph}</p>
         <ul className={css.ulElement}>
