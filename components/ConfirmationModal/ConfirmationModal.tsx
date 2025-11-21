@@ -15,15 +15,19 @@ interface ConfirmationModalProps {
   cancelButtonText?: string; // ? Текст відмовлення (По замовчуванню "Ні")
   onConfirm: () => void; // ? Функція що виконується у разі підтвердження
   onCancel: () => void; // ? Функція що виконується у разі відмовлення, закриття модального вікна
+  confirmButtonVariant?: 'Login' | 'Logout' | 'Register' | 'GoToMyProfile';
+  cancelButtonVariant?: 'Cancel';
 }
 
 export default function ConfirmationModal({
   title = 'Are you sure?',
   paragraph = 'We will miss you!',
-  confirmButtonText = 'Yes',
-  cancelButtonText = 'No',
+  confirmButtonText = 'Log out',
+  cancelButtonText = 'Cancel',
   onConfirm,
   onCancel,
+  confirmButtonVariant,
+  cancelButtonVariant = 'Cancel',
 }: ConfirmationModalProps) {
   // ? Обробка escape
   useEffect(() => {
@@ -78,7 +82,7 @@ export default function ConfirmationModal({
         <ul className={css.ulElement}>
           <li className={css.listElement}>
             <button
-              className={css.buttonCancel}
+              className={`${css.buttonCancel} ${css[`btn${cancelButtonVariant}`]}`}
               type="button"
               onClick={() => {
                 onCancel();
@@ -89,7 +93,7 @@ export default function ConfirmationModal({
           </li>
           <li className={css.listElement}>
             <button
-              className={css.buttonAccept}
+              className={`${css.buttonAccept} ${css[`btn${confirmButtonVariant}`]}`}
               type="button"
               onClick={() => {
                 onConfirm();
