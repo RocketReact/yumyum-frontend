@@ -5,14 +5,12 @@ import Image from 'next/image';
 import css from './RecipeCard.module.css';
 import Link from 'next/link';
 import { Recipe } from '@/types/recipe';
-import AuthModaling from '../AuthModaling/AuthModaling';
 import { useAuthStore } from '@/lib/store/authStore';
 import {
   addFavoriteRecipe,
   removeFavoriteRecipe,
 } from '@/lib/services/favorites';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import iziToast from 'izitoast';
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -33,21 +31,29 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
     try {
       if (isFavorite) {
         await removeFavoriteRecipe(recipe._id);
-        iziToast.success({
-          message: 'Recipe removed from favorites',
-          position: 'topRight',
+        import('izitoast').then((iziToast) => {
+          iziToast.default.success({
+            title: 'Success',
+            message: 'Removed from favorites',
+            position: 'topRight',
+          });
         });
       } else {
         await addFavoriteRecipe(recipe._id);
-        iziToast.success({
-          message: 'Recipe added to favorites',
-          position: 'topRight',
+        import('izitoast').then((iziToast) => {
+          iziToast.default.success({
+            title: 'Success',
+            message: 'Successfully saved to favorites',
+            position: 'topRight',
+          });
         });
       }
     } catch (error) {
-      iziToast.error({
-        message: 'Something went wrong',
-        position: 'topRight',
+      import('izitoast').then((iziToast) => {
+        iziToast.default.error({
+          message: `Error toggling favorite!`,
+          position: 'topRight',
+        });
       });
     }
   };
@@ -98,7 +104,19 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
         </button>
       </div>
 
-      {showAuthModal && <AuthModaling />}
+      {showAuthModal && (
+        <ConfirmationModal
+          title="Login Required"
+          confirmButtonText="Login"
+          cancelButtonText="Cancel"
+          onConfirm={() => {
+            setShowAuthModal(false);
+          }}
+          onCancel={() => {
+            setShowAuthModal(false);
+          }}
+        />
+      )}
     </>
   );
 }
