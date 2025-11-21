@@ -4,12 +4,10 @@ import Select, {
   components,
   DropdownIndicatorProps,
   GroupBase,
-  SelectComponentsConfig,
   StylesConfig,
 } from 'react-select';
-import { Category } from '@/types/recipe';
-import css from '../AddRecipeForm.module.css';
 import { FormikSelectProps, SelectOption } from '@/types/formik';
+import css from '../AddRecipeForm.module.css';
 
 const DropdownIndicator = (
   props: DropdownIndicatorProps<SelectOption, false>,
@@ -37,16 +35,19 @@ const DropdownIndicator = (
   ) : null;
 };
 
-const customStyles: StylesConfig<SelectOption, false> = {
+const getCustomStyles = (
+  selectWidth: string,
+): StylesConfig<SelectOption, false> => ({
   control: (provided, state) => ({
     ...provided,
     height: '48px',
-    width: '172px',
+    width: selectWidth,
     minHeight: '48px',
     borderRadius: '8px',
     backgroundColor: 'transparent',
     borderColor: state.isFocused ? 'var(--black)' : 'var(--light-gray)',
-    boxShadow: state.isFocused ? 'none' : 'none',
+    borderWidth: '1px',
+    boxShadow: 'none',
     padding: '0 8px',
     cursor: 'pointer',
     fontSize: 'var(--body-lg-regular)',
@@ -102,7 +103,6 @@ const customStyles: StylesConfig<SelectOption, false> = {
 
   dropdownIndicator: (provided) => ({
     ...provided,
-
     color: 'var(--gray)',
     padding: '0 12px',
     display: 'flex',
@@ -111,18 +111,29 @@ const customStyles: StylesConfig<SelectOption, false> = {
   }),
 
   indicatorSeparator: () => ({ display: 'none' }),
-};
+});
 
-export const FormikSelect: React.FC<FormikSelectProps> = ({
+export const FormikSelect: React.FC<
+  FormikSelectProps & {
+    width?: string;
+    onChange?: (option: SelectOption | null) => void;
+  }
+> = ({
   label,
   options,
   placeholder,
+  width = '172px',
+  onChange: externalOnChange,
   ...props
 }) => {
   const [field, meta, helpers] = useField(props);
+  const selectStyles = React.useMemo(() => getCustomStyles(width), [width]);
 
   const handleChange = (option: SelectOption | null) => {
     helpers.setValue(option ? option.value : '');
+    if (externalOnChange) {
+      externalOnChange(option);
+    }
   };
 
   const selectedOption = options.find((option) => option.value === field.value);
@@ -141,12 +152,12 @@ export const FormikSelect: React.FC<FormikSelectProps> = ({
         onBlur={() => helpers.setTouched(true)}
         isClearable={false}
         placeholder={placeholder}
-        styles={customStyles}
+        styles={selectStyles}
         classNamePrefix="react-select"
         components={{ DropdownIndicator }}
         className={hasError ? css['is-invalid'] : ''}
       />
-      {hasError && <div className={css.errorMessage}>{meta.error}</div>}
+      {hasError && <div className={css.errorMessage}>{meta.error}</div>} 
     </label>
   );
 };

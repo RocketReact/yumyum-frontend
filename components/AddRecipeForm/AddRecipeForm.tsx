@@ -97,6 +97,12 @@ export const RecipeForm = () => {
     label: cat.name,
     data: cat,
   }));
+  // 💡 НОВИЙ СПИСОК ОПЦІЙ ДЛЯ ІНГРЕДІЄНТІВ
+  const ingredientOptions: SelectOption[] = ingredientsList.map((ing) => ({
+    value: ing._id,
+    label: ing.name,
+    data: ing,
+  }));
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -365,48 +371,27 @@ export const RecipeForm = () => {
                         <div>
                           {values.ingredients.length > 0 && (
                             <div className={css.ingredientRow}>
-                              <label className={css.addRecipeFormBlockSubtitle}>
-                                Name
-                                <div className={css.selectWrapper}>
-                                  <Field
-                                    as="select"
-                                    name={`ingredients[${lastIndex}].id`}
-                                    className={
-                                      css.addRecipeFormIngredientsInput
-                                    }
-                                    onChange={(e: any) => {
-                                      const selected = ingredientsList.find(
-                                        (i) => i._id === e.target.value,
-                                      );
-
-                                      setFieldValue(
-                                        `ingredients[${lastIndex}].id`,
-                                        selected?._id || '',
-                                      );
-                                      setFieldValue(
-                                        `ingredients[${lastIndex}].name`,
-                                        selected?.name || '',
-                                      );
-                                    }}
-                                    value={values.ingredients[lastIndex].id}
-                                  >
-                                    <option value="Broccoli">Broccoli</option>
-                                    {ingredientsList.map((i) => (
-                                      <option key={i._id} value={i._id}>
-                                        {i.name}
-                                      </option>
-                                    ))}
-                                  </Field>
-                                  <svg className={css.arrowIcon}>
-                                    <use href="/sprite.svg#icon-Controlschevron-down"></use>
-                                  </svg>
-                                </div>
-                                <ErrorMessage
-                                  name={`ingredients[${lastIndex}].id`}
-                                  component="div"
-                                  className={css.errorMessage}
-                                />
-                              </label>
+                              <FormikSelect
+                                label="Name"
+                                name={`ingredients[${lastIndex}].id`}
+                                options={ingredientOptions}
+                                placeholder="Broccoli"
+                                width="100%"
+                                onChange={(option: SelectOption | null) => {
+                                  const selectedName = option
+                                    ? option.label
+                                    : '';
+                                  setFieldValue(
+                                    `ingredients[${lastIndex}].name`,
+                                    selectedName,
+                                  );
+                                }}
+                              />
+                              <ErrorMessage
+                                name={`ingredients[${lastIndex}].id`}
+                                component="div"
+                                className={css.errorMessage}
+                              />
 
                               <label className={css.addRecipeFormBlockSubtitle}>
                                 Amount

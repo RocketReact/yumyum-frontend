@@ -1,9 +1,9 @@
-import { Category } from '@/types/recipe';
+import { Category, Ingredient } from '@/types/recipe';
 
 export interface SelectOption {
   value: string;
   label: string;
-  data: Category;
+  data: Category | Ingredient;
 }
 
 export interface FormikSelectProps {
@@ -11,4 +11,5 @@ export interface FormikSelectProps {
   label: string;
   options: SelectOption[];
   placeholder: string;
+  width?: string;
 }
