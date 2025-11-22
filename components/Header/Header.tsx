@@ -78,7 +78,7 @@ export default function Header() {
             onClick={toggleMenu}
           >
             <svg stroke="var(--white)" width={32} height={32}>
-              <use href={'/sprite.svg#icon-Genericburger-regular'} />
+              <use href={'/sprite-new.svg#icon-burger-medium'} />
             </svg>
           </button>
         </div>
@@ -119,7 +119,7 @@ export default function Header() {
                   height={32}
                   className={css.closeIcon}
                 >
-                  <use href={'/sprite.svg#icon-Genericclose'} />
+                  <use href={'/sprite-new.svg#icon-close-circle-medium'} />
                 </svg>
               </button>
             </div>
@@ -162,7 +162,7 @@ export default function Header() {
                         width={24}
                         height={24}
                       >
-                        <use href="/sprite.svg#icon-Genericlog-out" />
+                        <use href="/sprite-new.svg#icon-logout-medium" />
                       </svg>
                     </button>
                   </div>
