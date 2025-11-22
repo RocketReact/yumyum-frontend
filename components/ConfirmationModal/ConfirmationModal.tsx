@@ -138,4 +138,5 @@ export default function ConfirmationModal({
 //          confirmButtonText="Logout"
 //          confirmButtonVariant="Logout"
 //          onConfirmSecond={() => setIsModalOpen(false)}
+//          onClose={() => setIsModalOpen(false)}
 //        />
