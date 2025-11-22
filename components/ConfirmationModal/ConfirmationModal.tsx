@@ -74,7 +74,7 @@ export default function ConfirmationModal({
           ${confirmSecondButtonVariant === 'GoToMyProfile' ? css.modalGoToMyProfile : ''}`}
       >
         <button
-          className={css.confirmSecondButton}
+          className={css.closeSvgButton}
           type="button"
           onClick={() => {
             onConfirmSecond();

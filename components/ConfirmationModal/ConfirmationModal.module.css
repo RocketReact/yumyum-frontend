@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   z-index: 10000;
-  padding: 64px 20px;
+  padding: 64px 15px 64px 16px;
 }
 
 .modal {
@@ -20,17 +20,11 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   max-width: 362px;
   width: 100%;
-
 }
 
 .title {
-  font: var(--body-md-semibold);
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 120%;
-  letter-spacing: 0.01em;
+  font: var(--display-md-semibold);
   text-align: center;
-  margin-top: 16px;
   margin-bottom: 20px;
   color: var(--font-color);
 }
@@ -39,7 +33,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  row-gap: 20px;
+  row-gap: 16px;
   font: var(--body-lg-semibold);
   width: 100%;
 }
@@ -70,7 +64,9 @@
 .btnRegister:hover,
 .btnRegister:focus,
 .btnGoToMyProfile:hover,
-.btnGoToMyProfile:focus {
+.btnGoToMyProfile:focus,
+.btnRegister:active,
+.btnGoToMyProfile:active {
   background: var(--brown);
   transition: background var(--primary-transition);
 }
@@ -84,23 +80,27 @@
 }
 
 .btnLogout:hover,
-.btnLogout:focus {
+.btnLogout:focus,
+.btnLogout:active {
   opacity: 0.7;
   transition: opacity var(--primary-transition);
 }
+
 .btnCancel:hover,
 .btnCancel:focus,
 .btnLogin:hover,
-.btnLogin:focus {
-  background: var(--beige-2);
-  border: none;
+.btnLogin:focus,
+.btnCancel:active,
+.btnLogin:active {
+  border-color: var(--light-brown);
+  background: var(--light-brown);
   color: var(--white);
   transition: background var(--primary-transition);
 }
 
-.confirmSecondButton {
+.closeSvgButton {
   position: absolute;
-  top: 20px;
+  top: 16px;
   right: 20px;
   background: none;
   border: none;
@@ -109,13 +109,13 @@
   align-items: center;
   cursor: pointer;
 }
-.confirmSecondButton svg {
+.closeSvgButton svg {
   color: var(--black);
   width: 24px;
   height: 24px;
 }
-.confirmSecondButton:hover svg,
-.confirmSecondButton:focus svg {
+.closeSvgButton:hover svg,
+.closeSvgButton:focus svg {
   color: var(--black-60);
 }
 
@@ -135,6 +135,7 @@
   height: 54px;
   cursor: pointer;
 }
+
 .btnGoToMyProfile {
   font: var(--body-md-semibold);
   text-wrap: nowrap;
@@ -145,17 +146,23 @@
   background: var(--light-brown);
 }
 .modalLogoutCancel {
-  padding: 56px 24px 16px 24px ;
+  padding: 56px 24px 32px 24px;
+  row-gap: 16px;
 }
 .modalGoToMyProfile {
+  .title {
+    line-height: 100%;
+    letter-spacing: 0;
+  }
   padding: 64px 16px;
 }
+
 @media screen and (min-width: 768px) {
   .backdrop {
     padding: 64px 32px;
   }
   .modal {
-    padding: 56px 32px 32px 32px;
+    padding: 56px 32px;
     max-width: 420px;
     width: 100%;
   }
@@ -169,7 +176,7 @@
   .ulElementReverse {
     flex-direction: row-reverse;
   }
-  .confirmSecondButton {
+  .closeSvgButton {
     right: 32px;
   }
   .buttonAccept,
@@ -195,8 +202,15 @@
     padding: 12px 99.5px;
     height: 44px;
   }
-  .btnLogout, .btnCancel {
+  .btnLogout,
+  .btnCancel {
     padding: 12px 50.25px;
+  }
+  .modalLogoutCancel {
+    padding: 56px 32px 32px 32px;
+  }
+  .modalGoToMyProfile {
+    padding: 56px 32px 32px 32px;
   }
 }
 @media screen and (min-width: 1440px) {
@@ -205,9 +219,6 @@
   }
   .modalLogoutCancel {
     padding: 56px 32px 32px 32px;
-  }
-  .confirmSecondButton {
-    top: 32px;
   }
   .buttonAccept {
     padding: 8px 56px;
@@ -218,7 +229,9 @@
     padding: 8px 56px;
     height: 36px;
   }
-  .btnLogout, .btnCancel {
+  .btnLogout,
+  .btnCancel {
+    height: 44px;
     padding: 8px 50.25px;
   }
 
