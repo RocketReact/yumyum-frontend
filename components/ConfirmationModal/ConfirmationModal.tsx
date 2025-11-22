@@ -4,17 +4,14 @@ import { useEffect, useState } from 'react';
 import css from './ConfirmationModal.module.css';
 import { createPortal } from 'react-dom';
 
-// ! ІКОНКА XРЕСТИКА, ПРИ ПОТРЕБІ ЗАМІНИТИ
-// import { IoIosClose  } from "react-icons/io";
-
 // !!ЩОБ КОМПОНЕНТ ПРАЦЮВАВ ОБОВ'ЯЗКОВО ПЕРЕДАТИ ЦІ ПРОПСИ
 interface ConfirmationModalProps {
   title?: string; // ? Текст попередження (По замовчуванню 'Ви точно хочете вийти?')
   paragraph?: string; // ? Додатковий текст попередження
-  confirmButtonText?: string; // ? Текст підтвердження (По замовчуванню "Так")
-  confirmSecondButtonText?: string; // ? Текст відмовлення (По замовчуванню "Ні")
+  confirmButtonText?: string; // ? Текст кнопки
+  confirmSecondButtonText?: string; // ? Текст другої кнопки
   onConfirm: () => void; // ? Функція що виконується у разі підтвердження
-  onConfirmSecond: () => void; // ? Функція що виконується у разі відмовлення, закриття модального вікна
+  onConfirmSecond: () => void; // ? Функція що виконується у разі підтвердження
   confirmButtonVariant?: 'Login' | 'Logout';
   confirmSecondButtonVariant?: 'Cancel' | 'Register' | 'GoToMyProfile';
   reverseOrder?: boolean; // ? Чи міняти порядок кнопок місцями - нужно только для Login Register модалки

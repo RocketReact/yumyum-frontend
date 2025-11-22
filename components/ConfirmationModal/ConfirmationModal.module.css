@@ -18,7 +18,9 @@
   border-radius: 40px;
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  min-width: 362px;
+  max-width: 362px;
+  width: 100%;
+
 }
 
 .title {
@@ -39,6 +41,10 @@
   align-items: center;
   row-gap: 20px;
   font: var(--body-lg-semibold);
+  width: 100%;
+}
+.ulElement li {
+  width: 100%;
 }
 .ulElementReverse {
   flex-direction: column-reverse;
@@ -54,12 +60,13 @@
   background: var(--red);
   color: var(--white);
   text-wrap: nowrap;
+  width: 100%;
 }
-.btnRegister,
-.btnGoToMyProfile {
+.btnRegister {
   color: var(--white);
   background: var(--light-brown);
 }
+
 .btnRegister:hover,
 .btnRegister:focus,
 .btnGoToMyProfile:hover,
@@ -73,6 +80,7 @@
   background: var(--light-beige);
   border: 1px solid var(--black);
   text-wrap: nowrap;
+  width: 100%;
 }
 
 .btnLogout:hover,
@@ -89,6 +97,7 @@
   color: var(--white);
   transition: background var(--primary-transition);
 }
+
 .confirmSecondButton {
   position: absolute;
   top: 20px;
@@ -105,34 +114,35 @@
   width: 24px;
   height: 24px;
 }
-
 .confirmSecondButton:hover svg,
 .confirmSecondButton:focus svg {
   color: var(--black-60);
 }
+
 .buttonCancel {
   border-radius: 8px;
   padding: 16px 16px;
   text-align: center;
-  width: 314px;
+  width: 100%;
   height: 54px;
   cursor: pointer;
 }
-
 .buttonAccept {
   text-align: center;
   border-radius: 8px;
   padding: 16px 16px;
-  width: 314px;
+  width: 100%;
   height: 54px;
   cursor: pointer;
 }
 .btnGoToMyProfile {
   font: var(--body-md-semibold);
   text-wrap: nowrap;
-  width: 330px;
-  padding: 12px 99.5px;
+  width: 100%;
+  padding: 12px clamp(20px, 8vw, 100px);
   height: 44px;
+  color: var(--white);
+  background: var(--light-brown);
 }
 @media screen and (min-width: 768px) {
   .backdrop {
@@ -140,7 +150,8 @@
   }
   .modal {
     padding: 56px 32px 32px 32px;
-    width: 420px;
+    max-width: 420px;
+    width: 100%;
   }
 
   .ulElement {
@@ -178,6 +189,9 @@
     padding: 12px 99.5px;
     height: 44px;
   }
+  .btnLogout, .btnCancel {
+    padding: 12px 50.25px;
+  }
 }
 @media screen and (min-width: 1440px) {
   .modal {
@@ -191,10 +205,15 @@
     padding: 8px 56px;
     height: 36px;
   }
+
   .buttonCancel {
     padding: 8px 56px;
     height: 36px;
   }
+  .btnLogout, .btnCancel {
+    padding: 8px 50.25px;
+  }
+
   .btnRegister {
     padding: 8px 47.75px;
   }
