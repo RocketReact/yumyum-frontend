@@ -65,12 +65,14 @@ export default function Footer() {
           <ConfirmationModal
             title="Login Required"
             confirmButtonText="Login"
-            cancelButtonText="Cancel"
+            confirmButtonVariant="Login"
             onConfirm={() => {
               setShowModal(false);
               router.push('/auth/login');
             }}
-            onCancel={() => setShowModal(false)}
+            confirmSecondButtonText="Cancel"
+            confirmSecondButtonVariant="Cancel"
+            onConfirmSecond={() => setShowModal(false)}
           />
         )}
       </Container>

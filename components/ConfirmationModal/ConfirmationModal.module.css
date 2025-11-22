@@ -151,7 +151,6 @@
 }
 
 @media screen and (min-width: 768px) {
-
   .backdrop {
     padding: 64px 32px;
   }
@@ -206,6 +205,11 @@
   .ulElementReverse {
     flex-direction: row-reverse;
   }
+  .loginRequiredModalBtnCancel {
+    font: var(--body-md-semibold);
+    padding: 8px 48px;
+    height: 36px;
+  }
 }
 @media screen and (min-width: 1440px) {
   .modal {
@@ -237,5 +241,8 @@
   }
   .modalGoToMyProfile {
     padding: 56px 32px 32px 32px;
+  }
+  .loginRequiredModalBtnCancel {
+    height: 36px;
   }
 }

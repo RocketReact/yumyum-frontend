@@ -93,7 +93,9 @@ export default function ConfirmationModal({
         >
           <li className={css.listElement}>
             <button
-              className={`${css.buttonCancel} ${css[`btn${confirmSecondButtonVariant}`]}`}
+              className={` ${css.buttonCancel}
+                           ${css[`btn${confirmSecondButtonVariant}`]}
+                           ${confirmSecondButtonVariant === 'Cancel' && confirmButtonVariant === 'Login' ? css.loginRequiredModalBtnCancel : ''}`}
               type="button"
               onClick={() => {
                 onConfirmSecond();
