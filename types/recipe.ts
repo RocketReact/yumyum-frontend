@@ -65,14 +65,3 @@ export interface RecipeFormValues {
   instructions: string;
   thumb?: File | null;
 }
-
-export const initialValues: RecipeFormValues = {
-  title: '',
-  description: '',
-  time: '',
-  cals: '',
-  category: '',
-  ingredients: [{ id: '', name: '', amount: '' }],
-  instructions: '',
-  thumb: null,
-};

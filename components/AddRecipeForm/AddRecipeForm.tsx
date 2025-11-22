@@ -13,7 +13,6 @@ import {
   FormikTouched,
 } from 'formik';
 import * as Yup from 'yup';
-import { api } from '@/lib/api/api';
 import { useRouter } from 'next/navigation';
 import css from './AddRecipeForm.module.css';
 import 'izitoast/dist/css/iziToast.min.css';
@@ -21,14 +20,23 @@ import {
   Category,
   Ingredient,
   IngredientValue,
-  initialValues,
   RecipeFormValues,
 } from '@/types/recipe';
-import { createRecipe } from '@/lib/api/clientApi';
+import {
+  createRecipe,
+  getCategories,
+  getIngredients,
+} from '@/lib/api/clientApi';
 import { FormikSelect } from './FormikSelect/FormikSelect';
 import { SelectOption } from '@/types/formik';
 import { useRecipeDraftStore } from '@/lib/store/recipeDraftStore';
 import FormDraftManager from './FormDraftManager/FormDraftManager';
+import {
+  ingredientValidationSchema,
+  validationSchema,
+} from './YupValidation/YupValidation';
+import { initialValues } from '@/app/constans/initialValues';
+import Loader from '../Loader/Loader';
 
 const getIziToast = async () => {
   if (typeof window !== 'undefined') {
@@ -47,46 +55,6 @@ interface AddIngredientButtonProps {
   getIziToast: () => Promise<any>;
 }
 
-const validationSchema = Yup.object({
-  title: Yup.string().min(2).max(64).required('Enter the recipe name'),
-  description: Yup.string()
-    .min(10)
-    .max(200)
-    .required('Enter a short description'),
-  time: Yup.number()
-    .min(1, 'Minimum 1 minute')
-    .max(360, 'Maximum 360 minutes')
-    .required('Specify the cooking time'),
-  cals: Yup.number()
-    .min(1, 'Calories cannot be less than 1')
-    .max(10000, 'Calories cannot be more than 10,000')
-    .nullable(),
-  category: Yup.string().required('Choose a category'),
-  ingredients: Yup.array()
-    .of(
-      Yup.object({
-        id: Yup.string().nullable(),
-        name: Yup.string().nullable(),
-        amount: Yup.string()
-          .nullable()
-          .min(2, 'Minimum 2 characters')
-          .max(50, 'Maximum 50 characters'),
-      }),
-    )
-    .min(0, 'Must contain at least 0 elements (check handled in handleSubmit)')
-    .max(17, 'Maximum 16 ingredients to add.'),
-  instructions: Yup.string().max(1200).required('Specify the instructions'),
-  thumb: Yup.mixed().nullable().optional(),
-});
-
-const ingredientValidationSchema = Yup.object({
-  id: Yup.string().required('Choose an ingredient'),
-  name: Yup.string().required(),
-  amount: Yup.string()
-    .required('Specify the quantity')
-    .min(1, 'Specify the quantity'),
-});
-
 export const RecipeForm = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([]);
@@ -103,30 +71,41 @@ export const RecipeForm = () => {
     label: ing.name,
     data: ing,
   }));
+
   const [isInitialValuesLoaded, setIsInitialValuesLoaded] = useState(false);
-  const { clearDraft } = useRecipeDraftStore();
+  const clearDraft = useRecipeDraftStore((state) => state.clearDraft);
 
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchAllData = async () => {
+      const iziToast = await getIziToast();
       try {
-        const res = await api.get('/categories');
-        setCategories(res.data);
-      } catch (err) {
-        console.error(err);
+        const categoriesData = await getCategories();
+        setCategories(categoriesData);
+      } catch (error) {
+        if (iziToast) {
+          iziToast.error({
+            title: 'Error loading categories',
+            message: `Failed to load category list`,
+            position: 'topRight',
+          });
+        }
+      }
+
+      try {
+        const ingredientsData = await getIngredients();
+        setIngredientsList(ingredientsData);
+      } catch (error) {
+        if (iziToast) {
+          iziToast.error({
+            title: 'Error loading ingrdients',
+            message: `Failed to load ingredient list..`,
+            position: 'topRight',
+          });
+        }
       }
     };
 
-    const fetchIngredients = async () => {
-      try {
-        const res = await api.get('/ingredients');
-        setIngredientsList(res.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchCategories();
-    fetchIngredients();
+    fetchAllData();
   }, []);
 
   const handleSubmit = async (
@@ -179,9 +158,8 @@ export const RecipeForm = () => {
         id: ing.id,
         measure: ing.amount,
       }));
-      console.log('Ingredients JSON:', JSON.stringify(ingredientsForBackend));
+
       formData.append('ingredients', JSON.stringify(ingredientsForBackend));
-      console.log('Sending formData keys:', Array.from(formData.keys()));
 
       const res = await createRecipe(formData);
       clearDraft();
@@ -191,7 +169,6 @@ export const RecipeForm = () => {
       }
       router.push(`/recipes/${res.data._id}`);
     } catch (err: any) {
-      console.error(err);
       if (iziToast) {
         iziToast.error({
           title: 'Error',
@@ -227,7 +204,7 @@ export const RecipeForm = () => {
                 setInitialValuesLoaded={setIsInitialValuesLoaded}
               />
               {!isInitialValuesLoaded ? (
-                <p>Draft loading...</p>
+                <Loader />
               ) : (
                 <>
                   {/* --- Upload Photo Block --- */}
