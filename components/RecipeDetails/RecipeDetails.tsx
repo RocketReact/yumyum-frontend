@@ -24,6 +24,7 @@ const RecipeDetails = ({ recipe, ingredients }: RecipeDetailsProps) => {
   const [isMyRecipe, setIsMyRecipe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const router = useRouter();
 
@@ -71,16 +72,8 @@ const RecipeDetails = ({ recipe, ingredients }: RecipeDetailsProps) => {
         });
       } else {
         await addFavoriteRecipe(recipe._id);
-
         setFavorite(true);
-
-        import('izitoast').then((iziToast) => {
-          iziToast.default.success({
-            title: 'Success',
-            message: 'Successfully saved to favorites',
-            position: 'topRight',
-          });
-        });
+        setShowSuccessModal(true);
       }
     } catch {
       setFavorite(previousState);
@@ -253,15 +246,16 @@ const RecipeDetails = ({ recipe, ingredients }: RecipeDetailsProps) => {
           </div>
         </div>
       </Container>
-      {favorite && (
+      {showSuccessModal && (
         <ConfirmationModal
           title="Done! Recipe saved"
           confirmSecondButtonText="Go To My Profile"
           confirmSecondButtonVariant="GoToMyProfile"
           onConfirmSecond={() => {
+            setShowSuccessModal(false);
             router.push('/profile/own');
           }}
-          onClose={() => setFavorite(false)}
+          onClose={() => setShowSuccessModal(false)}
         />
       )}
 
