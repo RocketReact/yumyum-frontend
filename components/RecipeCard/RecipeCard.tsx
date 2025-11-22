@@ -76,7 +76,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
     try {
       await deleteMyRecipe({ recipeId: recipe._id });
       await showError('Recipe deleted successfully');
-      queryClient.invalidateQueries({ queryKey: ['recipes', 'favorites'] });
+      queryClient.invalidateQueries({ queryKey: ['recipes', 'own'] });
       queryClient.invalidateQueries({ queryKey: ['recipes'] });
     } catch {
       await showError('Error deleting recipe!');
