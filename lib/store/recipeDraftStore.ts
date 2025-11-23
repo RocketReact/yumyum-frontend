@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { RecipeFormValues } from '@/types/recipe';
-import { initialValues } from '@/app/constans/initialValues';
+import { initialValues } from '@/constants/initialValues';
 
 interface DraftStoreState {
   draft: Omit<RecipeFormValues, 'thumb'> & { thumbName: string | null };

@@ -35,7 +35,7 @@ import {
   ingredientValidationSchema,
   validationSchema,
 } from './YupValidation/YupValidation';
-import { initialValues } from '@/app/constans/initialValues';
+import { initialValues } from '@/constants/initialValues';
 import Loader from '../Loader/Loader';
 
 const getIziToast = async () => {
