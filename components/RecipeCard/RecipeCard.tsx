@@ -129,7 +129,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
             disabled={isLoading}
           >
             <svg className={css.deleteBtnIcon} width="24" height="24">
-              <use href="/sprite-new.svg#icon-Genericdelete" />
+              <use href="/sprite-new.svg#icon-bin-medium" />
             </svg>
           </button>
         ) : (
