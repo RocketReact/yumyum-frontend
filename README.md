@@ -26,11 +26,25 @@ It integrates with the YumYum Backend API (_!!! link to Swagger !!!_), uses Reac
 
 ---
 
-## Screeshots
+## 📸 Screenshots
 
-## Installation
+| Landing Page                                                                                                          | Search Results                                                                                                        | Filters Panel                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) |
 
-... add some steps ...
+| Recipe Grid                                                                                                           | Recipe Details                                                                                                        | Favorites                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) |
+
+| No Results State                                                                                                      | Mobile View                                                                                                           | Add Recipe                                                                                                            |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) |
+
+## 🛠 Installation
+
+- Copy repo locally
+- npm install
+- customize your .env with proper values
 
 ## 🧱 Tech Stack
 
