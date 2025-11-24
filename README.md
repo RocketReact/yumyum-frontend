@@ -1,7 +1,7 @@
 # 🍽️ YumYum Frontend
 
 YumYum Frontend is a modern Next.js application for browsing, searching, and filtering recipes.  
-It integrates with the YumYum Backend API (_!!! link to Swagger !!!_), uses React Query for data fetching, Zustand for state management, and Radix for custom dropdowns and popovers.
+It integrates with the [YumYum Backend API](https://nodejs-hw-zdyd.onrender.com/api-docs/), uses React Query for data fetching, Zustand for state management, and Radix for custom dropdowns and popovers. More information regarding Backend in [this repository](https://github.com/AlejandroMotyl/yumyum-backend).
 
 ---
 
@@ -28,17 +28,17 @@ It integrates with the YumYum Backend API (_!!! link to Swagger !!!_), uses Reac
 
 ## 📸 Screenshots
 
-| Landing Page                                                                                                          | Search Results                                                                                                        | Filters Panel                                                                                                         |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) |
+| Main Page                                                                                                 | Search & Filters                                                                                                  | Recipes Grid                                                                                                  |
+| --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| [<img src="./public/screenshots/main-page-min.png" width="300"/>](./public/screenshots/main-page-min.png) | [<img src="./public/screenshots/search-filter-min.png" width="300"/>](./public/screenshots/search-filter-min.png) | [<img src="./public/screenshots/recipe-grid-min.png" width="300"/>](./public/screenshots/recipe-grid-min.png) |
 
-| Recipe Grid                                                                                                           | Recipe Details                                                                                                        | Favorites                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) |
+| Recipe Details                                                                                                      | Register                                                                                                | Login                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| [<img src="./public/screenshots/recipe-details-min.png" width="300"/>](./public/screenshots/recipe-details-min.png) | [<img src="./public/screenshots/register-min.png" width="300"/>](./public/screenshots/register-min.png) | [<img src="./public/screenshots/login-min.png" width="300"/>](./public/screenshots/login-min.png) |
 
-| No Results State                                                                                                      | Mobile View                                                                                                           | Add Recipe                                                                                                            |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) | [<img src="./public/img-default/default-img-desktop.jpg" width="300"/>](./public/img-default/default-img-desktop.jpg) |
+| Add Recipe                                                                                                  | User Profile                                                                                                | Logout                                                                                              |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [<img src="./public/screenshots/add-recipe-min.png" width="300"/>](./public/screenshots/add-recipe-min.png) | [<img src="./public/screenshots/my-profile-min.png" width="300"/>](./public/screenshots/my-profile-min.png) | [<img src="./public/screenshots/logout-min.png" width="300"/>](./public/screenshots/logout-min.png) |
 
 ## 🛠 Installation
 
