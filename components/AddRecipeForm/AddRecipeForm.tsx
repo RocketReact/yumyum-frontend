@@ -464,7 +464,7 @@ export const RecipeForm = () => {
                                           className={css.removeButton}
                                         >
                                           <svg className={css.removeIcon}>
-                                            <use href="/sprite-new.svg#icon-Genericdelete" />
+                                            <use href="/sprite-new.svg#icon-bin-medium" />
                                           </svg>
                                         </button>
                                       </div>
