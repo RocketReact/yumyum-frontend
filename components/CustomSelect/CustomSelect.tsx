@@ -14,17 +14,12 @@ export function CustomSelect({
   const selectHasValue = Boolean(value);
   const [open, setOpen] = useState(false);
 
-  const contentId = `${name}-popover`;
-
   return (
     <Popover.Root modal={false} open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
         <div
           className={`${css.trigger} ${selectHasValue ? css.triggerSelected : ''}`}
           aria-label={name}
-          aria-expanded={open}
-          aria-controls={contentId}
-          aria-haspopup="listbox"
           role="button"
           tabIndex={0}
         >
@@ -41,12 +36,10 @@ export function CustomSelect({
           </div>
         </div>
       </Popover.Trigger>
-      <Popover.Content id={contentId} className={css.content}>
-        <ul className={css.viewport} role="listbox">
+      <Popover.Content className={css.content}>
+        <ul className={css.viewport}>
           {options.map((option) => (
             <li
-              role="option"
-              aria-selected={option.value === value}
               key={option.value}
               className={css.item}
               data-checked={option.value === value}
