@@ -275,12 +275,12 @@
     fill: none;
     width: 24x;
     height: 24px;
-    transition: stroke var(--primary-transition);
+    transition: color var(--primary-transition);
   }
 
   .removeIcon:hover,
   .removeIcon:focus {
-    stroke: var(--red);
+    color: var(--red);
   }
 
   .arrowIcon {
