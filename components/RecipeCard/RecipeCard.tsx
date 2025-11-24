@@ -15,6 +15,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { usePathname, useRouter } from 'next/navigation';
 import { showError, showSuccess } from '@/utils/toast';
 import { deleteMyRecipe } from '@/lib/api/clientApi';
+import Loader from '@/components/Loader/Loader';
 
 interface RecipeCardProps {
   recipe: AnyRecipe;
@@ -24,8 +25,8 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
   const { isAuthenticated, user } = useAuthStore();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showLoadingAddFavorite, setShowLoadingAddFavorite] = useState(false);
   const router = useRouter();
-
   const queryClient = useQueryClient();
   const pathname = usePathname();
 
@@ -57,11 +58,16 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
         await removeFavoriteRecipe(recipe._id);
         await showSuccess('Removed from favorites');
       } else {
+        setShowLoadingAddFavorite(true);
         await addFavoriteRecipe(recipe._id);
+        setTimeout(() => {
+          setOptimisticFavorite(true);
+          setShowLoadingAddFavorite(false); // <-- скрыть через 500ms
+          queryClient.invalidateQueries({ queryKey: ['recipes', 'favorites'] });
+          queryClient.invalidateQueries({ queryKey: ['recipes'] });
+        }, 500);
         await showSuccess('Recipe saved to favorites');
       }
-      queryClient.invalidateQueries({ queryKey: ['recipes', 'favorites'] });
-      queryClient.invalidateQueries({ queryKey: ['recipes'] });
     } catch {
       setOptimisticFavorite(previousState);
       await showError('Error toggling favorite!');
@@ -77,8 +83,8 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
     try {
       await deleteMyRecipe({ recipeId: recipe._id });
       await showSuccess('Recipe deleted successfully');
-      queryClient.invalidateQueries({ queryKey: ['recipes', 'own'] });
-      queryClient.invalidateQueries({ queryKey: ['recipes'] });
+      await queryClient.invalidateQueries({ queryKey: ['recipes', 'own'] });
+      await queryClient.invalidateQueries({ queryKey: ['recipes'] });
     } catch {
       await showError('Error deleting recipe!');
     } finally {
@@ -165,6 +171,11 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
           confirmSecondButtonVariant="Register"
           reverseOrder
         />
+      )}
+      {showLoadingAddFavorite && (
+        <div className={css.loadingOverlay}>
+          <Loader />
+        </div>
       )}
     </>
   );
