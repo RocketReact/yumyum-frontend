@@ -91,7 +91,7 @@ export function RecipesList({
       ) : isEmpty ? (
         <NoResults />
       ) : (
-        <>
+        <div className={css.listWrapper}>
           <ul className={css.listRecipes}>
             {recipes.map((recipe: AnyRecipe) => (
               <li key={recipe._id} className={css.oneRecipe}>
@@ -106,7 +106,7 @@ export function RecipesList({
             totalPages={totalPages}
             recipes={recipes.length > 0}
           />
-        </>
+        </div>
       )}
     </>
   );
