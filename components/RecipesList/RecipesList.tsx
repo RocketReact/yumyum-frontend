@@ -81,9 +81,9 @@ export function RecipesList({
   return (
     <>
       {!externalRecipes && (
-        <h1 className={css.titleRecipes} ref={listRef}>
+        <h2 className={css.titleRecipes} ref={listRef}>
           {search ? `Search Results for "${search}"` : 'Recipes'}
-        </h1>
+        </h2>
       )}
 
       <Filters totalRecipes={data?.totalRecipes ?? externalTotalRecipes ?? 0} />
