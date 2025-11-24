@@ -26,6 +26,15 @@
     border-radius: 16px;
     padding: 12px;
     background: var(--light-beige);
+    transition:
+      transform var(--primary-transition),
+      box-shadow var(--primary-transition);
+  }
+
+  .oneRecipe:hover,
+  .oneRecipe:focus {
+    transform: translateY(-5px);
+    box-shadow: 5px 5px 10px var(--darck-gray);
   }
 }
 
