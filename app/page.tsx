@@ -9,6 +9,7 @@ import { RecipesList } from '@/components/RecipesList/RecipesList';
 import Container from '@/components/Container/Container';
 import { Metadata } from 'next';
 import { generateMetadataGlobal } from '@/utils/generateMetadataGlobal';
+import PageTransition from '@/components/PageTransition/PageTransition';
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = `YumYum Recipes`;
@@ -38,7 +39,9 @@ export default async function Home() {
 
   return (
     <>
-      <Hero />
+      <PageTransition>
+        <Hero />
+      </PageTransition>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Container>
           <RecipesList />
