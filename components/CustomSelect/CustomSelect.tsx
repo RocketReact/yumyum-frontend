@@ -20,7 +20,6 @@ export function CustomSelect({
         <button
           className={`${css.trigger} ${selectHasValue ? css.triggerSelected : ''}`}
           aria-label={name}
-          role="button"
           tabIndex={0}
         >
           <span className={selectHasValue ? css.valueText : css.placeholder}>
