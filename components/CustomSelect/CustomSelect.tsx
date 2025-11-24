@@ -35,7 +35,7 @@ export function CustomSelect({
           </span>
         </button>
       </Popover.Trigger>
-      <Popover.Content className={css.content}>
+      <Popover.Content forceMount className={css.content}>
         <ul className={css.viewport}>
           {options.map((option) => (
             <li
