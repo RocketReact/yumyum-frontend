@@ -99,16 +99,24 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
 
   const handleDelete = async () => {
     if (!isAuthenticated || !isMyRecipe) return;
-
     setIsLoading(true);
+
     try {
+      setShowLoadingAddFavorite(true);
+      setOptimisticFavorite(false); // оптимистично сразу
       await deleteMyRecipe({ recipeId: recipe._id });
-      await showSuccess('Recipe deleted successfully');
-      await queryClient.invalidateQueries({ queryKey: ['recipes', 'own'] });
+      await new Promise((resolve) => setTimeout(resolve, 600));
+      await queryClient.invalidateQueries({
+        queryKey: ['recipes', 'favorites'],
+      });
       await queryClient.invalidateQueries({ queryKey: ['recipes'] });
-    } catch {
+      await showSuccess('Recipe deleted successfully');
+    } catch (error) {
+      setOptimisticFavorite(true);
       await showError('Error deleting recipe!');
     } finally {
+      setShowLoadingAddFavorite(false);
+      isUpdating.current = false;
       setIsLoading(false);
     }
   };
