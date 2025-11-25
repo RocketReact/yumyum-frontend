@@ -210,7 +210,7 @@ const RegisterPage = () => {
                         <svg className={styles.eyeIcon}>
                           <use
                             href={`/sprite-new.svg#${
-                              showPassword
+                              showConfirmPassword
                                 ? 'icon-eye-crossed-medium'
                                 : 'icon-eye-medium'
                             }`}
