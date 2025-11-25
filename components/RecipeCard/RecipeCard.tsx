@@ -55,7 +55,13 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
 
     try {
       if (previousState) {
+        setShowLoadingAddFavorite(true); // <-- добавить это!
         await removeFavoriteRecipe(recipe._id);
+        setTimeout(() => {
+          setShowLoadingAddFavorite(false);
+          queryClient.invalidateQueries({ queryKey: ['recipes', 'favorites'] });
+          queryClient.invalidateQueries({ queryKey: ['recipes'] });
+        }, 600);
         await showSuccess('Removed from favorites');
       } else {
         setShowLoadingAddFavorite(true);
@@ -65,7 +71,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
           setShowLoadingAddFavorite(false); // <-- скрыть через 500ms
           queryClient.invalidateQueries({ queryKey: ['recipes', 'favorites'] });
           queryClient.invalidateQueries({ queryKey: ['recipes'] });
-        }, 500);
+        }, 600);
         await showSuccess('Recipe saved to favorites');
       }
     } catch {
